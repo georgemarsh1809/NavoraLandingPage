@@ -1,18 +1,69 @@
 /* ---------- Base / Theme ---------- */
 :root {
-    /* Original dark scheme */
-    --bg: #121212; /* slightly lighter dark */
-    --panel: #181818; /* softer panels */
-    --line: #262626; /* gentler dividers */
-    --muted: #b8b8b8; /* toned down text */
+    /* Dark mode (default) */
+    --bg: #121212;
+    --panel: #181818;
+    --line: #262626;
+    --muted: #b8b8b8;
     --muted-2: #a3a3a3;
-    --text: #e8e8e8; /* off‑white */
-    --accent: #3fb7ac; /* softer teal */
-    --accent-soft: #9edfd8; /* light accent for gradients */
+    --text: #e8e8e8;
+    --accent: #3fb7ac;
+    --accent-soft: #9edfd8;
     --shadow: 0 0 0 2px rgba(63, 183, 172, 0.15);
     --radius: 12px;
-    --gap: 1.25rem; /* global grid gap */
+    --gap: 1.25rem;
+    /* UI state tokens */
+    --header-bg: rgba(20, 20, 20, 0.8);
+    --mobile-menu-bg: rgba(20, 20, 20, 0.7);
+    --nav-hover-bg: #161616;
+    --nav-active-bg: #202020;
+    --nav-active-border: #2a2a2a;
+    --btn-bg: #e6e6e6;
+    --btn-bg-hover: #dcdcdc;
+    --btn-outline-border: #555;
+    --btn-outline-hover-border: #666;
+    --btn-outline-hover-bg: #141414;
+    --menu-toggle-border: #333;
+    --menu-toggle-hover-bg: #151515;
     color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        /* Light mode */
+        --bg: #F3F4F6;
+        --panel: #FFFFFF;
+        --line: #E5E7EB;
+        --text: #111827;
+        --muted: #6B7280;
+        --muted-2: #9CA3AF;
+        /* Keep teal accent for brand consistency */
+        --accent: #3fb7ac;
+        --accent-soft: #9edfd8;
+        --shadow: 0 0 0 2px rgba(63, 183, 172, 0.15);
+        --header-bg: rgba(255, 255, 255, 0.86);
+        --mobile-menu-bg: rgba(255, 255, 255, 0.95);
+        --nav-hover-bg: rgba(63, 183, 172, 0.12);
+        --nav-active-bg: rgba(63, 183, 172, 0.10);
+        --nav-active-border: var(--line);
+        --btn-bg: #0f172a; /* subtle dark text on light */
+        --btn-bg-hover: #111827;
+        --btn-outline-border: var(--line);
+        --btn-outline-hover-border: var(--accent);
+        --btn-outline-hover-bg: rgba(63, 183, 172, 0.12);
+        color-scheme: light;
+    }
+    /* Invert hero button only in light mode for contrast */
+    .hero .btn {
+        background: var(--text);
+        color: var(--panel);
+        border-color: var(--text);
+    }
+    .hero .btn:hover {
+        background: #0f172a;
+        color: var(--panel);
+        border-color: #0f172a;
+    }
 }
 
 *,
@@ -132,14 +183,14 @@ a:hover {
 }
 
 .card:hover {
-    border-color: #2a2a2a;
+    border-color: var(--line);
 }
 
 .header {
     position: sticky;
     top: 0;
     z-index: 10;
-    background: rgba(20, 20, 20, 0.8);
+    background: var(--header-bg);
     border-bottom: 1px solid var(--line);
     padding: 0.9rem 0;
     backdrop-filter: saturate(160%) blur(8px);
@@ -174,13 +225,8 @@ a:hover {
         var(--panel);
 }
 #value .card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), var(--shadow);
-    background: linear-gradient(
-            180deg,
-            rgba(63, 183, 172, 0.08),
-            rgba(63, 183, 172, 0) 55%
-        ),
-        var(--panel);
+    box-shadow: none;
+    background: var(--panel);
 }
 
 /* Solutions cards: match Value Props visual treatment */
@@ -197,24 +243,19 @@ a:hover {
         var(--panel);
 }
 #solutions .card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), var(--shadow);
-    background: linear-gradient(
-            180deg,
-            rgba(63, 183, 172, 0.08),
-            rgba(63, 183, 172, 0) 55%
-        ),
-        var(--panel);
+    box-shadow: none;
+    background: var(--panel);
 }
 #solutions .card:hover p,
-#solutions .card:hover li { color: var(--text); }
+#solutions .card:hover li { color: inherit; }
 #pricing label.card {
     cursor: pointer;
 }
 #value .card:hover h3 {
-    color: var(--accent-soft);
+    color: var(--accent);
 }
 #value .card:hover p {
-    color: var(--text);
+    color: inherit;
 }
 
 /* ---------- Navigation ---------- */
@@ -223,18 +264,18 @@ a:hover {
     gap: 1rem;
 }
 .nav a {
-    color: #ddd;
+    color: var(--muted);
     padding: 6px 8px;
     border-radius: 6px;
 }
 .nav a:hover {
-    background: #161616;
+    background: transparent;
     text-decoration: none;
 }
 .nav a.active {
-    color: #fff;
-    background: #202020;
-    border: 1px solid #2a2a2a;
+    color: var(--text);
+    background: var(--nav-active-bg);
+    border: 1px solid var(--nav-active-border);
     position: relative;
 }
 /* Keyboard focus on nav */
@@ -256,7 +297,7 @@ a:hover {
     cursor: pointer;
 }
 .btn:hover {
-    background: #dcdcdc;
+    background: #e6e6e6;
 }
 .btn-outline {
     display: inline-block;
@@ -270,8 +311,8 @@ a:hover {
     box-shadow: var(--shadow);
 }
 .btn-outline:hover {
-    border-color: #666;
-    background: #141414;
+    border-color: #555;
+    background: transparent;
 }
 
 /* ---------- Mobile Nav ---------- */
@@ -283,7 +324,7 @@ a:hover {
     padding: 6px;
 }
 .menu-toggle:hover {
-    background: #151515;
+    background: transparent;
 }
 
 .mobile-menu {
@@ -308,7 +349,7 @@ a:hover {
     color: #eee;
 }
 .mobile-nav a:hover {
-    background: #161616;
+    background: transparent;
     text-decoration: none;
 }
 .mobile-nav a.active {
@@ -338,7 +379,7 @@ a:hover {
     font-size: clamp(2rem, 5vw, 2.75rem);
 }
 .hero p {
-    color: #ccc;
+    color: var(--muted);
     max-width: 680px;
 }
 
@@ -491,9 +532,9 @@ a:hover {
 }
 .hero .btn:hover {
     transform: translateY(-2px);
-    background: #efefef;
-    border-color: #cfcfcf;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), var(--shadow);
+    background: inherit;
+    border-color: transparent;
+    box-shadow: none;
 }
 .hero .btn:active {
     transform: translateY(-1px);
@@ -523,7 +564,7 @@ a:hover {
     transition: opacity 0.25s ease;
 }
 .hero .btn:hover::after {
-    opacity: 1;
+    opacity: 0;
 }
 .highlight {
     background: linear-gradient(90deg, var(--accent), var(--accent-soft));
@@ -538,7 +579,7 @@ a:hover {
     color: var(--accent);
     letter-spacing: -0.01em;
 }
-#solutions .card:hover h3 { color: var(--accent-soft); }
+#solutions .card:hover h3 { color: var(--accent); }
 #solutions .card ul {
     list-style: none;
     padding-left: 0;
@@ -782,16 +823,16 @@ summary:focus-visible {
         box-shadow 0.18s ease, background-color 0.18s ease;
 }
 #pricing label.card:hover {
-    transform: translateY(-3px);
-    border-color: var(--accent);
-    box-shadow: var(--shadow);
+    transform: none;
+    border-color: var(--line);
+    box-shadow: none;
 }
 #pricing label.card:hover strong {
-    color: var(--accent);
+    color: inherit;
 }
 #pricing .container label[style*='inline-flex']:hover,
 #pricing .container label[style*='inline-flex']:hover * {
-    color: #ddd;
+    color: inherit;
 }
 
 /* ---------- Media safety ---------- */

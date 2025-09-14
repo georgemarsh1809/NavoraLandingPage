@@ -130,6 +130,7 @@ export default function PricingCalculator() {
     };
 
     const [selTier, setSelTier] = useState('simple');
+    // Continuous sliders: 0..100 (0=low, 50=med, 100=high)
     const [dataIdx, setDataIdx] = useState(0);
     const [featIdx, setFeatIdx] = useState(0);
     const [rush, setRush] = useState(false);
@@ -152,20 +153,48 @@ export default function PricingCalculator() {
         if (tierKey && tiers[tierKey]) setSelTier(tierKey);
         if (d !== null) {
             const n = Number(d);
-            if (!Number.isNaN(n) && n >= 0 && n <= 2) setDataIdx(n);
+            if (!Number.isNaN(n)) {
+                // Support old 0/1/2 values by mapping to 0/50/100
+                if (n >= 0 && n <= 2 && Number.isInteger(n)) {
+                    setDataIdx(n * 50);
+                } else if (n >= 0 && n <= 100) {
+                    setDataIdx(n);
+                }
+            }
         }
         if (f !== null) {
             const n = Number(f);
-            if (!Number.isNaN(n) && n >= 0 && n <= 2) setFeatIdx(n);
+            if (!Number.isNaN(n)) {
+                if (n >= 0 && n <= 2 && Number.isInteger(n)) {
+                    setFeatIdx(n * 50);
+                } else if (n >= 0 && n <= 100) {
+                    setFeatIdx(n);
+                }
+            }
         }
         if (r !== null) setRush(r === '1');
     }, []);
 
+    // Map continuous slider position to the nearest band (low/med/high)
+    const nearestBandIdx = (p) => {
+        const targets = [0, 50, 100];
+        let best = 0;
+        let dist = Infinity;
+        for (let i = 0; i < targets.length; i++) {
+            const d = Math.abs(p - targets[i]);
+            if (d < dist) {
+                dist = d;
+                best = i;
+            }
+        }
+        return best; // 0, 1, or 2
+    };
+
     const estimate = useMemo(() => {
         const t = tiers[selTier];
         const scale = tierScales[selTier];
-        const wData = scale.data[dataIdx].w;
-        const wFeat = scale.features[featIdx].w;
+        const wData = scale.data[nearestBandIdx(dataIdx)].w;
+        const wFeat = scale.features[nearestBandIdx(featIdx)].w;
         let price = t.base * wData * wFeat;
         if (rush) price *= 1.25;
         if (contingency) price *= 1.2;
@@ -179,8 +208,8 @@ export default function PricingCalculator() {
         const url = new URL(window.location.href);
         const qp = url.searchParams;
         qp.set('tier', selTier);
-        qp.set('data', String(dataIdx));
-        qp.set('features', String(featIdx));
+        qp.set('data', String(Math.round(dataIdx)));
+        qp.set('features', String(Math.round(featIdx)));
         qp.set('rush', rush ? '1' : '0');
         url.search = qp.toString();
         return url.toString();
@@ -192,7 +221,7 @@ export default function PricingCalculator() {
                 {/* <h2 className="section-title">Pricing</h2> */}
                 <div className="card">
                     <h3 style={{ marginTop: 0 }}>Interactive Pricing Guide</h3>
-                    <p className="small" style={{ color: '#bbb' }}>
+                    <p className="small">
                         Pick a tier, then adjust complexity to get an estimate
                         for pricing.
                     </p>
@@ -202,7 +231,6 @@ export default function PricingCalculator() {
                         <legend
                             id="tier-legend"
                             className="small"
-                            style={{ color: '#bbb' }}
                         >
                             Select a tier
                         </legend>
@@ -325,7 +353,7 @@ export default function PricingCalculator() {
                         }}
                     >
                         <div>
-                            <div className="small" style={{ color: '#bbb' }}>
+                            <div className="small">
                                 Estimated build price
                             </div>
                             <div
@@ -339,33 +367,15 @@ export default function PricingCalculator() {
                             >
                                 £{estimate.toLocaleString()}
                             </div>
-                            <div className="small" style={{ color: '#bbb' }}>
+                            <div className="small">
                                 Typical monthly support: £{tier.retainer[0]}–£
                                 {tier.retainer[1]}/mo
                             </div>
-                            <div className="small" style={{ color: '#9aa' }}>
+                            <div className="small">
                                 Final pricing confirmed after a 30‑minute
                                 discovery call.
                             </div>
-                        {/* Removed "What’s included" list for a cleaner output */}
-                        </div>
-                        <div style={{ justifySelf: 'end' }}>
-                            <button
-                                type="button"
-                                className="btn-outline"
-                                onClick={async () => {
-                                    try {
-                                        await navigator.clipboard.writeText(
-                                            shareUrl
-                                        );
-                                        alert('Link copied');
-                                    } catch {
-                                        prompt('Copy this link:', shareUrl);
-                                    }
-                                }}
-                            >
-                                Copy link with selections
-                            </button>
+                            {/* Removed "What’s included" list for a cleaner output */}
                         </div>
                     </div>
                 </div>
@@ -383,7 +393,7 @@ function TierSlider({ label, value, onChange, ticks }) {
             <input
                 type="range"
                 min={0}
-                max={2}
+                max={100}
                 step={1}
                 value={value}
                 onChange={(e) => onChange(parseInt(e.target.value, 10))}
@@ -393,7 +403,15 @@ function TierSlider({ label, value, onChange, ticks }) {
                 {ticks.map((t, i) => (
                     <span
                         key={t.key}
-                        className={value === i ? 'is-active' : ''}
+                        className={(() => {
+                            const targets = [0, 50, 100];
+                            const nearest = targets.reduce((a, b) =>
+                                Math.abs(b - value) < Math.abs(a - value)
+                                    ? b
+                                    : a
+                            );
+                            return nearest === targets[i] ? 'is-active' : '';
+                        })()}
                     >
                         {t.label}
                     </span>
