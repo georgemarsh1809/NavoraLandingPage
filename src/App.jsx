@@ -12,7 +12,7 @@ export default function NavoraLanding() {
             <main id="main">
                 <Hero />
                 <ValueProps />
-                <Offerings />
+                <Solutions />
                 <PricingCalculator />
                 <CTA />
                 <FAQ />
@@ -40,7 +40,7 @@ function Header() {
     // Track active section via viewport center for stable highlighting
     // Only sections that have nav items (exclude CTA)
     useEffect(() => {
-        const ids = ['value', 'offerings', 'pricing', 'faq'];
+        const ids = ['value', 'solutions', 'pricing', 'faq'];
         const getEls = () =>
             ids.map((id) => document.getElementById(id)).filter(Boolean);
 
@@ -78,7 +78,7 @@ function Header() {
 
     // Keep nav highlight in sync with hash changes and initial load
     useEffect(() => {
-        const valid = new Set(['value', 'offerings', 'pricing', 'faq']);
+        const valid = new Set(['value', 'solutions', 'pricing', 'faq']);
         const setFromHash = () => {
             const id = (window.location.hash || '').replace('#', '');
             if (valid.has(id)) setCurrent(id);
@@ -98,23 +98,29 @@ function Header() {
                     <a
                         href="#value"
                         className={navClass('value')}
-                        aria-current={current === 'value' ? 'location' : undefined}
+                        aria-current={
+                            current === 'value' ? 'location' : undefined
+                        }
                         onClick={() => setCurrent('value')}
                     >
                         Who We Are
                     </a>
                     <a
-                        href="#offerings"
-                        className={navClass('offerings')}
-                        aria-current={current === 'offerings' ? 'location' : undefined}
-                        onClick={() => setCurrent('offerings')}
+                        href="#solutions"
+                        className={navClass('solutions')}
+                        aria-current={
+                            current === 'solutions' ? 'location' : undefined
+                        }
+                        onClick={() => setCurrent('solutions')}
                     >
-                        Offerings
+                        Solutions
                     </a>
                     <a
                         href="#pricing"
                         className={navClass('pricing')}
-                        aria-current={current === 'pricing' ? 'location' : undefined}
+                        aria-current={
+                            current === 'pricing' ? 'location' : undefined
+                        }
                         onClick={() => setCurrent('pricing')}
                     >
                         Pricing
@@ -122,7 +128,9 @@ function Header() {
                     <a
                         href="#faq"
                         className={navClass('faq')}
-                        aria-current={current === 'faq' ? 'location' : undefined}
+                        aria-current={
+                            current === 'faq' ? 'location' : undefined
+                        }
                         onClick={() => setCurrent('faq')}
                     >
                         FAQ
@@ -176,7 +184,9 @@ function Header() {
                             <a
                                 href="#value"
                                 className={navClass('value')}
-                                aria-current={current === 'value' ? 'location' : undefined}
+                                aria-current={
+                                    current === 'value' ? 'location' : undefined
+                                }
                                 onClick={() => {
                                     setCurrent('value');
                                     close();
@@ -185,20 +195,28 @@ function Header() {
                                 Who We Are
                             </a>
                             <a
-                                href="#offerings"
-                                className={navClass('offerings')}
-                                aria-current={current === 'offerings' ? 'location' : undefined}
+                                href="#solutions"
+                                className={navClass('solutions')}
+                                aria-current={
+                                    current === 'solutions'
+                                        ? 'location'
+                                        : undefined
+                                }
                                 onClick={() => {
-                                    setCurrent('offerings');
+                                    setCurrent('solutions');
                                     close();
                                 }}
                             >
-                                Offerings
+                                Solutions
                             </a>
                             <a
                                 href="#pricing"
                                 className={navClass('pricing')}
-                                aria-current={current === 'pricing' ? 'location' : undefined}
+                                aria-current={
+                                    current === 'pricing'
+                                        ? 'location'
+                                        : undefined
+                                }
                                 onClick={() => {
                                     setCurrent('pricing');
                                     close();
@@ -209,7 +227,9 @@ function Header() {
                             <a
                                 href="#faq"
                                 className={navClass('faq')}
-                                aria-current={current === 'faq' ? 'location' : undefined}
+                                aria-current={
+                                    current === 'faq' ? 'location' : undefined
+                                }
                                 onClick={() => {
                                     setCurrent('faq');
                                     close();
@@ -282,7 +302,7 @@ function ValueProps() {
     );
 }
 
-function Offerings() {
+function Solutions() {
     const items = [
         {
             title: 'Tier 1 – Basic',
@@ -322,9 +342,9 @@ function Offerings() {
         },
     ];
     return (
-        <section id="offerings" className="section">
+        <section id="solutions" className="section">
             <div className="container">
-                <h2 className="section-title">Offerings</h2>
+                <h2 className="section-title">Solutions</h2>
                 <div className="grid">
                     {items.map((card) => (
                         <div key={card.title} className="card">
@@ -344,24 +364,109 @@ function Offerings() {
 }
 
 function CTA() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [note, setNote] = useState('');
+    const [sent, setSent] = useState(false);
+    const [error, setError] = useState('');
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        setError('');
+        if (!name || !email) {
+            setError('Please enter your name and work email.');
+            return;
+        }
+        const subject = `Discovery Call Request — ${name}`;
+        const body = `Name: ${name}%0AEmail: ${email}%0A${note ? `Notes: ${encodeURIComponent(note)}` : ''}`;
+        const mailto = `mailto:hello@gbmgroup.io?subject=${encodeURIComponent(
+            subject
+        )}&body=${body}`;
+        // Open email client; also show an inline confirmation
+        window.location.href = mailto;
+        setSent(true);
+    };
+
     return (
         <section id="cta" className="section">
-            <div className="container card text-center">
-                <h2 className="section-title">Get Started</h2>
-                <h3>Book your Data Discovery Call</h3>
-                <form
-                    onSubmit={(e) => {
-                        e.preventDefault();
-                        alert('Thanks! I’ll get back to you within 24 hours.');
-                    }}
-                    className="form"
-                >
-                    <input placeholder="Name" required />
-                    <input type="email" placeholder="Work email" required />
+            <div className="container card">
+                <div className="cta-head">
+                    <h2 className="section-title">Get Started</h2>
+                    <h3>Book your Data Discovery Call</h3>
+                    <p className="small" style={{ color: '#bbb' }}>
+                        Typically replies within 1 business day.
+                    </p>
+                </div>
+                <form onSubmit={onSubmit} className="form" noValidate>
+                    <div className="form-row">
+                        <label htmlFor="cta-name">Name</label>
+                        <input
+                            id="cta-name"
+                            name="name"
+                            placeholder="Jane Doe"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-row">
+                        <label htmlFor="cta-email">Work email</label>
+                        <input
+                            id="cta-email"
+                            name="email"
+                            type="email"
+                            placeholder="jane@company.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-row">
+                        <label htmlFor="cta-note">Notes (optional)</label>
+                        <textarea
+                            id="cta-note"
+                            name="note"
+                            placeholder="Share context or preferred times"
+                            rows={3}
+                            value={note}
+                            onChange={(e) => setNote(e.target.value)}
+                        />
+                    </div>
+
                     <button type="submit" className="btn">
                         Request a slot
                     </button>
+
+                    <div
+                        className="small"
+                        role="status"
+                        aria-live="polite"
+                        style={{ color: sent ? '#9edfd8' : '#ffb4b4' }}
+                    >
+                        {sent
+                            ? 'Thanks — your email client should open. If not, contact hello@gbmgroup.io.'
+                            : error || ''}
+                    </div>
                 </form>
+
+                <p
+                    className="small"
+                    style={{
+                        marginTop: '0.75rem',
+                        color: '#9aa',
+                        maxWidth: 420,
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        textAlign: 'left',
+                    }}
+                >
+                    Prefer email? Write to{' '}
+                    <a className="underline" href="mailto:hello@gbmgroup.io">
+                        hello@gbmgroup.io
+                    </a>
+                </p>
             </div>
         </section>
     );
@@ -370,16 +475,32 @@ function CTA() {
 function FAQ() {
     const items = [
         {
-            q: 'What tools do you use?',
-            a: 'Tier 1 often ships on Looker Studio. Tier 2–3 use React/Next.js with FastAPI & Postgres.',
+            q: 'What problems do you typically solve?',
+            a: 'Automated reporting, single‑source‑of‑truth dashboards, KPI consolidation across tools, and lightweight workflow automations for ops, finance, and leadership teams.'
         },
         {
-            q: 'Who’s behind GBMGroup?',
-            a: 'I’m George Marsh — a full-stack engineer who likes turning chaos into clarity.',
+            q: 'How long does a project take?',
+            a: 'Basic solutions typically ship in ~1 week. Moderate builds land in 2–4 weeks. Complex, multi‑source solutions run 6–12 weeks depending on integrations and scope.'
         },
         {
-            q: 'How do retainers work?',
-            a: 'Monthly in advance. Clear scope. 30-minute monthly review.',
+            q: 'How is pricing structured?',
+            a: 'Transparent build pricing by complexity (see the calculator), plus an optional monthly retainer for maintenance and small enhancements. Typical retainers range from £200–£2,500/mo.'
+        },
+        {
+            q: 'What do you need from us to start?',
+            a: 'Your objectives and KPIs, a quick list of data sources, and read‑only access where possible. We can sign an NDA and use time‑boxed discovery to finalise scope.'
+        },
+        {
+            q: 'How do you handle data security?',
+            a: 'Least‑privilege access, read‑only credentials wherever feasible, encrypted secrets, and revocable access on project end. We can work within your SSO and security policies.'
+        },
+        {
+            q: 'Who owns the deliverables?',
+            a: 'You do. Dashboards, source code, and assets are delivered into your accounts and repositories with handover docs so your team can run independently.'
+        },
+        {
+            q: 'What stack do you use?',
+            a: 'We meet you where you are. Typical setups use Looker Studio for simple needs, and React/Next.js with FastAPI + Postgres for custom apps and integrations.'
         },
     ];
     return (
@@ -404,7 +525,7 @@ function Footer() {
                 <div>GBMGroup</div>
                 <nav className="footer-nav">
                     <a href="#value">What We Do</a>
-                    <a href="#offerings">Offerings</a>
+                    <a href="#solutions">Solutions</a>
                     <a href="#pricing">Pricing</a>
                     <a href="#faq">FAQ</a>
                     <a href="#" aria-disabled="true">
@@ -413,7 +534,7 @@ function Footer() {
                     <a href="#" aria-disabled="true">
                         Terms
                     </a>
-                    <a href="mailto:hello@navora.dev">hello@navora.dev</a>
+                    <a href="mailto:hello@gbmgroup.io">hello@gbmgroup.io</a>
                 </nav>
                 <p className="small">© {new Date().getFullYear()} GBMGroup</p>
             </div>

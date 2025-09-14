@@ -129,15 +129,15 @@ export default function PricingCalculator() {
         },
     };
 
-    const [selTier, setSelTier] = useState('moderate');
-    const [dataIdx, setDataIdx] = useState(1);
-    const [featIdx, setFeatIdx] = useState(1);
+    const [selTier, setSelTier] = useState('simple');
+    const [dataIdx, setDataIdx] = useState(0);
+    const [featIdx, setFeatIdx] = useState(0);
     const [rush, setRush] = useState(false);
     const [contingency] = useState(false);
 
     useEffect(() => {
-        setDataIdx(1);
-        setFeatIdx(1);
+        setDataIdx(0);
+        setFeatIdx(0);
     }, [selTier]);
 
     // Initialize from URL params
@@ -189,7 +189,7 @@ export default function PricingCalculator() {
     return (
         <section id="pricing" className="section">
             <div className="container">
-                <h2 className="section-title">Pricing</h2>
+                {/* <h2 className="section-title">Pricing</h2> */}
                 <div className="card">
                     <h3 style={{ marginTop: 0 }}>Interactive Pricing Guide</h3>
                     <p className="small" style={{ color: '#bbb' }}>
@@ -199,7 +199,11 @@ export default function PricingCalculator() {
 
                     {/* Tier selector */}
                     <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
-                        <legend id="tier-legend" className="small" style={{ color: '#bbb' }}>
+                        <legend
+                            id="tier-legend"
+                            className="small"
+                            style={{ color: '#bbb' }}
+                        >
                             Select a tier
                         </legend>
                         <div
@@ -209,6 +213,7 @@ export default function PricingCalculator() {
                                 gridTemplateColumns:
                                     'repeat(auto-fit, minmax(260px, 1fr))',
                                 marginTop: 16,
+                                alignItems: 'stretch',
                             }}
                             aria-labelledby="tier-legend"
                             role="radiogroup"
@@ -248,7 +253,9 @@ export default function PricingCalculator() {
                                                 name="tier"
                                                 value={t.key}
                                                 checked={selTier === t.key}
-                                                onChange={() => setSelTier(t.key)}
+                                                onChange={() =>
+                                                    setSelTier(t.key)
+                                                }
                                             />
                                             <strong>{t.name}</strong>
                                         </div>
@@ -306,63 +313,75 @@ export default function PricingCalculator() {
                         </label>
                     </div>
 
-                {/* Output */}
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginTop: 20,
-                        flexWrap: 'wrap',
-                        gap: 16,
-                    }}
-                >
-                    <div>
-                        <div className="small" style={{ color: '#bbb' }}>
-                            Estimated build price
-                        </div>
-                        <div
-                            style={{ fontSize: 28, fontWeight: 800 }}
-                            aria-live="polite"
-                            aria-atomic="true"
-                        >
-                            £{estimate.toLocaleString()}
-                        </div>
-                        <div className="small" style={{ color: '#bbb' }}>
-                            Typical retainer: £{tier.retainer[0]}–£
-                            {tier.retainer[1]}/mo
-                        </div>
-                        <div className="small" style={{ color: '#9aa' }}>
-                            Final pricing confirmed after a 20‑minute discovery call.
-                        </div>
-                        <div style={{ marginTop: 12 }}>
-                            <div className="small" style={{ color: '#bbb', marginBottom: 6 }}>
-                                What’s included
+                    {/* Output */}
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: '1fr auto',
+                            alignItems: 'start',
+                            marginTop: 20,
+                            columnGap: 16,
+                            rowGap: 12,
+                        }}
+                    >
+                        <div>
+                            <div className="small" style={{ color: '#bbb' }}>
+                                Estimated build price
                             </div>
-                            <ul style={{ margin: 0, paddingLeft: 18, color: '#ccc' }}>
-                                {tier.bullets.slice(0, 3).map((b) => (
-                                    <li key={b}>{b}</li>
-                                ))}
-                            </ul>
+                            <div
+                                style={{ fontSize: 28, fontWeight: 800, fontVariantNumeric: 'tabular-nums' }}
+                                aria-live="polite"
+                                aria-atomic="true"
+                            >
+                                £{estimate.toLocaleString()}
+                            </div>
+                            <div className="small" style={{ color: '#bbb' }}>
+                                Typical retainer: £{tier.retainer[0]}–£
+                                {tier.retainer[1]}/mo
+                            </div>
+                            <div className="small" style={{ color: '#9aa' }}>
+                                Final pricing confirmed after a 20‑minute
+                                discovery call.
+                            </div>
+                            <div style={{ marginTop: 12 }}>
+                                <div
+                                    className="small"
+                                    style={{ color: '#bbb', marginBottom: 6 }}
+                                >
+                                    What’s included
+                                </div>
+                                <ul
+                                    style={{
+                                        margin: 0,
+                                        paddingLeft: 18,
+                                        color: '#ccc',
+                                    }}
+                                >
+                                    {tier.bullets.slice(0, 3).map((b) => (
+                                        <li key={b}>{b}</li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </div>
+                        <div style={{ justifySelf: 'end' }}>
+                            <button
+                                type="button"
+                                className="btn-outline"
+                                onClick={async () => {
+                                    try {
+                                        await navigator.clipboard.writeText(
+                                            shareUrl
+                                        );
+                                        alert('Link copied');
+                                    } catch {
+                                        prompt('Copy this link:', shareUrl);
+                                    }
+                                }}
+                            >
+                                Copy link with selections
+                            </button>
                         </div>
                     </div>
-                    <div>
-                        <button
-                            type="button"
-                            className="btn-outline"
-                            onClick={async () => {
-                                try {
-                                    await navigator.clipboard.writeText(shareUrl);
-                                    alert('Link copied');
-                                } catch {
-                                    prompt('Copy this link:', shareUrl);
-                                }
-                            }}
-                        >
-                            Copy link with selections
-                        </button>
-                    </div>
-                </div>
                 </div>
             </div>
         </section>
@@ -384,24 +403,9 @@ function TierSlider({ label, value, onChange, ticks }) {
                 onChange={(e) => onChange(parseInt(e.target.value, 10))}
                 style={{ width: '100%', marginTop: 10 }}
             />
-            <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr 1fr',
-                    marginTop: 10,
-                    gap: 10,
-                }}
-            >
+            <div className="slider-ticks" style={{ marginTop: 10 }}>
                 {ticks.map((t, i) => (
-                    <span
-                        key={t.key}
-                        style={{
-                            fontSize: 12,
-                            color: value === i ? '#fff' : '#aaa',
-                            textAlign:
-                                i === 0 ? 'left' : i === 1 ? 'center' : 'right',
-                        }}
-                    >
+                    <span key={t.key} className={value === i ? 'is-active' : ''}>
                         {t.label}
                     </span>
                 ))}

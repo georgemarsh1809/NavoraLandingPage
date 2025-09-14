@@ -93,6 +93,42 @@ a:hover {
     padding: 1.25rem;
 }
 
+/* Simple utility used by CTA */
+.text-center { text-align: center; }
+.underline { text-decoration: underline; }
+
+/* CTA styling tweaks */
+#cta .card {
+    max-width: 680px;
+    margin: 0 auto;
+    background: linear-gradient(
+            180deg,
+            rgba(63, 183, 172, 0.06),
+            rgba(63, 183, 172, 0) 55%
+        ),
+        var(--panel);
+}
+#cta .cta-head { text-align: center; }
+#cta .form { margin: 1rem auto 0; }
+#cta [role='status'] { min-height: 1.25em; }
+#cta .form label {
+    font-size: 12px;
+    color: var(--muted);
+}
+#cta .form .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem; /* tighter spacing between label and field */
+}
+#cta textarea {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #111;
+    color: #fff;
+}
+
 .card:hover {
     border-color: #2a2a2a;
 }
