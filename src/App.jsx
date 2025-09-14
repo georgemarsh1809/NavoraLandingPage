@@ -313,7 +313,7 @@ function Solutions() {
                 '1 week delivery',
                 'Basic maintenance included',
             ],
-            price: '£1,500 build + £200–£400/m',
+            price: '£1,500 build + £200–£400/mo',
         },
         {
             title: 'Tier 2 – Moderate',
@@ -325,7 +325,7 @@ function Solutions() {
                 '2–4 weeks delivery',
                 'Priority support',
             ],
-            price: '£2,500–£4,000 build + £400–£800/m',
+            price: '£2,500–£4,000 build + £400–£800/mo',
         },
         {
             title: 'Tier 3 – Complex',
@@ -338,7 +338,7 @@ function Solutions() {
                 '6–12 weeks delivery',
                 'White‑glove service',
             ],
-            price: '£5,000–£12,000 build + £1,000–£2,500/m',
+            price: '£5,000–£12,000 build + £1,000–£2,500/mo',
         },
     ];
     return (
@@ -354,7 +354,23 @@ function Solutions() {
                                     <li key={b}>{b}</li>
                                 ))}
                             </ul>
-                            <p>{card.price}</p>
+                            <p>
+                                {(() => {
+                                    const parts = card.price.split(' build + ');
+                                    if (parts.length === 2) {
+                                        return (
+                                            <>
+                                                {parts[0]} build
+                                                <br />
+                                                <span className="retainer">
+                                                    {parts[1]} ongoing support
+                                                </span>
+                                            </>
+                                        );
+                                    }
+                                    return card.price;
+                                })()}
+                            </p>
                         </div>
                     ))}
                 </div>
@@ -378,7 +394,9 @@ function CTA() {
             return;
         }
         const subject = `Discovery Call Request — ${name}`;
-        const body = `Name: ${name}%0AEmail: ${email}%0A${note ? `Notes: ${encodeURIComponent(note)}` : ''}`;
+        const body = `Name: ${name}%0AEmail: ${email}%0A${
+            note ? `Notes: ${encodeURIComponent(note)}` : ''
+        }`;
         const mailto = `mailto:hello@gbmgroup.io?subject=${encodeURIComponent(
             subject
         )}&body=${body}`;
@@ -476,31 +494,31 @@ function FAQ() {
     const items = [
         {
             q: 'What problems do you typically solve?',
-            a: 'Automated reporting, single‑source‑of‑truth dashboards, KPI consolidation across tools, and lightweight workflow automations for ops, finance, and leadership teams.'
+            a: 'Automated reporting, single‑source‑of‑truth dashboards, KPI consolidation across tools, and lightweight workflow automations for ops, finance, and leadership teams.',
         },
         {
             q: 'How long does a project take?',
-            a: 'Basic solutions typically ship in ~1 week. Moderate builds land in 2–4 weeks. Complex, multi‑source solutions run 6–12 weeks depending on integrations and scope.'
+            a: 'Basic solutions typically ship in ~1 week. Moderate builds land in 2–4 weeks. Complex, multi‑source solutions run 6–12 weeks depending on integrations and scope.',
         },
         {
             q: 'How is pricing structured?',
-            a: 'Transparent build pricing by complexity (see the calculator), plus an optional monthly retainer for maintenance and small enhancements. Typical retainers range from £200–£2,500/mo.'
+            a: 'Transparent build pricing by complexity (see the calculator), plus an optional monthly retainer for maintenance and small enhancements. Typical retainers range from £200–£2,500/mo.',
         },
         {
             q: 'What do you need from us to start?',
-            a: 'Your objectives and KPIs, a quick list of data sources, and read‑only access where possible. We can sign an NDA and use time‑boxed discovery to finalise scope.'
+            a: 'Your objectives and KPIs, a quick list of data sources, and read‑only access where possible. We can sign an NDA and use time‑boxed discovery to finalise scope.',
         },
         {
             q: 'How do you handle data security?',
-            a: 'Least‑privilege access, read‑only credentials wherever feasible, encrypted secrets, and revocable access on project end. We can work within your SSO and security policies.'
+            a: 'Least‑privilege access, read‑only credentials wherever feasible, encrypted secrets, and revocable access on project end. We can work within your SSO and security policies.',
         },
         {
             q: 'Who owns the deliverables?',
-            a: 'You do. Dashboards, source code, and assets are delivered into your accounts and repositories with handover docs so your team can run independently.'
+            a: 'You do. Dashboards, source code, and assets are delivered into your accounts and repositories with handover docs so your team can run independently.',
         },
         {
             q: 'What stack do you use?',
-            a: 'We meet you where you are. Typical setups use Looker Studio for simple needs, and React/Next.js with FastAPI + Postgres for custom apps and integrations.'
+            a: 'We meet you where you are. Typical setups use Looker Studio for simple needs, and React/Next.js with FastAPI + Postgres for custom apps and integrations.',
         },
     ];
     return (

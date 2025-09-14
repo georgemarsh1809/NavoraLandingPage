@@ -329,39 +329,25 @@ export default function PricingCalculator() {
                                 Estimated build price
                             </div>
                             <div
-                                style={{ fontSize: 28, fontWeight: 800, fontVariantNumeric: 'tabular-nums' }}
+                                style={{
+                                    fontSize: 28,
+                                    fontWeight: 800,
+                                    fontVariantNumeric: 'tabular-nums',
+                                }}
                                 aria-live="polite"
                                 aria-atomic="true"
                             >
                                 £{estimate.toLocaleString()}
                             </div>
                             <div className="small" style={{ color: '#bbb' }}>
-                                Typical retainer: £{tier.retainer[0]}–£
+                                Typical monthly support: £{tier.retainer[0]}–£
                                 {tier.retainer[1]}/mo
                             </div>
                             <div className="small" style={{ color: '#9aa' }}>
-                                Final pricing confirmed after a 20‑minute
+                                Final pricing confirmed after a 30‑minute
                                 discovery call.
                             </div>
-                            <div style={{ marginTop: 12 }}>
-                                <div
-                                    className="small"
-                                    style={{ color: '#bbb', marginBottom: 6 }}
-                                >
-                                    What’s included
-                                </div>
-                                <ul
-                                    style={{
-                                        margin: 0,
-                                        paddingLeft: 18,
-                                        color: '#ccc',
-                                    }}
-                                >
-                                    {tier.bullets.slice(0, 3).map((b) => (
-                                        <li key={b}>{b}</li>
-                                    ))}
-                                </ul>
-                            </div>
+                        {/* Removed "What’s included" list for a cleaner output */}
                         </div>
                         <div style={{ justifySelf: 'end' }}>
                             <button
@@ -405,7 +391,10 @@ function TierSlider({ label, value, onChange, ticks }) {
             />
             <div className="slider-ticks" style={{ marginTop: 10 }}>
                 {ticks.map((t, i) => (
-                    <span key={t.key} className={value === i ? 'is-active' : ''}>
+                    <span
+                        key={t.key}
+                        className={value === i ? 'is-active' : ''}
+                    >
                         {t.label}
                     </span>
                 ))}
