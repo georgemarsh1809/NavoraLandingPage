@@ -103,7 +103,7 @@ function Header() {
                         }
                         onClick={() => setCurrent('value')}
                     >
-                        Who We Are
+                        How We Help
                     </a>
                     <a
                         href="#solutions"
@@ -192,7 +192,7 @@ function Header() {
                                     close();
                                 }}
                             >
-                                Who We Are
+                                How We Help
                             </a>
                             <a
                                 href="#solutions"
