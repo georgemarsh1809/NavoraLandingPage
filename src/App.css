@@ -31,12 +31,12 @@
 @media (prefers-color-scheme: light) {
     :root {
         /* Light mode */
-        --bg: #F3F4F6;
-        --panel: #FFFFFF;
-        --line: #E5E7EB;
+        --bg: #f3f4f6;
+        --panel: #ffffff;
+        --line: #e5e7eb;
         --text: #111827;
-        --muted: #6B7280;
-        --muted-2: #9CA3AF;
+        --muted: #6b7280;
+        --muted-2: #9ca3af;
         /* Keep teal accent for brand consistency */
         --accent: #3fb7ac;
         --accent-soft: #9edfd8;
@@ -44,7 +44,7 @@
         --header-bg: rgba(255, 255, 255, 0.86);
         --mobile-menu-bg: rgba(255, 255, 255, 0.95);
         --nav-hover-bg: rgba(63, 183, 172, 0.12);
-        --nav-active-bg: rgba(63, 183, 172, 0.10);
+        --nav-active-bg: rgba(63, 183, 172, 0.1);
         --nav-active-border: var(--line);
         --btn-bg: #0f172a; /* subtle dark text on light */
         --btn-bg-hover: #111827;
@@ -148,8 +148,12 @@ a:hover {
 }
 
 /* Simple utility used by CTA */
-.text-center { text-align: center; }
-.underline { text-decoration: underline; }
+.text-center {
+    text-align: center;
+}
+.underline {
+    text-decoration: underline;
+}
 
 /* CTA styling tweaks */
 #cta .card {
@@ -162,9 +166,15 @@ a:hover {
         ),
         var(--panel);
 }
-#cta .cta-head { text-align: center; }
-#cta .form { margin: 1rem auto 0; }
-#cta [role='status'] { min-height: 1.25em; }
+#cta .cta-head {
+    text-align: center;
+}
+#cta .form {
+    margin: 1rem auto 0;
+}
+#cta [role='status'] {
+    min-height: 1.25em;
+}
 #cta .form label {
     font-size: 12px;
     color: var(--muted);
@@ -248,7 +258,9 @@ a:hover {
     background: var(--panel);
 }
 #solutions .card:hover p,
-#solutions .card:hover li { color: inherit; }
+#solutions .card:hover li {
+    color: inherit;
+}
 #pricing label.card {
     cursor: pointer;
 }
@@ -480,13 +492,21 @@ a:hover {
 }
 
 @keyframes heroDotsDrift {
-    from { background-position: 0 0; }
-    to { background-position: 320px 160px; }
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 320px 160px;
+    }
 }
 
 @keyframes heroLinesDrift {
-    from { background-position: 0 0; }
-    to { background-position: 480px 240px; }
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 480px 240px;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -589,11 +609,10 @@ a:hover {
     color: var(--accent);
     letter-spacing: -0.01em;
 }
-#how .card h3 {
-    margin-bottom: 0.5rem;
+
+#solutions .card:hover h3 {
     color: var(--accent);
 }
-#solutions .card:hover h3 { color: var(--accent); }
 #solutions .card ul {
     list-style: none;
     padding-left: 0;

@@ -1,4 +1,4 @@
-import CTAHome from './CTA.jsx';
+import CTA from './CTA.jsx';
 
 export default function HowItWorks() {
     return (
@@ -126,8 +126,7 @@ export default function HowItWorks() {
                 </div>
             </section>
 
-            {/* CTA from homepage */}
-            <CTAHome />
+            <CTA />
         </div>
     );
 }

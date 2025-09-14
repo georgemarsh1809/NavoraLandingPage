@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './App.css';
 
 export default function CTA() {
     const [name, setName] = useState('');
@@ -71,7 +72,7 @@ export default function CTA() {
                         />
                     </div>
                     <button type="submit" className="btn">
-                        Request a slot
+                        Send
                     </button>
                     <div
                         className="small"
