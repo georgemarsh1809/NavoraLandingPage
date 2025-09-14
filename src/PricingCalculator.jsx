@@ -204,17 +204,6 @@ export default function PricingCalculator() {
     const scaleFor = tierScales[selTier];
     const tier = tiers[selTier];
 
-    const shareUrl = useMemo(() => {
-        const url = new URL(window.location.href);
-        const qp = url.searchParams;
-        qp.set('tier', selTier);
-        qp.set('data', String(Math.round(dataIdx)));
-        qp.set('features', String(Math.round(featIdx)));
-        qp.set('rush', rush ? '1' : '0');
-        url.search = qp.toString();
-        return url.toString();
-    }, [selTier, dataIdx, featIdx, rush]);
-
     return (
         <section id="pricing" className="section">
             <div className="container">
@@ -228,10 +217,7 @@ export default function PricingCalculator() {
 
                     {/* Tier selector */}
                     <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
-                        <legend
-                            id="tier-legend"
-                            className="small"
-                        >
+                        <legend id="tier-legend" className="small">
                             Select a tier
                         </legend>
                         <div
@@ -353,9 +339,7 @@ export default function PricingCalculator() {
                         }}
                     >
                         <div>
-                            <div className="small">
-                                Estimated build price
-                            </div>
+                            <div className="small">Estimated build price</div>
                             <div
                                 style={{
                                     fontSize: 28,

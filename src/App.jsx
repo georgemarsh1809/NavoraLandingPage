@@ -1,8 +1,41 @@
 import './App.css';
 import { useState, useEffect } from 'react';
-import PricingCalculator from './calc';
+import PricingCalculator from './PricingCalculator.jsx';
+import HowItWorks from './HowItWorks.jsx';
 
-export default function NavoraLanding() {
+function Router() {
+    const path = typeof window !== 'undefined' ? window.location.pathname : '/';
+    if (path === '/how-we-work') {
+        return (
+            <div className="page">
+                <a href="#main" className="skip-link">
+                    Skip to content
+                </a>
+                <Header />
+                <main id="main">
+                    <HowItWorks />
+                </main>
+                <Footer />
+            </div>
+        );
+    }
+    return <NavoraLanding />;
+}
+
+function NavoraLanding() {
+    // Scroll to hash target on initial load (e.g., /#solutions)
+    useEffect(() => {
+        const hash =
+            typeof window !== 'undefined'
+                ? (window.location.hash || '').replace('#', '')
+                : '';
+        if (!hash) return;
+        const el = document.getElementById(hash);
+        if (!el) return;
+        setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 0);
+    }, []);
     return (
         <div className="page">
             <a href="#main" className="skip-link">
@@ -22,10 +55,14 @@ export default function NavoraLanding() {
     );
 }
 
+export default Router;
+
 function Header() {
     const [open, setOpen] = useState(false);
     const [current, setCurrent] = useState('');
     const close = () => setOpen(false);
+    const path = typeof window !== 'undefined' ? window.location.pathname : '/';
+    const onHowItWorks = path === '/how-we-work';
 
     // Lock body scroll when mobile menu is open
     useEffect(() => {
@@ -93,20 +130,19 @@ function Header() {
     return (
         <header className="header">
             <div className="container flex-between">
-                <div className="logo">GBMGroup</div>
+                <a href="/" className="logo">
+                    GBMGroup
+                </a>
                 <nav className="nav">
                     <a
-                        href="#value"
-                        className={navClass('value')}
-                        aria-current={
-                            current === 'value' ? 'location' : undefined
-                        }
-                        onClick={() => setCurrent('value')}
+                        href="/how-we-work"
+                        className={onHowItWorks ? 'active' : ''}
+                        aria-current={onHowItWorks ? 'page' : undefined}
                     >
-                        How We Help
+                        How We Work
                     </a>
                     <a
-                        href="#solutions"
+                        href={onHowItWorks ? '/#solutions' : '#solutions'}
                         className={navClass('solutions')}
                         aria-current={
                             current === 'solutions' ? 'location' : undefined
@@ -116,7 +152,7 @@ function Header() {
                         Solutions
                     </a>
                     <a
-                        href="#pricing"
+                        href={onHowItWorks ? '/#pricing' : '#pricing'}
                         className={navClass('pricing')}
                         aria-current={
                             current === 'pricing' ? 'location' : undefined
@@ -126,7 +162,7 @@ function Header() {
                         Pricing
                     </a>
                     <a
-                        href="#faq"
+                        href={onHowItWorks ? '/#faq' : '#faq'}
                         className={navClass('faq')}
                         aria-current={
                             current === 'faq' ? 'location' : undefined
@@ -182,20 +218,17 @@ function Header() {
                     <div className="container">
                         <nav className="mobile-nav">
                             <a
-                                href="#value"
-                                className={navClass('value')}
-                                aria-current={
-                                    current === 'value' ? 'location' : undefined
-                                }
-                                onClick={() => {
-                                    setCurrent('value');
-                                    close();
-                                }}
+                                href="/how-we-work"
+                                className={onHowItWorks ? 'active' : ''}
+                                aria-current={onHowItWorks ? 'page' : undefined}
+                                onClick={() => close()}
                             >
-                                How We Help
+                                How We Work
                             </a>
                             <a
-                                href="#solutions"
+                                href={
+                                    onHowItWorks ? '/#solutions' : '#solutions'
+                                }
                                 className={navClass('solutions')}
                                 aria-current={
                                     current === 'solutions'
@@ -210,7 +243,7 @@ function Header() {
                                 Solutions
                             </a>
                             <a
-                                href="#pricing"
+                                href={onHowItWorks ? '/#pricing' : '#pricing'}
                                 className={navClass('pricing')}
                                 aria-current={
                                     current === 'pricing'
@@ -225,7 +258,7 @@ function Header() {
                                 Pricing
                             </a>
                             <a
-                                href="#faq"
+                                href={onHowItWorks ? '/#faq' : '#faq'}
                                 className={navClass('faq')}
                                 aria-current={
                                     current === 'faq' ? 'location' : undefined
@@ -258,8 +291,9 @@ function Hero() {
                     <span className="highlight">Actionable Insights</span>
                 </h1>
                 <p>
-                    Dashboards and tools for ops and internal teams that cut
-                    reporting time and surface the KPIs that matter.
+                    Dashboards and tools for ops and other internal teams that
+                    cut reporting time and surface the KPIs and metrics that
+                    matter most.
                 </p>
                 <div className="buttons">
                     <a href="#cta" className="btn">
@@ -297,6 +331,7 @@ function ValueProps() {
                         </div>
                     ))}
                 </div>
+                {/* Removed prominent CTA here to reduce intensity */}
             </div>
         </section>
     );
@@ -313,7 +348,7 @@ function Solutions() {
                 '1 week delivery',
                 'Basic maintenance included',
             ],
-            price: '£1,500 build + £200–£400/mo',
+            price: '£1,500 build + £200–£300/mo',
         },
         {
             title: 'Tier 2 – Moderate',
@@ -338,7 +373,7 @@ function Solutions() {
                 '6–12 weeks delivery',
                 'White‑glove service',
             ],
-            price: '£5,000–£12,000 build + £1,000–£2,500/mo',
+            price: '£5,000–£20,000 build + £1,000–£4000/mo',
         },
     ];
     return (
@@ -373,6 +408,13 @@ function Solutions() {
                             </p>
                         </div>
                     ))}
+                </div>
+                <div className="text-center" style={{ marginTop: 20 }}>
+                    <p className="small" style={{ color: 'var(--muted)' }}>
+                        <a className="underline" href="/how-we-work">
+                            See how we work
+                        </a>
+                    </p>
                 </div>
             </div>
         </section>
@@ -542,7 +584,7 @@ function Footer() {
             <div className="container flex-between">
                 <div>GBMGroup</div>
                 <nav className="footer-nav">
-                    <a href="#value">What We Do</a>
+                    <a href="/how-we-work">What We Do</a>
                     <a href="#solutions">Solutions</a>
                     <a href="#pricing">Pricing</a>
                     <a href="#faq">FAQ</a>

@@ -55,14 +55,15 @@
     }
     /* Invert hero button only in light mode for contrast */
     .hero .btn {
-        background: var(--text);
-        color: var(--panel);
-        border-color: var(--text);
+        background: var(--text) !important;
+        color: var(--panel) !important;
+        border-color: var(--text) !important;
     }
     .hero .btn:hover {
-        background: #0f172a;
-        color: var(--panel);
-        border-color: #0f172a;
+        background: #0f172a !important;
+        color: var(--panel) !important;
+        border-color: #0f172a !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), var(--shadow) !important;
     }
 }
 
@@ -267,9 +268,11 @@ a:hover {
     color: var(--muted);
     padding: 6px 8px;
     border-radius: 6px;
+    transition: background-color 0.16s ease, color 0.16s ease;
 }
 .nav a:hover {
-    background: transparent;
+    background: var(--nav-hover-bg);
+    color: var(--text);
     text-decoration: none;
 }
 .nav a.active {
@@ -297,7 +300,14 @@ a:hover {
     cursor: pointer;
 }
 .btn:hover {
-    background: #e6e6e6;
+    background: #dcdcdc;
+}
+.btn-accent {
+    background: var(--accent);
+    color: #ffffff;
+}
+.btn-accent:hover {
+    background: var(--accent-soft);
 }
 .btn-outline {
     display: inline-block;
@@ -349,7 +359,7 @@ a:hover {
     color: #eee;
 }
 .mobile-nav a:hover {
-    background: transparent;
+    background: var(--nav-hover-bg);
     text-decoration: none;
 }
 .mobile-nav a.active {
@@ -532,9 +542,9 @@ a:hover {
 }
 .hero .btn:hover {
     transform: translateY(-2px);
-    background: inherit;
-    border-color: transparent;
-    box-shadow: none;
+    background: #efefef;
+    border-color: #cfcfcf;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), var(--shadow);
 }
 .hero .btn:active {
     transform: translateY(-1px);
@@ -564,7 +574,7 @@ a:hover {
     transition: opacity 0.25s ease;
 }
 .hero .btn:hover::after {
-    opacity: 0;
+    opacity: 1;
 }
 .highlight {
     background: linear-gradient(90deg, var(--accent), var(--accent-soft));
@@ -579,6 +589,10 @@ a:hover {
     color: var(--accent);
     letter-spacing: -0.01em;
 }
+#how .card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}
 #solutions .card:hover h3 { color: var(--accent); }
 #solutions .card ul {
     list-style: none;
@@ -587,7 +601,19 @@ a:hover {
     display: grid;
     gap: 0.4rem;
 }
+#how .card ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0.5rem 0 0;
+    display: grid;
+    gap: 0.4rem;
+}
 #solutions .card ul li {
+    position: relative;
+    padding-left: 14px;
+    color: var(--muted);
+}
+#how .card ul li {
     position: relative;
     padding-left: 14px;
     color: var(--muted);
@@ -603,10 +629,24 @@ a:hover {
     background: var(--accent-soft);
     transform: translateY(-50%);
 }
+#how .card ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.9em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    transform: translateY(-50%);
+}
 #solutions .card p:last-child {
     margin-top: 0.75rem;
     color: #ddd;
     font-weight: 600;
+}
+#how .card p:last-child {
+    margin-top: 0.75rem;
 }
 #solutions .card p .retainer {
     color: var(--muted);
@@ -614,6 +654,16 @@ a:hover {
 }
 #solutions .card:hover p .retainer {
     color: var(--muted);
+}
+
+/* Match Value/Solutions panel treatment on How page */
+#how .card {
+    background: linear-gradient(
+            180deg,
+            rgba(63, 183, 172, 0.08),
+            rgba(63, 183, 172, 0) 55%
+        ),
+        var(--panel);
 }
 
 /* ---------- Tier cards (calculator) ---------- */
