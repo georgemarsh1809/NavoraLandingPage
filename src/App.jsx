@@ -5,13 +5,18 @@ import PricingCalculator from './calc';
 export default function NavoraLanding() {
     return (
         <div className="page">
+            <a href="#main" className="skip-link">
+                Skip to content
+            </a>
             <Header />
-            <Hero />
-            <ValueProps />
-            <Offerings />
-            <PricingCalculator />
-            <CTA />
-            <FAQ />
+            <main id="main">
+                <Hero />
+                <ValueProps />
+                <Offerings />
+                <PricingCalculator />
+                <CTA />
+                <FAQ />
+            </main>
             <Footer />
         </div>
     );
@@ -22,9 +27,20 @@ function Header() {
     const [current, setCurrent] = useState('');
     const close = () => setOpen(false);
 
-    // Track active section via viewport center for stable highlighting
+    // Lock body scroll when mobile menu is open
     useEffect(() => {
-        const ids = ['value', 'offerings', 'pricing', 'faq', 'cta'];
+        const original = document.body.style.overflow;
+        if (open) document.body.style.overflow = 'hidden';
+        else document.body.style.overflow = original || '';
+        return () => {
+            document.body.style.overflow = original || '';
+        };
+    }, [open]);
+
+    // Track active section via viewport center for stable highlighting
+    // Only sections that have nav items (exclude CTA)
+    useEffect(() => {
+        const ids = ['value', 'offerings', 'pricing', 'faq'];
         const getEls = () =>
             ids.map((id) => document.getElementById(id)).filter(Boolean);
 
@@ -60,6 +76,18 @@ function Header() {
         };
     }, []);
 
+    // Keep nav highlight in sync with hash changes and initial load
+    useEffect(() => {
+        const valid = new Set(['value', 'offerings', 'pricing', 'faq']);
+        const setFromHash = () => {
+            const id = (window.location.hash || '').replace('#', '');
+            if (valid.has(id)) setCurrent(id);
+        };
+        setFromHash();
+        window.addEventListener('hashchange', setFromHash);
+        return () => window.removeEventListener('hashchange', setFromHash);
+    }, []);
+
     const navClass = (id) => (current === id ? 'active' : '');
 
     return (
@@ -67,16 +95,16 @@ function Header() {
             <div className="container flex-between">
                 <div className="logo">Navora</div>
                 <nav className="nav">
-                    <a href="#value" className={navClass('value')}>
+                    <a href="#value" className={navClass('value')} onClick={() => setCurrent('value')}>
                         Who We Are
                     </a>
-                    <a href="#offerings" className={navClass('offerings')}>
+                    <a href="#offerings" className={navClass('offerings')} onClick={() => setCurrent('offerings')}>
                         Offerings
                     </a>
-                    <a href="#pricing" className={navClass('pricing')}>
+                    <a href="#pricing" className={navClass('pricing')} onClick={() => setCurrent('pricing')}>
                         Pricing
                     </a>
-                    <a href="#faq" className={navClass('faq')}>
+                    <a href="#faq" className={navClass('faq')} onClick={() => setCurrent('faq')}>
                         FAQ
                     </a>
                 </nav>
@@ -128,28 +156,28 @@ function Header() {
                             <a
                                 href="#value"
                                 className={navClass('value')}
-                                onClick={close}
+                                onClick={() => { setCurrent('value'); close(); }}
                             >
                                 Who We Are
                             </a>
                             <a
                                 href="#offerings"
                                 className={navClass('offerings')}
-                                onClick={close}
+                                onClick={() => { setCurrent('offerings'); close(); }}
                             >
                                 Offerings
                             </a>
                             <a
                                 href="#pricing"
                                 className={navClass('pricing')}
-                                onClick={close}
+                                onClick={() => { setCurrent('pricing'); close(); }}
                             >
                                 Pricing
                             </a>
                             <a
                                 href="#faq"
                                 className={navClass('faq')}
-                                onClick={close}
+                                onClick={() => { setCurrent('faq'); close(); }}
                             >
                                 FAQ
                             </a>
@@ -174,8 +202,8 @@ function Hero() {
                     <span className="highlight">Actionable Insights</span>
                 </h1>
                 <p>
-                    Custom data insights and digital solutions, tailored to your
-                    business needs.
+                    Dashboards and tools for ops and internal teams that cut
+                    reporting time and surface the KPIs that matter.
                 </p>
                 <div className="buttons">
                     <a href="#cta" className="btn">
@@ -339,9 +367,20 @@ function Footer() {
         <footer className="footer">
             <div className="container flex-between">
                 <div>Navora</div>
-                <p className="small">
-                    © {new Date().getFullYear()} Navora. All rights reserved.
-                </p>
+                <nav className="footer-nav">
+                    <a href="#value">What We Do</a>
+                    <a href="#offerings">Offerings</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#" aria-disabled="true">
+                        Privacy
+                    </a>
+                    <a href="#" aria-disabled="true">
+                        Terms
+                    </a>
+                    <a href="mailto:hello@navora.dev">hello@navora.dev</a>
+                </nav>
+                <p className="small">© {new Date().getFullYear()} Navora</p>
             </div>
         </footer>
     );

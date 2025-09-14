@@ -64,7 +64,7 @@ a {
     text-decoration: none;
 }
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* ---------- Layout ---------- */
@@ -128,9 +128,14 @@ a:hover {
         box-shadow 0.16s ease, background-color 0.16s ease, color 0.16s ease;
     will-change: transform;
     cursor: default;
+    background: linear-gradient(
+            180deg,
+            rgba(63, 183, 172, 0.08),
+            rgba(63, 183, 172, 0) 55%
+        ),
+        var(--panel);
 }
 #value .card:hover {
-    transform: translateY(-4px);
     border-color: var(--accent);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), var(--shadow);
     background: linear-gradient(
@@ -173,6 +178,13 @@ a:hover {
     color: #fff;
     background: #202020;
     border: 1px solid #2a2a2a;
+    position: relative;
+}
+/* Keyboard focus on nav */
+.nav a:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow);
+    border-radius: 6px;
 }
 
 /* ---------- Buttons ---------- */
@@ -299,6 +311,50 @@ a:hover {
 /* Increase spacing between heading, paragraph, and buttons in hero */
 .hero .container > * + * {
     margin-top: 1rem;
+}
+.hero .btn {
+    border: 1px solid transparent; /* prevent shift on hover */
+    transition: transform 0.18s ease, box-shadow 0.18s ease,
+        background-color 0.18s ease, border-color 0.18s ease;
+    position: relative;
+    overflow: visible;
+    z-index: 0; /* allow pseudo glow behind */
+}
+.hero .btn:hover {
+    transform: translateY(-2px);
+    background: #efefef;
+    border-color: #cfcfcf;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), var(--shadow);
+}
+.hero .btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22), var(--shadow);
+}
+
+/* Soft background glow on hover */
+.hero .btn::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 160%;
+    height: 160%;
+    transform: translate(-50%, -50%);
+    border-radius: 999px;
+    background: radial-gradient(
+        circle at center,
+        rgba(158, 223, 216, 0.45) 0%,
+        rgba(158, 223, 216, 0.18) 40%,
+        rgba(158, 223, 216, 0) 70%
+    );
+    filter: blur(14px);
+    opacity: 0;
+    z-index: -1; /* render beneath the button */
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+.hero .btn:hover::after {
+    opacity: 1;
 }
 .highlight {
     background: linear-gradient(90deg, var(--accent), var(--accent-soft));
@@ -490,6 +546,55 @@ details p {
     border-top: 1px solid var(--line);
     padding: 1.25rem 0 2rem;
     color: var(--muted);
+}
+.footer-nav {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.footer-nav a[aria-disabled='true'] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Footer mobile layout */
+@media (max-width: 720px) {
+    .footer .container.flex-between {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    .footer-nav {
+        gap: 0.5rem 0.75rem;
+    }
+}
+
+/* Skip link (accessibility) */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: 8px;
+    background: #fff;
+    color: #111;
+    padding: 6px 10px;
+    border-radius: 6px;
+    z-index: 999;
+}
+.skip-link:focus {
+    left: 8px;
+}
+
+/* Trusted by strip */
+/* (trusted-by section removed) */
+
+/* Results section list cleanup */
+/* (results section removed) */
+
+/* FAQ focus improvements */
+summary:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow);
+    border-radius: 6px;
 }
 
 /* ---------- Pricing (hover effects) ---------- */

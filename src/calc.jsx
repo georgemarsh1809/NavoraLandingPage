@@ -140,6 +140,25 @@ export default function PricingCalculator() {
         setFeatIdx(1);
     }, [selTier]);
 
+    // Initialize from URL params
+    useEffect(() => {
+        const qp = new URLSearchParams(window.location.search);
+        const t = qp.get('tier');
+        const d = qp.get('data');
+        const f = qp.get('features');
+        const r = qp.get('rush');
+        if (t && tiers[t]) setSelTier(t);
+        if (d !== null) {
+            const n = Number(d);
+            if (!Number.isNaN(n) && n >= 0 && n <= 2) setDataIdx(n);
+        }
+        if (f !== null) {
+            const n = Number(f);
+            if (!Number.isNaN(n) && n >= 0 && n <= 2) setFeatIdx(n);
+        }
+        if (r !== null) setRush(r === '1');
+    }, []);
+
     const estimate = useMemo(() => {
         const t = tiers[selTier];
         const scale = tierScales[selTier];
@@ -153,6 +172,17 @@ export default function PricingCalculator() {
 
     const scaleFor = tierScales[selTier];
     const tier = tiers[selTier];
+
+    const shareUrl = useMemo(() => {
+        const url = new URL(window.location.href);
+        const qp = url.searchParams;
+        qp.set('tier', selTier);
+        qp.set('data', String(dataIdx));
+        qp.set('features', String(featIdx));
+        qp.set('rush', rush ? '1' : '0');
+        url.search = qp.toString();
+        return url.toString();
+    }, [selTier, dataIdx, featIdx, rush]);
 
     return (
         <section id="pricing" className="section">
@@ -267,30 +297,59 @@ export default function PricingCalculator() {
                         </label>
                     </div>
 
-                    {/* Output */}
-                    <div
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'space-between',
-                            marginTop: 20,
-                            flexWrap: 'wrap',
-                            gap: 16,
-                        }}
-                    >
-                        <div>
-                            <div className="small" style={{ color: '#bbb' }}>
-                                Estimated build price
+                {/* Output */}
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        marginTop: 20,
+                        flexWrap: 'wrap',
+                        gap: 16,
+                    }}
+                >
+                    <div>
+                        <div className="small" style={{ color: '#bbb' }}>
+                            Estimated build price
+                        </div>
+                        <div style={{ fontSize: 28, fontWeight: 800 }}>
+                            £{estimate.toLocaleString()}
+                        </div>
+                        <div className="small" style={{ color: '#bbb' }}>
+                            Typical retainer: £{tier.retainer[0]}–£
+                            {tier.retainer[1]}/mo
+                        </div>
+                        <div className="small" style={{ color: '#9aa' }}>
+                            Final pricing confirmed after a 20‑minute discovery call.
+                        </div>
+                        <div style={{ marginTop: 12 }}>
+                            <div className="small" style={{ color: '#bbb', marginBottom: 6 }}>
+                                What’s included
                             </div>
-                            <div style={{ fontSize: 28, fontWeight: 800 }}>
-                                £{estimate.toLocaleString()}
-                            </div>
-                            <div className="small" style={{ color: '#bbb' }}>
-                                Typical retainer: £{tier.retainer[0]}–£
-                                {tier.retainer[1]}/mo
-                            </div>
+                            <ul style={{ margin: 0, paddingLeft: 18, color: '#ccc' }}>
+                                {tier.bullets.slice(0, 3).map((b) => (
+                                    <li key={b}>{b}</li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
+                    <div>
+                        <button
+                            type="button"
+                            className="btn-outline"
+                            onClick={async () => {
+                                try {
+                                    await navigator.clipboard.writeText(shareUrl);
+                                    alert('Link copied');
+                                } catch {
+                                    prompt('Copy this link:', shareUrl);
+                                }
+                            }}
+                        >
+                            Copy link with selections
+                        </button>
+                    </div>
+                </div>
                 </div>
             </div>
         </section>
