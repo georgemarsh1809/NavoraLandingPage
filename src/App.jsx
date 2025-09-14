@@ -93,18 +93,38 @@ function Header() {
     return (
         <header className="header">
             <div className="container flex-between">
-                <div className="logo">Navora</div>
+                <div className="logo">GBMGroup</div>
                 <nav className="nav">
-                    <a href="#value" className={navClass('value')} onClick={() => setCurrent('value')}>
+                    <a
+                        href="#value"
+                        className={navClass('value')}
+                        aria-current={current === 'value' ? 'location' : undefined}
+                        onClick={() => setCurrent('value')}
+                    >
                         Who We Are
                     </a>
-                    <a href="#offerings" className={navClass('offerings')} onClick={() => setCurrent('offerings')}>
+                    <a
+                        href="#offerings"
+                        className={navClass('offerings')}
+                        aria-current={current === 'offerings' ? 'location' : undefined}
+                        onClick={() => setCurrent('offerings')}
+                    >
                         Offerings
                     </a>
-                    <a href="#pricing" className={navClass('pricing')} onClick={() => setCurrent('pricing')}>
+                    <a
+                        href="#pricing"
+                        className={navClass('pricing')}
+                        aria-current={current === 'pricing' ? 'location' : undefined}
+                        onClick={() => setCurrent('pricing')}
+                    >
                         Pricing
                     </a>
-                    <a href="#faq" className={navClass('faq')} onClick={() => setCurrent('faq')}>
+                    <a
+                        href="#faq"
+                        className={navClass('faq')}
+                        aria-current={current === 'faq' ? 'location' : undefined}
+                        onClick={() => setCurrent('faq')}
+                    >
                         FAQ
                     </a>
                 </nav>
@@ -156,28 +176,44 @@ function Header() {
                             <a
                                 href="#value"
                                 className={navClass('value')}
-                                onClick={() => { setCurrent('value'); close(); }}
+                                aria-current={current === 'value' ? 'location' : undefined}
+                                onClick={() => {
+                                    setCurrent('value');
+                                    close();
+                                }}
                             >
                                 Who We Are
                             </a>
                             <a
                                 href="#offerings"
                                 className={navClass('offerings')}
-                                onClick={() => { setCurrent('offerings'); close(); }}
+                                aria-current={current === 'offerings' ? 'location' : undefined}
+                                onClick={() => {
+                                    setCurrent('offerings');
+                                    close();
+                                }}
                             >
                                 Offerings
                             </a>
                             <a
                                 href="#pricing"
                                 className={navClass('pricing')}
-                                onClick={() => { setCurrent('pricing'); close(); }}
+                                aria-current={current === 'pricing' ? 'location' : undefined}
+                                onClick={() => {
+                                    setCurrent('pricing');
+                                    close();
+                                }}
                             >
                                 Pricing
                             </a>
                             <a
                                 href="#faq"
                                 className={navClass('faq')}
-                                onClick={() => { setCurrent('faq'); close(); }}
+                                aria-current={current === 'faq' ? 'location' : undefined}
+                                onClick={() => {
+                                    setCurrent('faq');
+                                    close();
+                                }}
                             >
                                 FAQ
                             </a>
@@ -218,22 +254,21 @@ function Hero() {
 function ValueProps() {
     const items = [
         {
-            title: 'Full Data Integration',
-            desc: 'We connect your spreadsheets, Google Sheets, or APIs and do the messy joins for you, delivering end-to-end solutions.',
+            title: 'Save Time, Reduce Errors',
+            desc: 'Turn scattered spreadsheets into a single source of truth. Automate reporting, cut manual work, and eliminate costly mistakes. ',
         },
         {
-            title: 'Transparent Pricing',
-            desc: 'Clear tiers with a complexity calculator. No hidden fees, no surprises — know exactly what you pay for.',
+            title: 'Affordable Insights',
+            desc: 'Get the clarity of a data team at a fraction of the cost. Transparent build pricing and simple monthly retainers keep your budget in control.',
         },
         {
-            title: 'Ongoing Support',
-            desc: 'Full support post-implementation, including improved functionality and new metrics as requested.',
+            title: 'Personal, Reliable Partnership',
+            desc: 'Work directly with one engineer you can trust. Fast prototypes, clear communication, and ongoing support.',
         },
     ];
     return (
         <section id="value" className="section">
             <div className="container">
-                <h2 className="section-title">Who We Are</h2>
                 <div className="grid">
                     {items.map((it) => (
                         <div key={it.title} className="card">
@@ -339,7 +374,7 @@ function FAQ() {
             a: 'Tier 1 often ships on Looker Studio. Tier 2–3 use React/Next.js with FastAPI & Postgres.',
         },
         {
-            q: 'Who’s behind Navora?',
+            q: 'Who’s behind GBMGroup?',
             a: 'I’m George Marsh — a full-stack engineer who likes turning chaos into clarity.',
         },
         {
@@ -366,7 +401,7 @@ function Footer() {
     return (
         <footer className="footer">
             <div className="container flex-between">
-                <div>Navora</div>
+                <div>GBMGroup</div>
                 <nav className="footer-nav">
                     <a href="#value">What We Do</a>
                     <a href="#offerings">Offerings</a>
@@ -380,7 +415,7 @@ function Footer() {
                     </a>
                     <a href="mailto:hello@navora.dev">hello@navora.dev</a>
                 </nav>
-                <p className="small">© {new Date().getFullYear()} Navora</p>
+                <p className="small">© {new Date().getFullYear()} GBMGroup</p>
             </div>
         </footer>
     );

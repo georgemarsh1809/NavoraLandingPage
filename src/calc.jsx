@@ -3,7 +3,7 @@ import { useMemo, useState, useEffect } from 'react';
 export default function PricingCalculator() {
     const tiers = {
         simple: {
-            key: 'basic',
+            key: 'simple',
             name: 'Basic',
             base: 1500,
             retainer: [200, 400],
@@ -147,7 +147,9 @@ export default function PricingCalculator() {
         const d = qp.get('data');
         const f = qp.get('features');
         const r = qp.get('rush');
-        if (t && tiers[t]) setSelTier(t);
+        // Back-compat: allow older links that used `basic` to map to `simple`
+        const tierKey = t === 'basic' ? 'simple' : t;
+        if (tierKey && tiers[tierKey]) setSelTier(tierKey);
         if (d !== null) {
             const n = Number(d);
             if (!Number.isNaN(n) && n >= 0 && n <= 2) setDataIdx(n);
@@ -196,58 +198,65 @@ export default function PricingCalculator() {
                     </p>
 
                     {/* Tier selector */}
-                    <div
-                        style={{
-                            display: 'grid',
-                            gap: 12,
-                            gridTemplateColumns:
-                                'repeat(auto-fit, minmax(260px, 1fr))',
-                            marginTop: 16,
-                        }}
-                    >
-                        {Object.values(tiers).map((t) => (
-                            <label
-                                key={t.key}
-                                className="card"
-                                style={{
-                                    cursor: 'pointer',
-                                    borderColor:
-                                        selTier === t.key
-                                            ? 'var(--accent)'
-                                            : 'var(--line)',
-                                    boxShadow:
-                                        selTier === t.key
-                                            ? 'var(--shadow)'
-                                            : 'none',
-                                }}
-                            >
-                                <div
+                    <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
+                        <legend id="tier-legend" className="small" style={{ color: '#bbb' }}>
+                            Select a tier
+                        </legend>
+                        <div
+                            style={{
+                                display: 'grid',
+                                gap: 12,
+                                gridTemplateColumns:
+                                    'repeat(auto-fit, minmax(260px, 1fr))',
+                                marginTop: 16,
+                            }}
+                            aria-labelledby="tier-legend"
+                            role="radiogroup"
+                        >
+                            {Object.values(tiers).map((t) => (
+                                <label
+                                    key={t.key}
+                                    className="card"
                                     style={{
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'space-between',
+                                        cursor: 'pointer',
+                                        borderColor:
+                                            selTier === t.key
+                                                ? 'var(--accent)'
+                                                : 'var(--line)',
+                                        boxShadow:
+                                            selTier === t.key
+                                                ? 'var(--shadow)'
+                                                : 'none',
                                     }}
                                 >
                                     <div
                                         style={{
                                             display: 'flex',
                                             alignItems: 'center',
-                                            gap: 10,
+                                            justifyContent: 'space-between',
                                         }}
                                     >
-                                        <input
-                                            type="radio"
-                                            name="tier"
-                                            value={t.key}
-                                            checked={selTier === t.key}
-                                            onChange={() => setSelTier(t.key)}
-                                        />
-                                        <strong>{t.name}</strong>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                gap: 10,
+                                            }}
+                                        >
+                                            <input
+                                                type="radio"
+                                                name="tier"
+                                                value={t.key}
+                                                checked={selTier === t.key}
+                                                onChange={() => setSelTier(t.key)}
+                                            />
+                                            <strong>{t.name}</strong>
+                                        </div>
                                     </div>
-                                </div>
-                            </label>
-                        ))}
-                    </div>
+                                </label>
+                            ))}
+                        </div>
+                    </fieldset>
 
                     {/* Sliders take full width */}
                     <div
@@ -312,7 +321,11 @@ export default function PricingCalculator() {
                         <div className="small" style={{ color: '#bbb' }}>
                             Estimated build price
                         </div>
-                        <div style={{ fontSize: 28, fontWeight: 800 }}>
+                        <div
+                            style={{ fontSize: 28, fontWeight: 800 }}
+                            aria-live="polite"
+                            aria-atomic="true"
+                        >
                             £{estimate.toLocaleString()}
                         </div>
                         <div className="small" style={{ color: '#bbb' }}>
