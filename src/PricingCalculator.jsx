@@ -24,62 +24,62 @@ export default function PricingCalculator() {
     const tiers = {
         simple: {
             key: 'simple',
-            name: 'Basic',
-            base: 1500,
-            retainer: [200, 400],
-            eta: '~1 week',
+            name: 'Decision Preview (Prototype)',
+            base: 1000,
+            retainer: [0, 0],
+            eta: '7–10 days',
         },
         moderate: {
             key: 'moderate',
-            name: 'Moderate (Most Popular)',
+            name: 'Ops Visibility  (Most popular)',
             base: 2500,
             retainer: [400, 800],
-            eta: '~2–4 weeks',
+            eta: '2–4 weeks',
         },
         complex: {
             key: 'complex',
-            name: 'Complex',
-            base: 5000,
+            name: 'Run & Automate Suite',
+            base: 8000,
             retainer: [1000, 2500],
-            eta: '~6–12 weeks',
+            eta: '6–12 weeks',
         },
     };
 
     const tierScales = {
         simple: {
             data: [
-                { key: 'low', w: 1, label: 'CSV only (×1)' },
-                { key: 'med', w: 1.5, label: 'CSV + Sheets (×1.5)' },
-                { key: 'high', w: 2, label: 'API/DB (×2)' },
+                { key: 'low', w: 1, label: 'Sheets/CSV only (×1)' },
+                { key: 'med', w: 1.5, label: 'Mix of Sheets + APIs (×1.5)' },
+                { key: 'high', w: 2, label: 'APIs + DBs, joins (×2)' },
             ],
             features: [
-                { key: 'low', w: 1, label: 'Static charts (×1)' },
-                { key: 'med', w: 1.5, label: 'Filters & export (×1.5)' },
-                { key: 'high', w: 2, label: 'Automations/alerts (×2)' },
+                { key: 'low', w: 1, label: 'Core KPIs & email report (×1)' },
+                { key: 'med', w: 1.5, label: 'Filters + alerts (×1.5)' },
+                { key: 'high', w: 2, label: 'Forecasting + roles/SSO (×2)' },
             ],
         },
         moderate: {
             data: [
-                { key: 'low', w: 1, label: '≤2 sources (×1)' },
-                { key: 'med', w: 1.5, label: '3–4 blended (×1.5)' },
-                { key: 'high', w: 2, label: 'APIs + DBs (×2)' },
+                { key: 'low', w: 1, label: 'Sheets/CSV only (×1)' },
+                { key: 'med', w: 1.5, label: 'Mix of Sheets + APIs (×1.5)' },
+                { key: 'high', w: 2, label: 'APIs + DBs, joins (×2)' },
             ],
             features: [
-                { key: 'low', w: 1, label: '2 dashboards (×1)' },
-                { key: 'med', w: 1.5, label: '3 dashboards + filters (×1.5)' },
-                { key: 'high', w: 2, label: 'Automations, reports (×2)' },
+                { key: 'low', w: 1, label: 'Core KPIs & email report (×1)' },
+                { key: 'med', w: 1.5, label: 'Filters + alerts (×1.5)' },
+                { key: 'high', w: 2, label: 'Forecasting + roles/SSO (×2)' },
             ],
         },
         complex: {
             data: [
-                { key: 'low', w: 1, label: '3–4 sources (×1)' },
-                { key: 'med', w: 1.5, label: '5–6 sources (×1.5)' },
-                { key: 'high', w: 2, label: '7+ pipelines (×2)' },
+                { key: 'low', w: 1, label: 'Sheets/CSV only (×1)' },
+                { key: 'med', w: 1.5, label: 'Mix of Sheets + APIs (×1.5)' },
+                { key: 'high', w: 2, label: 'APIs + DBs, joins (×2)' },
             ],
             features: [
-                { key: 'low', w: 1, label: 'Multi-page (×1)' },
-                { key: 'med', w: 1.5, label: 'Roles/SSO (×1.5)' },
-                { key: 'high', w: 2, label: 'Forecasting/AI (×2)' },
+                { key: 'low', w: 1, label: 'Core KPIs & email report (×1)' },
+                { key: 'med', w: 1.5, label: 'Filters + alerts (×1.5)' },
+                { key: 'high', w: 2, label: 'Forecasting + roles/SSO (×2)' },
             ],
         },
     };
@@ -141,11 +141,10 @@ export default function PricingCalculator() {
                 <div className="card">
                     <h3 style={{ marginTop: 0 }}>Interactive Pricing Guide</h3>
                     <p className="small">
-                        This estimate is designed to help you budget
-                        confidently. We finalise scope & pricing after a short
-                        discovery call. <br />
+                        This estimate helps you budget confidently. We finalise
+                        scope and pricing after a short discovery call. <br />
                         Not sure which tier fits? Pick your best guess — we’ll
-                        guide you.
+                        guide you the rest of the way.
                     </p>
                     <p className="small"></p>
                     {/* Tier selector */}
@@ -216,6 +215,7 @@ export default function PricingCalculator() {
                             ))}
                         </div>
                     </fieldset>
+
                     {/* Discrete “slider” controls */}
                     <BandSlider
                         label="Data Complexity"
@@ -265,9 +265,7 @@ export default function PricingCalculator() {
                         }}
                     >
                         <div>
-                            <div className="small">
-                                Estimated build price (ex. VAT)
-                            </div>
+                            <div className="small">Estimated Build Price</div>
                             <div
                                 style={{
                                     fontSize: 28,
@@ -279,7 +277,7 @@ export default function PricingCalculator() {
                                 {fmtGBP.format(estimate)}
                             </div>
                             <div className="small">
-                                Typical monthly support:{' '}
+                                Typical Run & Improve:{' '}
                                 {fmtGBP.format(tier.retainer[0])}–
                                 {fmtGBP.format(tier.retainer[1])}/mo
                             </div>
@@ -296,17 +294,16 @@ export default function PricingCalculator() {
                                     flexWrap: 'wrap',
                                 }}
                             >
-                                <a
-                                    className="button"
-                                    href={`/book?${new URLSearchParams({
-                                        tier: selTier,
-                                        data: String(dataIdx),
-                                        features: String(featIdx),
-                                        rush: rush ? '1' : '0',
-                                    })}`}
-                                >
-                                    Book My Free Data Audit
+                                <a className="button" href="#cta">
+                                    Review My Estimate
                                 </a>
+                                <div
+                                    className="small"
+                                    style={{ width: '100%' }}
+                                >
+                                    We’ll pressure‑test scope and confirm a
+                                    fixed price.
+                                </div>
                             </div>
                         </div>
                         <div

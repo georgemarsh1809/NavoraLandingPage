@@ -5,7 +5,6 @@ import {
     faCircleQuestion,
     faClock,
     faGaugeHigh,
-    faHandshake,
     faSeedling,
     faLayerGroup,
     faSitemap,
@@ -173,7 +172,7 @@ function Header() {
                         }
                         onClick={() => setCurrent('pricing')}
                     >
-                        Pricing
+                        Pricing & Plans
                     </a>
                     <a
                         href={onHowItWorks ? '/#faq' : '#faq'}
@@ -321,9 +320,15 @@ function Hero() {
                 </p>
                 <div className="buttons">
                     <a href="#cta" className="btn">
-                        Start with a Free Data Audit
+                        Book a Free Data Audit
+                    </a>
+                    <a href="#pricing" className="btn btn-outline">
+                        See Pricing & Plans
                     </a>
                 </div>
+                <p className="small" style={{ marginTop: 8 }}>
+                    20‑min audit + tailored plan.
+                </p>
             </div>
         </section>
     );
@@ -332,19 +337,19 @@ function Hero() {
 function ValueProps() {
     const items = [
         {
-            title: 'Save Time, Reduce Errors',
-            desc: 'Turn scattered spreadsheets into a single source of truth. Automate reporting, cut manual work, and eliminate costly mistakes. ',
+            title: 'Unify your data',
+            desc: 'One source of truth across finance, ops, and growth.',
+            icon: faSitemap,
+        },
+        {
+            title: 'Get Insights',
+            desc: 'Get the clarity of a data team at a fraction of the cost.',
             icon: faClock,
         },
         {
-            title: 'Affordable Insights',
-            desc: 'Get the clarity of a data team at a fraction of the cost. Transparent build pricing and simple monthly retainers keep your budget in control.',
+            title: 'Surface what matters',
+            desc: 'Clear dashboards and alerts for the KPIs that drive decisions.',
             icon: faGaugeHigh,
-        },
-        {
-            title: 'Personal Partnership',
-            desc: 'Work directly with one engineer you can trust. Fast prototypes, clear communication, and ongoing support.',
-            icon: faHandshake,
         },
     ];
     return (
@@ -373,42 +378,44 @@ function ValueProps() {
 function Solutions() {
     const items = [
         {
-            title: 'Tier 1 – Basic',
+            title: 'Package A — Decision Preview (Prototype, 7–10 days)',
             bullets: [
-                '1 data source integration',
-                'Single dashboard',
-                '3–7 key metrics',
-                '1 week delivery',
-                'Basic maintenance included',
+                'Deliverables: 1 connected data pipe (e.g., Sheets/CSV), 1 KPI set (3–7), 1 dashboard, 1 automated email report.',
+                'Outcome: Validate the metrics & workflow on real data.',
+                'Risk reducer: If it doesn’t earn a rollout, you don’t pay.',
             ],
-            price: '£1,500 build + £200–£300/mo',
+            price: '£1,000–£2,500 + £200-£500/mo',
         },
         {
-            title: 'Tier 2 – Moderate',
+            title: 'Package B — Ops Visibility Pack (Core Build, 2–4 weeks)',
             bullets: [
-                '2–4 data sources',
-                '2–3 connected dashboards',
-                'Interactive filters',
-                'Process automation',
-                '2–4 weeks delivery',
-                'Priority support',
+                'Deliverables: 2 dashboards (Exec + Ops), source modeling, data dictionary, anomaly alerts, daily refresh by 9am.',
+                'Outcome: Cut manual reporting by 70–90%; leaders get the same numbers, every day.',
             ],
-            price: '£2,500–£4,000 build + £400–£800/mo',
+            price: '£2,500–£8,000 + £400–£800/mo',
         },
         {
-            title: 'Tier 3 – Complex',
+            title: 'Package C — Run & Automate Suite (Scale, 6–12 weeks)',
             bullets: [
-                '5+ data sources',
-                'Multi‑page dashboards',
-                'User roles & permissions',
-                'Advanced forecasting',
-                'AI integrations',
-                '6–12 weeks delivery',
-                'White‑glove service',
+                'Deliverables: 5–10 sources, role-based access, multi-page boards, SLAs, incident monitoring, forecasting.',
+                'Outcome: One source of truth across teams; proactive alerts, not reactive fire-drills.',
             ],
-            price: '£5,000–£20,000 build + £1,000–£4000/mo',
+            price: '£8,000–£20,000 + £1,000–£2,500/mo',
         },
     ];
+    const splitTitle = (t) => {
+        const parts = t.split('—');
+        const label = parts.length > 1 ? parts[0].trim() : '';
+        let right = parts.length > 1 ? parts.slice(1).join('—').trim() : t;
+        let name = right;
+        let meta = '';
+        const m = right.match(/^(.*)\((.*)\)$/);
+        if (m) {
+            name = (m[1] || '').trim();
+            meta = (m[2] || '').trim();
+        }
+        return { label, name, meta };
+    };
     return (
         <section id="solutions" className="section">
             <div className="container">
@@ -420,45 +427,84 @@ function Solutions() {
                     Solutions
                 </h2>
                 <div className="grid">
-                    {items.map((card) => (
-                        <div key={card.title} className="card">
-                            <h3>
-                                <FontAwesomeIcon
-                                    icon={
-                                        card.title.includes('Basic')
-                                            ? faSeedling
-                                            : card.title.includes('Moderate')
-                                            ? faLayerGroup
-                                            : faSitemap
-                                    }
-                                    style={{ marginRight: 8 }}
-                                />
-                                {card.title}
-                            </h3>
-                            <ul>
-                                {card.bullets.map((b) => (
-                                    <li key={b}>{b}</li>
-                                ))}
-                            </ul>
-                            <p>
-                                {(() => {
-                                    const parts = card.price.split(' build + ');
-                                    if (parts.length === 2) {
-                                        return (
-                                            <>
-                                                {parts[0]} build
-                                                <br />
-                                                <span className="retainer">
-                                                    {parts[1]} ongoing support
-                                                </span>
-                                            </>
-                                        );
-                                    }
-                                    return card.price;
-                                })()}
-                            </p>
-                        </div>
-                    ))}
+                    {items.map((card) => {
+                        const { label, name, meta } = splitTitle(card.title);
+                        const icon = card.title.includes('Decision Preview')
+                            ? faSeedling
+                            : card.title.includes('Ops Visibility')
+                            ? faLayerGroup
+                            : faSitemap;
+                        const noteMatch = card.price.match(/\(([^)]+)\)/);
+                        const note = noteMatch ? noteMatch[1] : '';
+                        const noNote = card.price
+                            .replace(/\s*\([^)]*\)\s*/g, '')
+                            .trim();
+                        let build = noNote;
+                        let retainer = '';
+                        if (noNote.includes('+')) {
+                            const parts = noNote.split('+');
+                            build = (parts[0] || '').trim();
+                            retainer = (parts.slice(1).join('+') || '').trim();
+                        }
+                        return (
+                            <div key={card.title} className="card">
+                                {label ? (
+                                    <span
+                                        className="badge"
+                                        style={{ marginBottom: 6 }}
+                                    >
+                                        {label}
+                                    </span>
+                                ) : null}
+                                <h3
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: 8,
+                                        marginTop: 4,
+                                    }}
+                                >
+                                    <FontAwesomeIcon
+                                        icon={icon}
+                                        style={{
+                                            color: 'var(--muted)',
+                                            fontSize: 14,
+                                        }}
+                                    />
+                                    {name}
+                                </h3>
+                                {meta ? (
+                                    <p
+                                        className="small"
+                                        style={{
+                                            color: 'var(--muted)',
+                                            marginTop: 4,
+                                        }}
+                                    >
+                                        {meta}
+                                    </p>
+                                ) : null}
+                                <ul>
+                                    {card.bullets.map((b) => (
+                                        <li key={b}>{b}</li>
+                                    ))}
+                                </ul>
+                                <div style={{ marginTop: 8 }}>
+                                    <div className="price-build">{build}</div>
+                                    {retainer ? (
+                                        <div className="price-retainer">
+                                            Scale & Improve: {retainer}
+                                        </div>
+                                    ) : null}
+                                    {note ? (
+                                        <div className="price-note small">
+                                            {note}
+                                        </div>
+                                    ) : null}
+                                </div>
+                            </div>
+                        );
+                    })}
                 </div>
                 <div className="text-center" style={{ marginTop: 20 }}>
                     <p className="small" style={{ color: 'var(--muted)' }}>

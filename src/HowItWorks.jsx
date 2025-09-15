@@ -16,10 +16,10 @@ export default function HowItWorks() {
             <section className="hero">
                 <div className="container">
                     <h1>
-                        <span>How We Work</span>
+                        <span>The GBM Way </span>
                         <br />
                         <span className="highlight">
-                            Discover → Validate → Scale
+                            Discover. Prototype. Launch.
                         </span>
                     </h1>
                     <p>
@@ -29,7 +29,7 @@ export default function HowItWorks() {
                     </p>
                     <div className="buttons">
                         <a className="btn" href="#cta">
-                            Start with a Free Data Audit
+                            Book a Free Data Audit
                         </a>
                     </div>
                 </div>
@@ -49,19 +49,17 @@ export default function HowItWorks() {
                             </h3>
                             <ul style={{ marginTop: 8, paddingLeft: 18 }}>
                                 <li>
-                                    <strong>Unify your data </strong> — bring
-                                    scattered spreadsheets and systems into one
-                                    reliable source of truth.
+                                    <strong>Unify your data.</strong> One source
+                                    of truth across finance, ops, and growth.
                                 </li>
                                 <li>
-                                    <strong>Automate reporting</strong> — save
-                                    hours of manual work while eliminating
-                                    costly errors.
+                                    <strong>Automate reporting.</strong> Cut
+                                    manual work and reduce errors.
                                 </li>
                                 <li>
-                                    <strong>Build clarity</strong> — create
-                                    dashboards that highlight the KPIs that
-                                    truly drive your business forward.
+                                    <strong>Surface what matters.</strong> Clear
+                                    dashboards and alerts for the KPIs that
+                                    drive decisions.
                                 </li>
                             </ul>
                         </div>
@@ -75,19 +73,15 @@ export default function HowItWorks() {
                             </h3>
                             <ul style={{ marginTop: 8, paddingLeft: 18 }}>
                                 <li>
-                                    <strong>Founders and Leadership</strong> -
-                                    who need decision-ready metrics at their
-                                    fingertips.
+                                    Founders and leadership who need
+                                    decision‑ready metrics.
                                 </li>
                                 <li>
-                                    <strong>Ops and Finance Teams</strong> -
-                                    looking to cut down manual reporting and
-                                    focus on metrics that matters.
+                                    Ops & finance teams tired of manual
+                                    reporting.
                                 </li>
                                 <li>
-                                    <strong>SMEs & Mid-Market Companies</strong>{' '}
-                                    — who want data insights without the cost of
-                                    a full in-house data team.
+                                    SMEs & mid‑market without a full data team.
                                 </li>
                             </ul>
                         </div>
@@ -125,23 +119,28 @@ export default function HowItWorks() {
                     >
                         {[
                             {
-                                title: '1. Discover & Align',
-                                desc: 'We kick things off with a discovery call to understand your goals, your key metrics, and where your data lives. This ensures we focus on the insights that matter most to your business.',
+                                title: '1. Discover',
+                                desc: 'We kick things off with a discovery call to understand your goals, your key metrics, and where your data lives. This ensures we focus on the insights that matter most to your business..',
                                 icon: faMagnifyingGlass,
                             },
                             {
-                                title: '2. Prototype & Validate',
+                                title: '2. Prototype',
                                 desc: 'Next, we create a simple, interactive prototype so you can see your data come to life. This quick win gives you confidence in the approach and lets us fine-tune before we scale.',
                                 icon: faWandMagicSparkles,
                             },
                             {
-                                title: '3. Build & Expand',
-                                desc: 'With the direction confirmed, we turn the prototype into a full dashboard solution: integrating more data, adding tailored views for teams, and creating clear, actionable reports that make decision-making effortless.',
+                                title: '3. Build',
+                                desc: 'With the direction confirmed, we turn the prototype into a full solution; integrating more data, adding tailored views for teams, and creating clear, actionable reports that make decision-making effortless.',
                                 icon: faGears,
                             },
                             {
-                                title: '4. Launch & Support',
-                                desc: 'We hand everything over with clear documentation and light training, so your team feels at home straight away. And if you’d like ongoing support, we offer a monthly service to keep your dashboards fresh, reliable, and growing with your business.',
+                                title: '4. Launch ',
+                                desc: 'We hand everything over with clear documentation and light training, so your team feels at home straight away. ',
+                                icon: faRocket,
+                            },
+                            {
+                                title: '5. Support & Improve',
+                                desc: 'If you’d like ongoing support, we offer a monthly service to keep your dashboards fresh, reliable, and growing with your business.',
                                 icon: faRocket,
                             },
                         ].map((s) => (

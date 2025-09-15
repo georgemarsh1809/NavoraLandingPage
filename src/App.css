@@ -251,6 +251,7 @@ a:hover {
         box-shadow 0.16s ease, background-color 0.16s ease, color 0.16s ease;
     will-change: transform;
     cursor: default;
+    text-align: center;
     background: linear-gradient(
             180deg,
             rgba(63, 183, 172, 0.08),
@@ -284,6 +285,15 @@ a:hover {
 #solutions .card:hover li {
     color: inherit;
 }
+#solutions .card .badge {
+    display: inline-block;
+    font-size: 11px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px 8px;
+    background: rgba(63, 183, 172, 0.06);
+}
 #pricing label.card {
     cursor: pointer;
 }
@@ -292,6 +302,20 @@ a:hover {
 }
 #value .card:hover p {
     color: inherit;
+}
+
+/* Solutions price formatting */
+#solutions .card .price-build {
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+#solutions .card .price-retainer {
+    color: var(--muted);
+    margin-top: 4px;
+}
+#solutions .card .price-note {
+    color: var(--muted);
+    margin-top: 4px;
 }
 
 /* ---------- Navigation ---------- */
@@ -349,9 +373,11 @@ a:hover {
 .btn-outline,
 .button.secondary {
     display: inline-block;
-    border: 1px solid #555;
+    border: 1px solid var(--btn-outline-border);
     padding: 0.6rem 1.1rem;
     border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
 }
 
 .btn:focus-visible,
@@ -362,8 +388,8 @@ a:hover {
 }
 .btn-outline:hover,
 .button.secondary:hover {
-    border-color: #555;
-    background: transparent;
+    border-color: var(--btn-outline-hover-border);
+    background: var(--btn-outline-hover-bg);
 }
 
 /* Brand-accent variant for the share-link button */
@@ -610,6 +636,18 @@ a:hover {
     background: #efefef;
     border-color: #cfcfcf;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), var(--shadow);
+}
+.hero .btn.btn-outline {
+    background: transparent !important;
+    color: var(--muted) !important;
+    border-color: var(--btn-outline-border) !important;
+}
+.hero .btn.btn-outline:hover {
+    transform: none !important;
+    background: var(--btn-outline-hover-bg) !important;
+    border-color: var(--btn-outline-hover-border) !important;
+    box-shadow: none !important;
+    color: var(--text) !important;
 }
 .hero .btn:active {
     transform: translateY(-1px);
