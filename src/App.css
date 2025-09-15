@@ -1034,6 +1034,35 @@ body:not(.app-ready) .page {
     transform: none;
 }
 
+/* ---------- On-load intro animation ---------- */
+@keyframes introFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+.intro { opacity: 0; }
+.app-ready .intro { animation: introFadeUp 520ms ease forwards; }
+.app-ready .intro.delay-1 { animation-delay: 120ms; }
+.app-ready .intro.delay-2 { animation-delay: 240ms; }
+.app-ready .intro.delay-3 { animation-delay: 360ms; }
+.app-ready .intro.delay-4 { animation-delay: 480ms; }
+
+@media (prefers-reduced-motion: reduce) {
+    .app-ready .intro {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .page,
     [data-reveal] {

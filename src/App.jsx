@@ -150,10 +150,10 @@ function Header() {
     return (
         <header className="header">
             <div className="container flex-between">
-                <a href="/" className="logo">
+                <a href="/" className="logo intro">
                     GBMGroup
                 </a>
-                <nav className="nav">
+                <nav className="nav intro delay-1">
                     <a
                         href={onHowItWorks ? '/#solutions' : '#solutions'}
                         className={navClass('solutions')}
@@ -192,7 +192,7 @@ function Header() {
                         How We Work
                     </a>
                 </nav>
-                <a href="#cta" className="btn">
+                <a href="#cta" className="btn intro delay-2">
                     Book a Call
                 </a>
 
@@ -308,25 +308,25 @@ function Hero() {
     return (
         <section className="hero">
             <div className="container">
-                <h1>
+                <h1 className="intro">
                     <span>Transform Data Chaos Into</span>
                     <br />
                     <span className="highlight">Actionable Insights</span>
                 </h1>
-                <p>
+                <p className="intro delay-1">
                     We help founders, operations & finance teams make smarter
                     decisions based on their data. No fuss, no manual reporting,
                     just reliable dashboards and digital solutions.
                 </p>
-                <div className="buttons">
+                <div className="buttons intro delay-2">
                     <a href="#cta" className="btn">
-                        This is a test
+                        Book a Free Data Audit
                     </a>
                     <a href="#pricing" className="btn btn-outline">
                         See Pricing & Plans
                     </a>
                 </div>
-                <p className="small" style={{ marginTop: 8 }}>
+                <p className="small intro delay-3" style={{ marginTop: 8 }}>
                     20‑min audit + tailored plan.
                 </p>
             </div>
@@ -356,13 +356,8 @@ function ValueProps() {
         <section id="value" className="section">
             <div className="container">
                 <div className="grid">
-                    {items.map((it, idx) => (
-                        <div
-                            key={it.title}
-                            className="card"
-                            data-reveal
-                            data-reveal-delay={`${idx * 60}ms`}
-                        >
+                    {items.map((it) => (
+                        <div key={it.title} className="card">
                             <h3>
                                 <FontAwesomeIcon
                                     icon={it.icon}
@@ -432,7 +427,7 @@ function Solutions() {
                     Solutions
                 </h2>
                 <div className="grid">
-                    {items.map((card, idx) => {
+                    {items.map((card) => {
                         const { label, name, meta } = splitTitle(card.title);
                         const icon = card.title.includes('Decision Preview')
                             ? faSeedling
@@ -452,12 +447,7 @@ function Solutions() {
                             retainer = (parts.slice(1).join('+') || '').trim();
                         }
                         return (
-                            <div
-                                key={card.title}
-                                className="card"
-                                data-reveal
-                                data-reveal-delay={`${idx * 60}ms`}
-                            >
+                            <div key={card.title} className="card">
                                 {label ? (
                                     <span
                                         className="badge"
