@@ -71,14 +71,6 @@ function NavoraLanding() {
                 <FAQ />
             </main>
             <Footer />
-            {/* Sticky mobile CTA */}
-            <div className="sticky-cta">
-                <div className="container">
-                    <a href="#cta" className="btn btn-accent">
-                        Book a Free Data Audit
-                    </a>
-                </div>
-            </div>
         </div>
     );
 }
