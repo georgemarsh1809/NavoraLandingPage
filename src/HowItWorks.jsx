@@ -19,7 +19,7 @@ export default function HowItWorks() {
                         <span>How We Work</span>
                         <br />
                         <span className="highlight">
-                            Direct. Transparent. Outcome‑focused.
+                            Discover → Validate → Scale
                         </span>
                     </h1>
                     <p>
@@ -41,7 +41,10 @@ export default function HowItWorks() {
                     <div className="grid">
                         <div className="card">
                             <h3>
-                                <FontAwesomeIcon icon={faListCheck} style={{ marginRight: 8 }} />
+                                <FontAwesomeIcon
+                                    icon={faListCheck}
+                                    style={{ marginRight: 8 }}
+                                />
                                 What We Do
                             </h3>
                             <ul style={{ marginTop: 8, paddingLeft: 18 }}>
@@ -64,7 +67,10 @@ export default function HowItWorks() {
                         </div>
                         <div className="card">
                             <h3>
-                                <FontAwesomeIcon icon={faUsers} style={{ marginRight: 8 }} />
+                                <FontAwesomeIcon
+                                    icon={faUsers}
+                                    style={{ marginRight: 8 }}
+                                />
                                 Who It’s For
                             </h3>
                             <ul style={{ marginTop: 8, paddingLeft: 18 }}>
@@ -90,7 +96,10 @@ export default function HowItWorks() {
             </section>
 
             {/* Inline CTA above Process */}
-            <div className="container text-center" style={{ marginTop: 8, marginBottom: 8 }}>
+            <div
+                className="container text-center"
+                style={{ marginTop: 8, marginBottom: 8 }}
+            >
                 <a href="#cta" className="btn cta-inline">
                     Yes, This Is Me — Let’s Talk
                 </a>
@@ -146,7 +155,10 @@ export default function HowItWorks() {
                                 }}
                             >
                                 <h3 style={{ marginTop: 0 }}>
-                                    <FontAwesomeIcon icon={s.icon} style={{ marginRight: 8 }} />
+                                    <FontAwesomeIcon
+                                        icon={s.icon}
+                                        style={{ marginRight: 8 }}
+                                    />
                                     {s.title}
                                 </h3>
                                 <p
