@@ -95,8 +95,6 @@ function Header() {
         };
     }, [open]);
 
-    
-
     // Track active section via viewport center for stable highlighting
     // Only sections that have nav items (exclude CTA)
     useEffect(() => {
@@ -344,7 +342,7 @@ function ValueProps() {
             icon: faGaugeHigh,
         },
         {
-            title: 'Personal, Reliable Partnership',
+            title: 'Personal Partnership',
             desc: 'Work directly with one engineer you can trust. Fast prototypes, clear communication, and ongoing support.',
             icon: faHandshake,
         },
