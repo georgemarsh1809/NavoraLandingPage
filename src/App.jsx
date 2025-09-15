@@ -1,4 +1,15 @@
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faPuzzlePiece,
+    faCircleQuestion,
+    faClock,
+    faGaugeHigh,
+    faHandshake,
+    faSeedling,
+    faLayerGroup,
+    faSitemap,
+} from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import PricingCalculator from './PricingCalculator.jsx';
 import HowItWorks from './HowItWorks.jsx';
@@ -47,6 +58,15 @@ function NavoraLanding() {
                 <Hero />
                 <ValueProps />
                 <Solutions />
+                {/* Inline CTA after Solutions on homepage */}
+                <div
+                    className="container text-center"
+                    style={{ marginTop: 0, marginBottom: 30 }}
+                >
+                    <a href="#cta" className="btn cta-inline">
+                        Book a Free Data Discovery Call
+                    </a>
+                </div>
                 <PricingCalculator />
                 <CTA />
                 <FAQ />
@@ -74,6 +94,8 @@ function Header() {
             document.body.style.overflow = original || '';
         };
     }, [open]);
+
+    
 
     // Track active section via viewport center for stable highlighting
     // Only sections that have nav items (exclude CTA)
@@ -173,6 +195,9 @@ function Header() {
                         How We Work
                     </a>
                 </nav>
+                <a href="#cta" className="btn">
+                    Book a Call
+                </a>
 
                 <button
                     className="menu-toggle"
@@ -287,18 +312,18 @@ function Hero() {
         <section className="hero">
             <div className="container">
                 <h1>
-                    <span>Transform Scattered Data Into</span>
+                    <span>Transform Data Chaos Into</span>
                     <br />
                     <span className="highlight">Actionable Insights</span>
                 </h1>
                 <p>
-                    Dashboards and tools for ops and other internal teams that
-                    cut reporting time and surface the KPIs and metrics that
-                    matter most.
+                    We help founders, operations & finance teams make smarter
+                    decisions based on their data. No fuss, no manual reporting,
+                    just reliable dashboards and digital solutions.
                 </p>
                 <div className="buttons">
                     <a href="#cta" className="btn">
-                        Book your Data Discovery Call
+                        Start with a Free Data Audit
                     </a>
                 </div>
             </div>
@@ -311,14 +336,17 @@ function ValueProps() {
         {
             title: 'Save Time, Reduce Errors',
             desc: 'Turn scattered spreadsheets into a single source of truth. Automate reporting, cut manual work, and eliminate costly mistakes. ',
+            icon: faClock,
         },
         {
             title: 'Affordable Insights',
             desc: 'Get the clarity of a data team at a fraction of the cost. Transparent build pricing and simple monthly retainers keep your budget in control.',
+            icon: faGaugeHigh,
         },
         {
             title: 'Personal, Reliable Partnership',
             desc: 'Work directly with one engineer you can trust. Fast prototypes, clear communication, and ongoing support.',
+            icon: faHandshake,
         },
     ];
     return (
@@ -327,7 +355,13 @@ function ValueProps() {
                 <div className="grid">
                     {items.map((it) => (
                         <div key={it.title} className="card">
-                            <h3>{it.title}</h3>
+                            <h3>
+                                <FontAwesomeIcon
+                                    icon={it.icon}
+                                    style={{ marginRight: 8 }}
+                                />
+                                {it.title}
+                            </h3>
                             <p>{it.desc}</p>
                         </div>
                     ))}
@@ -380,11 +414,29 @@ function Solutions() {
     return (
         <section id="solutions" className="section">
             <div className="container">
-                <h2 className="section-title">Solutions</h2>
+                <h2 className="section-title">
+                    <FontAwesomeIcon
+                        icon={faPuzzlePiece}
+                        style={{ marginRight: 8 }}
+                    />
+                    Solutions
+                </h2>
                 <div className="grid">
                     {items.map((card) => (
                         <div key={card.title} className="card">
-                            <h3>{card.title}</h3>
+                            <h3>
+                                <FontAwesomeIcon
+                                    icon={
+                                        card.title.includes('Basic')
+                                            ? faSeedling
+                                            : card.title.includes('Moderate')
+                                            ? faLayerGroup
+                                            : faSitemap
+                                    }
+                                    style={{ marginRight: 8 }}
+                                />
+                                {card.title}
+                            </h3>
                             <ul>
                                 {card.bullets.map((b) => (
                                     <li key={b}>{b}</li>
@@ -413,7 +465,7 @@ function Solutions() {
                 <div className="text-center" style={{ marginTop: 20 }}>
                     <p className="small" style={{ color: 'var(--muted)' }}>
                         <a className="underline" href="/how-we-work">
-                            See how we work
+                            See our process
                         </a>
                     </p>
                 </div>
@@ -457,10 +509,22 @@ function FAQ() {
     return (
         <section id="faq" className="section">
             <div className="container">
-                <h2 className="section-title">FAQ</h2>
+                <h2 className="section-title">
+                    <FontAwesomeIcon
+                        icon={faCircleQuestion}
+                        style={{ marginRight: 8 }}
+                    />
+                    FAQ
+                </h2>
                 {items.map((it) => (
                     <details key={it.q}>
-                        <summary>{it.q}</summary>
+                        <summary>
+                            <FontAwesomeIcon
+                                icon={faCircleQuestion}
+                                style={{ marginRight: 8 }}
+                            />
+                            {it.q}
+                        </summary>
                         <p>{it.a}</p>
                     </details>
                 ))}

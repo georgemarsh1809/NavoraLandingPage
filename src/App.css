@@ -1,6 +1,10 @@
 /* ---------- Base / Theme ---------- */
 :root {
     /* Dark mode (default) */
+    --font-body: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Helvetica, Arial, sans-serif;
     --bg: #121212;
     --panel: #181818;
     --line: #262626;
@@ -52,6 +56,9 @@
         --btn-outline-hover-border: var(--accent);
         --btn-outline-hover-bg: rgba(63, 183, 172, 0.12);
         color-scheme: light;
+        /* Option: swap heading font to DM Sans in light mode */
+        /* Uncomment to try: */
+        /* --font-heading: 'DM Sans', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; */
     }
     /* Invert hero button only in light mode for contrast */
     .hero .btn {
@@ -60,6 +67,20 @@
         border-color: var(--text) !important;
     }
     .hero .btn:hover {
+        background: #0f172a !important;
+        color: var(--panel) !important;
+        border-color: #0f172a !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), var(--shadow) !important;
+    }
+    /* Match header and inline CTA to hero CTA in light mode */
+    .header .btn,
+    .cta-inline {
+        background: var(--text) !important;
+        color: var(--panel) !important;
+        border-color: var(--text) !important;
+    }
+    .header .btn:hover,
+    .cta-inline:hover {
         background: #0f172a !important;
         color: var(--panel) !important;
         border-color: #0f172a !important;
@@ -86,8 +107,7 @@ body {
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        Helvetica, Arial, sans-serif;
+    font-family: var(--font-body);
     line-height: 1.6;
 }
 /* Refined type scale */
@@ -96,6 +116,7 @@ h2,
 h3 {
     margin: 0.25em 0 0.4em;
     line-height: 1.2;
+    font-family: var(--font-heading);
 }
 h1 {
     font-size: clamp(2rem, 5vw, 2.75rem);
@@ -212,9 +233,9 @@ a:hover {
     justify-content: space-between;
 }
 .logo {
-    font-weight: 600;
-    letter-spacing: 0.2px;
-    font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    font-size: clamp(1.35rem, 3vw, 1.85rem);
 }
 
 /* ---------- Value props heading color only ---------- */
@@ -301,7 +322,8 @@ a:hover {
 }
 
 /* ---------- Buttons ---------- */
-.btn {
+.btn,
+.button {
     display: inline-block;
     background: #e6e6e6; /* less stark than pure white */
     color: #121212;
@@ -311,7 +333,8 @@ a:hover {
     border: none;
     cursor: pointer;
 }
-.btn:hover {
+.btn:hover,
+.button:hover {
     background: #dcdcdc;
 }
 .btn-accent {
@@ -321,20 +344,36 @@ a:hover {
 .btn-accent:hover {
     background: var(--accent-soft);
 }
-.btn-outline {
+.btn-outline,
+.button.secondary {
     display: inline-block;
     border: 1px solid #555;
     padding: 0.6rem 1.1rem;
     border-radius: 8px;
 }
 
-.btn:focus-visible {
+.btn:focus-visible,
+.button:focus-visible,
+.button.secondary:focus-visible {
     outline: none;
     box-shadow: var(--shadow);
 }
-.btn-outline:hover {
+.btn-outline:hover,
+.button.secondary:hover {
     border-color: #555;
     background: transparent;
+}
+
+/* Brand-accent variant for the share-link button */
+.button.secondary {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: transparent;
+}
+.button.secondary:hover {
+    border-color: var(--accent);
+    background: rgba(63, 183, 172, 0.12);
+    color: var(--accent);
 }
 
 /* ---------- Mobile Nav ---------- */
@@ -396,6 +435,33 @@ a:hover {
     font-size: 12px;
     color: var(--muted);
 }
+
+/* ---------- Font themes (for quick experiments) ---------- */
+/* Apply these classes to <body> to try different combos */
+body.font-theme--inter {
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Helvetica, Arial, sans-serif;
+    --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+        Roboto, Helvetica, Arial, sans-serif;
+}
+body.font-theme--manrope {
+    --font-heading: 'Manrope', 'Inter', -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+body.font-theme--dm {
+    --font-body: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-heading: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+body.font-theme--system {
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Helvetica, Arial, sans-serif;
+    --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Helvetica, Arial, sans-serif;
+}
+
+/* (Icons for section titles removed as requested) */
 .hero h1 {
     margin: 0;
     font-size: clamp(2rem, 5vw, 2.75rem);

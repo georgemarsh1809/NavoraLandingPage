@@ -1,5 +1,25 @@
 import { useMemo, useState, useEffect } from 'react';
 
+const fmtGBP = new Intl.NumberFormat('en-GB', {
+    style: 'currency',
+    currency: 'GBP',
+    maximumFractionDigits: 0,
+});
+
+const BANDS = [0, 50, 100];
+const bandOf = (p) => {
+    let best = 0,
+        dist = Infinity;
+    for (let i = 0; i < BANDS.length; i++) {
+        const d = Math.abs(p - BANDS[i]);
+        if (d < dist) {
+            dist = d;
+            best = i;
+        }
+    }
+    return best; // 0,1,2
+};
+
 export default function PricingCalculator() {
     const tiers = {
         simple: {
@@ -7,234 +27,151 @@ export default function PricingCalculator() {
             name: 'Basic',
             base: 1500,
             retainer: [200, 400],
-            bullets: [
-                '✨ 1–2 data sources',
-                '📊 Single dashboard',
-                '📈 3–7 key metrics',
-                '⚡ 1 week delivery',
-                '🔧 Basic maintenance included',
-            ],
+            eta: '~1 week',
         },
         moderate: {
             key: 'moderate',
             name: 'Moderate (Most Popular)',
             base: 2500,
             retainer: [400, 800],
-            bullets: [
-                '🔗 3–4 data sources',
-                '📊 2–3 connected dashboards',
-                '🎛️ Interactive filters',
-                '🤖 Process automation',
-                '⚡ 2–4 weeks delivery',
-                '📞 Priority support',
-            ],
+            eta: '~2–4 weeks',
         },
         complex: {
             key: 'complex',
             name: 'Complex',
             base: 5000,
             retainer: [1000, 2500],
-            bullets: [
-                '🌐 5+ data sources',
-                '📱 Multi-page dashboards',
-                '👥 Accounts, roles & permissions',
-                '🧠 AI integrations & forecasting',
-                '⚡ 6–12 weeks delivery',
-                '🏆 White-glove service',
-            ],
+            eta: '~6–12 weeks',
         },
     };
 
-    // Labels with more detailed explanations
     const tierScales = {
         simple: {
             data: [
-                { key: 'low', w: 1, label: 'CSV only — simple import (×1)' },
-                {
-                    key: 'med',
-                    w: 1.5,
-                    label: 'CSV + Google Sheets — mixed sources (×1.5)',
-                },
-                {
-                    key: 'high',
-                    w: 2,
-                    label: 'API or database integration (×2)',
-                },
+                { key: 'low', w: 1, label: 'CSV only (×1)' },
+                { key: 'med', w: 1.5, label: 'CSV + Sheets (×1.5)' },
+                { key: 'high', w: 2, label: 'API/DB (×2)' },
             ],
             features: [
-                { key: 'low', w: 1, label: 'Single view, static charts (×1)' },
-                {
-                    key: 'med',
-                    w: 1.5,
-                    label: 'Interactive filters, export options (×1.5)',
-                },
-                {
-                    key: 'high',
-                    w: 2,
-                    label: 'Automations or alerts included (×2)',
-                },
+                { key: 'low', w: 1, label: 'Static charts (×1)' },
+                { key: 'med', w: 1.5, label: 'Filters & export (×1.5)' },
+                { key: 'high', w: 2, label: 'Automations/alerts (×2)' },
             ],
         },
         moderate: {
             data: [
-                {
-                    key: 'low',
-                    w: 1,
-                    label: '≤2 sources — light complexity (×1)',
-                },
-                {
-                    key: 'med',
-                    w: 1.5,
-                    label: '3–4 sources — blended data (×1.5)',
-                },
-                { key: 'high', w: 2, label: 'Mix of APIs + databases (×2)' },
+                { key: 'low', w: 1, label: '≤2 sources (×1)' },
+                { key: 'med', w: 1.5, label: '3–4 blended (×1.5)' },
+                { key: 'high', w: 2, label: 'APIs + DBs (×2)' },
             ],
             features: [
-                { key: 'low', w: 1, label: '2 dashboards, basic KPIs (×1)' },
-                {
-                    key: 'med',
-                    w: 1.5,
-                    label: '3 dashboards + interactive filters (×1.5)',
-                },
-                {
-                    key: 'high',
-                    w: 2,
-                    label: 'Automations, email reports, alerts (×2)',
-                },
+                { key: 'low', w: 1, label: '2 dashboards (×1)' },
+                { key: 'med', w: 1.5, label: '3 dashboards + filters (×1.5)' },
+                { key: 'high', w: 2, label: 'Automations, reports (×2)' },
             ],
         },
         complex: {
             data: [
-                { key: 'low', w: 1, label: '3–4 sources — manageable (×1)' },
-                {
-                    key: 'med',
-                    w: 1.5,
-                    label: '5–6 sources — advanced joins (×1.5)',
-                },
-                {
-                    key: 'high',
-                    w: 2,
-                    label: '7+ sources, heavy pipelines (×2)',
-                },
+                { key: 'low', w: 1, label: '3–4 sources (×1)' },
+                { key: 'med', w: 1.5, label: '5–6 sources (×1.5)' },
+                { key: 'high', w: 2, label: '7+ pipelines (×2)' },
             ],
             features: [
-                { key: 'low', w: 1, label: 'Multi-page dashboards (×1)' },
-                { key: 'med', w: 1.5, label: 'Roles, permissions, SSO (×1.5)' },
-                {
-                    key: 'high',
-                    w: 2,
-                    label: 'Forecasting, AI features, ML models (×2)',
-                },
+                { key: 'low', w: 1, label: 'Multi-page (×1)' },
+                { key: 'med', w: 1.5, label: 'Roles/SSO (×1.5)' },
+                { key: 'high', w: 2, label: 'Forecasting/AI (×2)' },
             ],
         },
     };
 
     const [selTier, setSelTier] = useState('simple');
-    // Continuous sliders: 0..100 (0=low, 50=med, 100=high)
-    const [dataIdx, setDataIdx] = useState(0);
-    const [featIdx, setFeatIdx] = useState(0);
+    const [dataIdx, setDataIdx] = useState(0); // 0/50/100
+    const [featIdx, setFeatIdx] = useState(0); // 0/50/100
     const [rush, setRush] = useState(false);
-    const [contingency] = useState(false);
 
-    useEffect(() => {
-        setDataIdx(0);
-        setFeatIdx(0);
-    }, [selTier]);
-
-    // Initialize from URL params
+    // Init from URL
     useEffect(() => {
         const qp = new URLSearchParams(window.location.search);
         const t = qp.get('tier');
         const d = qp.get('data');
         const f = qp.get('features');
         const r = qp.get('rush');
-        // Back-compat: allow older links that used `basic` to map to `simple`
         const tierKey = t === 'basic' ? 'simple' : t;
         if (tierKey && tiers[tierKey]) setSelTier(tierKey);
-        if (d !== null) {
-            const n = Number(d);
-            if (!Number.isNaN(n)) {
-                // Support old 0/1/2 values by mapping to 0/50/100
-                if (n >= 0 && n <= 2 && Number.isInteger(n)) {
-                    setDataIdx(n * 50);
-                } else if (n >= 0 && n <= 100) {
-                    setDataIdx(n);
-                }
-            }
-        }
-        if (f !== null) {
-            const n = Number(f);
-            if (!Number.isNaN(n)) {
-                if (n >= 0 && n <= 2 && Number.isInteger(n)) {
-                    setFeatIdx(n * 50);
-                } else if (n >= 0 && n <= 100) {
-                    setFeatIdx(n);
-                }
-            }
-        }
+        if (d !== null) setDataIdx(normalizeBandParam(d));
+        if (f !== null) setFeatIdx(normalizeBandParam(f));
         if (r !== null) setRush(r === '1');
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Map continuous slider position to the nearest band (low/med/high)
-    const nearestBandIdx = (p) => {
-        const targets = [0, 50, 100];
-        let best = 0;
-        let dist = Infinity;
-        for (let i = 0; i < targets.length; i++) {
-            const d = Math.abs(p - targets[i]);
-            if (d < dist) {
-                dist = d;
-                best = i;
-            }
-        }
-        return best; // 0, 1, or 2
-    };
+    // Sync URL on changes (debounced feel without timer: write immediately; it’s fine here)
+    useEffect(() => {
+        const qp = new URLSearchParams(window.location.search);
+        qp.set('tier', selTier);
+        qp.set('data', String(dataIdx));
+        qp.set('features', String(featIdx));
+        qp.set('rush', rush ? '1' : '0');
+        const url = `${window.location.pathname}?${qp.toString()}`;
+        window.history.replaceState({}, '', url);
+    }, [selTier, dataIdx, featIdx, rush]);
+
+    // Reset bands when tier changes
+    useEffect(() => {
+        setDataIdx(0);
+        setFeatIdx(0);
+    }, [selTier]);
+
+    const scale = tierScales[selTier];
+    const tier = tiers[selTier];
 
     const estimate = useMemo(() => {
-        const t = tiers[selTier];
-        const scale = tierScales[selTier];
-        const wData = scale.data[nearestBandIdx(dataIdx)].w;
-        const wFeat = scale.features[nearestBandIdx(featIdx)].w;
-        let price = t.base * wData * wFeat;
+        const wData = scale.data[bandOf(dataIdx)].w;
+        const wFeat = scale.features[bandOf(featIdx)].w;
+        let price = tier.base * wData * wFeat;
         if (rush) price *= 1.25;
-        if (contingency) price *= 1.2;
-        return Math.round(price / 50) * 50;
-    }, [selTier, dataIdx, featIdx, rush, contingency]);
+        // Round to nearest £100 for friendlier numbers
+        return Math.round(price / 100) * 100;
+    }, [selTier, dataIdx, featIdx, rush]);
 
-    const scaleFor = tierScales[selTier];
-    const tier = tiers[selTier];
+    const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
     return (
         <section id="pricing" className="section">
             <div className="container">
-                {/* <h2 className="section-title">Pricing</h2> */}
                 <div className="card">
                     <h3 style={{ marginTop: 0 }}>Interactive Pricing Guide</h3>
                     <p className="small">
-                        Pick a tier, then adjust complexity to get an estimate
-                        for pricing.
+                        This estimate is designed to help you budget
+                        confidently. We finalise scope & pricing after a short
+                        discovery call. <br />
+                        Not sure which tier fits? Pick your best guess — we’ll
+                        guide you.
                     </p>
-
+                    <p className="small"></p>
                     {/* Tier selector */}
                     <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
                         <legend id="tier-legend" className="small">
                             Select a tier
                         </legend>
                         <div
+                            role="radiogroup"
+                            aria-labelledby="tier-legend"
                             style={{
                                 display: 'grid',
                                 gap: 12,
                                 gridTemplateColumns:
                                     'repeat(auto-fit, minmax(260px, 1fr))',
                                 marginTop: 16,
-                                alignItems: 'stretch',
                             }}
-                            aria-labelledby="tier-legend"
-                            role="radiogroup"
                         >
                             {Object.values(tiers).map((t) => (
                                 <label
                                     key={t.key}
+                                    tabIndex={0}
+                                    onKeyDown={(e) =>
+                                        (e.key === 'Enter' || e.key === ' ') &&
+                                        setSelTier(t.key)
+                                    }
                                     className="card"
                                     style={{
                                         cursor: 'pointer',
@@ -270,6 +207,7 @@ export default function PricingCalculator() {
                                                 onChange={() =>
                                                     setSelTier(t.key)
                                                 }
+                                                aria-label={t.name}
                                             />
                                             <strong>{t.name}</strong>
                                         </div>
@@ -278,37 +216,26 @@ export default function PricingCalculator() {
                             ))}
                         </div>
                     </fieldset>
-
-                    {/* Sliders take full width */}
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: 20,
-                            marginTop: 20,
-                        }}
-                    >
-                        <TierSlider
-                            label="Data Complexity"
-                            value={dataIdx}
-                            onChange={setDataIdx}
-                            ticks={scaleFor.data}
-                        />
-                        <TierSlider
-                            label="Features"
-                            value={featIdx}
-                            onChange={setFeatIdx}
-                            ticks={scaleFor.features}
-                        />
-                    </div>
-
-                    {/* Toggles */}
+                    {/* Discrete “slider” controls */}
+                    <BandSlider
+                        label="Data Complexity"
+                        value={dataIdx}
+                        onChange={setDataIdx}
+                        ticks={scale.data}
+                    />
+                    <BandSlider
+                        label="Features"
+                        value={featIdx}
+                        onChange={setFeatIdx}
+                        ticks={scale.features}
+                    />
+                    {/* Rush toggle */}
                     <div
                         style={{
                             display: 'flex',
                             gap: 16,
                             flexWrap: 'wrap',
-                            marginTop: 16,
+                            marginTop: 12,
                         }}
                     >
                         <label
@@ -326,20 +253,21 @@ export default function PricingCalculator() {
                             Faster delivery (+25%)
                         </label>
                     </div>
-
-                    {/* Output */}
+                    {/* Output + CTA */}
                     <div
                         style={{
                             display: 'grid',
                             gridTemplateColumns: '1fr auto',
                             alignItems: 'start',
-                            marginTop: 20,
+                            marginTop: 16,
                             columnGap: 16,
                             rowGap: 12,
                         }}
                     >
                         <div>
-                            <div className="small">Estimated build price</div>
+                            <div className="small">
+                                Estimated build price (ex. VAT)
+                            </div>
                             <div
                                 style={{
                                     fontSize: 28,
@@ -347,19 +275,57 @@ export default function PricingCalculator() {
                                     fontVariantNumeric: 'tabular-nums',
                                 }}
                                 aria-live="polite"
-                                aria-atomic="true"
                             >
-                                £{estimate.toLocaleString()}
+                                {fmtGBP.format(estimate)}
                             </div>
                             <div className="small">
-                                Typical monthly support: £{tier.retainer[0]}–£
-                                {tier.retainer[1]}/mo
+                                Typical monthly support:{' '}
+                                {fmtGBP.format(tier.retainer[0])}–
+                                {fmtGBP.format(tier.retainer[1])}/mo
                             </div>
                             <div className="small">
-                                Final pricing confirmed after a 30‑minute
+                                Final pricing confirmed after a 30-minute
                                 discovery call.
                             </div>
-                            {/* Removed "What’s included" list for a cleaner output */}
+
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    gap: 10,
+                                    marginTop: 20,
+                                    flexWrap: 'wrap',
+                                }}
+                            >
+                                <a
+                                    className="button"
+                                    href={`/book?${new URLSearchParams({
+                                        tier: selTier,
+                                        data: String(dataIdx),
+                                        features: String(featIdx),
+                                        rush: rush ? '1' : '0',
+                                    })}`}
+                                >
+                                    Book My Free Data Audit
+                                </a>
+                            </div>
+                        </div>
+                        <div
+                            style={{
+                                alignSelf: 'start',
+                                display: 'flex',
+                                justifyContent: 'flex-end',
+                            }}
+                        >
+                            <button
+                                className="button secondary"
+                                type="button"
+                                onClick={() => {
+                                    navigator.clipboard?.writeText(shareUrl);
+                                }}
+                                aria-label="Copy shareable estimate link"
+                            >
+                                Copy share link
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -368,34 +334,67 @@ export default function PricingCalculator() {
     );
 }
 
-function TierSlider({ label, value, onChange, ticks }) {
+function normalizeBandParam(nStr) {
+    const n = Number(nStr);
+    if (Number.isNaN(n)) return 0;
+    // Support old 0/1/2 values
+    if (Number.isInteger(n) && n >= 0 && n <= 2) return n * 50;
+    // Clamp to 0/50/100
+    if (n <= 25) return 0;
+    if (n <= 75) return 50;
+    return 100;
+}
+
+function BandSlider({ label, value, onChange, ticks }) {
+    const i = bandOf(value); // 0/1/2
+    const active = ticks[i];
     return (
-        <div className="card" style={{ padding: 16, width: '100%' }}>
-            <label>
+        <div
+            className="card"
+            style={{ padding: 16, width: '100%', marginTop: 16 }}
+            role="group"
+            aria-label={label}
+        >
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'baseline',
+                    gap: 12,
+                }}
+            >
                 <strong>{label}</strong>
-            </label>
+                <span className="small" aria-live="polite">
+                    {active.label}
+                </span>
+            </div>
             <input
                 type="range"
                 min={0}
                 max={100}
-                step={1}
+                step={50}
                 value={value}
                 onChange={(e) => onChange(parseInt(e.target.value, 10))}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-valuenow={value}
+                aria-valuetext={`${label}: ${active.label}`}
                 style={{ width: '100%', marginTop: 10 }}
             />
-            <div className="slider-ticks" style={{ marginTop: 10 }}>
-                {ticks.map((t, i) => (
+            <div
+                className="slider-ticks"
+                style={{
+                    marginTop: 10,
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3,1fr)',
+                    gap: 8,
+                }}
+            >
+                {ticks.map((t, idx) => (
                     <span
                         key={t.key}
-                        className={(() => {
-                            const targets = [0, 50, 100];
-                            const nearest = targets.reduce((a, b) =>
-                                Math.abs(b - value) < Math.abs(a - value)
-                                    ? b
-                                    : a
-                            );
-                            return nearest === targets[i] ? 'is-active' : '';
-                        })()}
+                        className={i === idx ? 'is-active' : ''}
+                        style={{ textAlign: 'center' }}
                     >
                         {t.label}
                     </span>

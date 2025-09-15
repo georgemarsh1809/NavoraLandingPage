@@ -1,4 +1,13 @@
 import CTA from './CTA.jsx';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faListCheck,
+    faUsers,
+    faMagnifyingGlass,
+    faWandMagicSparkles,
+    faGears,
+    faRocket,
+} from '@fortawesome/free-solid-svg-icons';
 
 export default function HowItWorks() {
     return (
@@ -10,7 +19,7 @@ export default function HowItWorks() {
                         <span>How We Work</span>
                         <br />
                         <span className="highlight">
-                            Direct, transparent, outcome‑focused
+                            Direct. Transparent. Outcome‑focused.
                         </span>
                     </h1>
                     <p>
@@ -20,7 +29,7 @@ export default function HowItWorks() {
                     </p>
                     <div className="buttons">
                         <a className="btn" href="#cta">
-                            Book your Data Discovery Call
+                            Start with a Free Data Audit
                         </a>
                     </div>
                 </div>
@@ -31,42 +40,61 @@ export default function HowItWorks() {
                 <div className="container">
                     <div className="grid">
                         <div className="card">
-                            <h3>What We Do</h3>
+                            <h3>
+                                <FontAwesomeIcon icon={faListCheck} style={{ marginRight: 8 }} />
+                                What We Do
+                            </h3>
                             <ul style={{ marginTop: 8, paddingLeft: 18 }}>
                                 <li>
-                                    Turn scattered spreadsheets into a single
-                                    source of truth
+                                    <strong>Unify your data </strong> — bring
+                                    scattered spreadsheets and systems into one
+                                    reliable source of truth.
                                 </li>
                                 <li>
-                                    Automate reporting to cut manual work and
-                                    reduce errors
+                                    <strong>Automate reporting</strong> — save
+                                    hours of manual work while eliminating
+                                    costly errors.
                                 </li>
                                 <li>
-                                    Build clear dashboards that surface the KPIs
-                                    that matter
+                                    <strong>Build clarity</strong> — create
+                                    dashboards that highlight the KPIs that
+                                    truly drive your business forward.
                                 </li>
                             </ul>
                         </div>
                         <div className="card">
-                            <h3>Who It’s For</h3>
+                            <h3>
+                                <FontAwesomeIcon icon={faUsers} style={{ marginRight: 8 }} />
+                                Who It’s For
+                            </h3>
                             <ul style={{ marginTop: 8, paddingLeft: 18 }}>
                                 <li>
-                                    Founders and leadership needing
-                                    decision‑ready metrics
+                                    <strong>Founders and Leadership</strong> -
+                                    who need decision-ready metrics at their
+                                    fingertips.
                                 </li>
                                 <li>
-                                    Ops and finance teams aiming to cut manual
-                                    reporting
+                                    <strong>Ops and Finance Teams</strong> -
+                                    looking to cut down manual reporting and
+                                    focus on metrics that matters.
                                 </li>
                                 <li>
-                                    SMEs and mid‑market companies without a full
-                                    data team
+                                    <strong>SMEs & Mid-Market Companies</strong>{' '}
+                                    — who want data insights without the cost of
+                                    a full in-house data team.
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </section>
+
+            {/* Inline CTA above Process */}
+            <div className="container text-center" style={{ marginTop: 8, marginBottom: 8 }}>
+                <a href="#cta" className="btn cta-inline">
+                    Yes, This Is Me — Let’s Talk
+                </a>
+            </div>
 
             {/* Process (zoomed in, vertical, centered) */}
             <section className="section">
@@ -88,20 +116,24 @@ export default function HowItWorks() {
                     >
                         {[
                             {
-                                title: '1) Discovery',
-                                desc: 'Goals, KPIs, and data sources — time‑boxed and actionable.',
+                                title: '1. Discover & Align',
+                                desc: 'We kick things off with a discovery call to understand your goals, your key metrics, and where your data lives. This ensures we focus on the insights that matter most to your business.',
+                                icon: faMagnifyingGlass,
                             },
                             {
-                                title: '2) Prototype',
-                                desc: 'Quick proof of value with a simple view or automation.',
+                                title: '2. Prototype & Validate',
+                                desc: 'Next, we create a simple, interactive prototype so you can see your data come to life. This quick win gives you confidence in the approach and lets us fine-tune before we scale.',
+                                icon: faWandMagicSparkles,
                             },
                             {
-                                title: '3) Build',
-                                desc: 'Expand what works: metrics, dashboards, and small workflows.',
+                                title: '3. Build & Expand',
+                                desc: 'With the direction confirmed, we turn the prototype into a full dashboard solution: integrating more data, adding tailored views for teams, and creating clear, actionable reports that make decision-making effortless.',
+                                icon: faGears,
                             },
                             {
-                                title: '4) Handover',
-                                desc: 'Clear docs, light training, and optional monthly support.',
+                                title: '4. Launch & Support',
+                                desc: 'We hand everything over with clear documentation and light training, so your team feels at home straight away. And if you’d like ongoing support, we offer a monthly service to keep your dashboards fresh, reliable, and growing with your business.',
+                                icon: faRocket,
                             },
                         ].map((s) => (
                             <div
@@ -110,10 +142,13 @@ export default function HowItWorks() {
                                 style={{
                                     maxWidth: 720,
                                     width: '100%',
-                                    textAlign: 'center',
+                                    textAlign: 'left',
                                 }}
                             >
-                                <h3 style={{ marginTop: 0 }}>{s.title}</h3>
+                                <h3 style={{ marginTop: 0 }}>
+                                    <FontAwesomeIcon icon={s.icon} style={{ marginRight: 8 }} />
+                                    {s.title}
+                                </h3>
                                 <p
                                     className="small"
                                     style={{ fontSize: '1rem' }}
