@@ -320,7 +320,7 @@ function Hero() {
                 </p>
                 <div className="buttons">
                     <a href="#cta" className="btn">
-                        Book a Free Data Audit
+                        This is a test
                     </a>
                     <a href="#pricing" className="btn btn-outline">
                         See Pricing & Plans
@@ -356,8 +356,13 @@ function ValueProps() {
         <section id="value" className="section">
             <div className="container">
                 <div className="grid">
-                    {items.map((it) => (
-                        <div key={it.title} className="card">
+                    {items.map((it, idx) => (
+                        <div
+                            key={it.title}
+                            className="card"
+                            data-reveal
+                            data-reveal-delay={`${idx * 60}ms`}
+                        >
                             <h3>
                                 <FontAwesomeIcon
                                     icon={it.icon}
@@ -427,7 +432,7 @@ function Solutions() {
                     Solutions
                 </h2>
                 <div className="grid">
-                    {items.map((card) => {
+                    {items.map((card, idx) => {
                         const { label, name, meta } = splitTitle(card.title);
                         const icon = card.title.includes('Decision Preview')
                             ? faSeedling
@@ -447,7 +452,12 @@ function Solutions() {
                             retainer = (parts.slice(1).join('+') || '').trim();
                         }
                         return (
-                            <div key={card.title} className="card">
+                            <div
+                                key={card.title}
+                                className="card"
+                                data-reveal
+                                data-reveal-delay={`${idx * 60}ms`}
+                            >
                                 {label ? (
                                     <span
                                         className="badge"

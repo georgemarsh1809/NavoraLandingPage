@@ -39,7 +39,7 @@ export default function HowItWorks() {
             <section className="section">
                 <div className="container">
                     <div className="grid">
-                        <div className="card">
+                        <div className="card" data-reveal>
                             <h3>
                                 <FontAwesomeIcon
                                     icon={faListCheck}
@@ -63,7 +63,7 @@ export default function HowItWorks() {
                                 </li>
                             </ul>
                         </div>
-                        <div className="card">
+                        <div className="card" data-reveal data-reveal-delay="60ms">
                             <h3>
                                 <FontAwesomeIcon
                                     icon={faUsers}
@@ -143,10 +143,12 @@ export default function HowItWorks() {
                                 desc: 'If you’d like ongoing support, we offer a monthly service to keep your dashboards fresh, reliable, and growing with your business.',
                                 icon: faRocket,
                             },
-                        ].map((s) => (
+                        ].map((s, i) => (
                             <div
                                 key={s.title}
                                 className="card"
+                                data-reveal
+                                data-reveal-delay={`${i * 80}ms`}
                                 style={{
                                     maxWidth: 720,
                                     width: '100%',
