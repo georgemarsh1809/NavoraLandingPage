@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faPuzzlePiece,
     faCircleQuestion,
-    faClock,
-    faGaugeHigh,
     faSeedling,
     faLayerGroup,
     faSitemap,
+    faLightbulb,
+    faChartLine,
 } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import PricingCalculator from './PricingCalculator.jsx';
@@ -71,6 +71,14 @@ function NavoraLanding() {
                 <FAQ />
             </main>
             <Footer />
+            {/* Sticky mobile CTA */}
+            <div className="sticky-cta">
+                <div className="container">
+                    <a href="#cta" className="btn btn-accent">
+                        Book a Free Data Audit
+                    </a>
+                </div>
+            </div>
         </div>
     );
 }
@@ -337,19 +345,19 @@ function Hero() {
 function ValueProps() {
     const items = [
         {
-            title: 'Unify your data',
+            title: 'Unify Your Data',
             desc: 'One source of truth across finance, ops, and growth.',
             icon: faSitemap,
         },
         {
-            title: 'Get Insights',
+            title: 'Gain Insight',
             desc: 'Get the clarity of a data team at a fraction of the cost.',
-            icon: faClock,
+            icon: faLightbulb,
         },
         {
-            title: 'Surface what matters',
-            desc: 'Clear dashboards and alerts for the KPIs that drive decisions.',
-            icon: faGaugeHigh,
+            title: 'Make smarter decisions',
+            desc: 'Clear dashboards and alerts for the KPIs that drive business.',
+            icon: faChartLine,
         },
     ];
     return (

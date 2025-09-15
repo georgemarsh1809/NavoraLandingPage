@@ -6,7 +6,30 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function CTA() {
-    const qs = typeof window !== 'undefined' ? window.location.search : '';
+    const buildCalendlyUrl = () => {
+        const base = 'https://calendly.com/georgemarsh1809/30min';
+        if (typeof window === 'undefined') return base;
+        const qp = new URLSearchParams(window.location.search);
+        const tier = qp.get('tier') || '';
+        const data = qp.get('data') || '';
+        const features = qp.get('features') || '';
+        const rush = qp.get('rush') || '';
+
+        const url = new URL(base);
+        // Preserve original params
+        qp.forEach((v, k) => url.searchParams.set(k, v));
+        // UTM context
+        if (tier) url.searchParams.set('utm_campaign', `tier_${tier}`);
+        url.searchParams.set('utm_source', 'site');
+        url.searchParams.set('utm_medium', 'pricing_calculator');
+        // Custom fields a1..a4
+        if (tier) url.searchParams.set('a1', `tier=${tier}`);
+        if (data) url.searchParams.set('a2', `data=${data}`);
+        if (features) url.searchParams.set('a3', `features=${features}`);
+        if (rush) url.searchParams.set('a4', `rush=${rush}`);
+        return url.toString();
+    };
+    const calendlyHref = buildCalendlyUrl();
     return (
         <section id="cta" className="section">
             <div
@@ -36,9 +59,7 @@ export default function CTA() {
 
                 <a
                     className="btn btn-primary"
-                    href={`https://calendly.com/georgemarsh1809/30min${
-                        qs || ''
-                    }`}
+                    href={calendlyHref}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{

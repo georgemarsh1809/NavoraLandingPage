@@ -377,7 +377,7 @@ a:hover {
     padding: 0.6rem 1.1rem;
     border-radius: 8px;
     background: transparent;
-    color: var(--muted);
+    color: #e0e0e0; /* improve contrast in dark */
 }
 
 .btn:focus-visible,
@@ -385,6 +385,10 @@ a:hover {
 .button.secondary:focus-visible {
     outline: none;
     box-shadow: var(--shadow);
+}
+.btn-outline:focus-visible,
+.button.secondary:focus-visible {
+    border-color: var(--accent);
 }
 .btn-outline:hover,
 .button.secondary:hover {
@@ -648,6 +652,27 @@ a:hover {
     border-color: var(--btn-outline-hover-border) !important;
     box-shadow: none !important;
     color: var(--text) !important;
+}
+
+/* Sticky mobile CTA bar */
+.sticky-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    z-index: 20;
+    display: none;
+}
+.sticky-cta .container {
+    display: flex;
+    justify-content: center;
+}
+.sticky-cta .btn {
+    box-shadow: 0 12px 28px rgba(0,0,0,0.28), var(--shadow);
+}
+@media (max-width: 820px) {
+    .sticky-cta { display: block; }
+    body { padding-bottom: 68px; }
 }
 .hero .btn:active {
     transform: translateY(-1px);

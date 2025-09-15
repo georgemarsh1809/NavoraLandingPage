@@ -1,4 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 const fmtGBP = new Intl.NumberFormat('en-GB', {
     style: 'currency',
@@ -294,15 +296,23 @@ export default function PricingCalculator() {
                                     flexWrap: 'wrap',
                                 }}
                             >
-                                <a className="button" href="#cta">
-                                    Review My Estimate
+                                <a
+                                    className="button"
+                                    href="#cta"
+                                    aria-label="Pressure-test my estimate with an expert"
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faComments}
+                                        style={{ marginRight: 8 }}
+                                    />
+                                    Discuss My Plan
                                 </a>
                                 <div
                                     className="small"
                                     style={{ width: '100%' }}
                                 >
-                                    We’ll pressure‑test scope and confirm a
-                                    fixed price.
+                                    We’ll discuss data scope and confirm a fixed
+                                    price.
                                 </div>
                             </div>
                         </div>
