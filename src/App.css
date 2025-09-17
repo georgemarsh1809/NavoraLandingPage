@@ -7,8 +7,8 @@
         'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     --font-heading: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont,
         'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --bg: #121212;
-    --panel: #181818;
+    --bg: #151515; /* dark grey background instead of pure black */
+    --panel: #1f1f1f; /* dark grey instead of near-black */
     --line: #262626;
     --muted: #b8b8b8;
     --muted-2: #a3a3a3;
@@ -26,34 +26,41 @@
     --nav-active-border: #2a2a2a;
     --btn-bg: #e6e6e6;
     --btn-bg-hover: #dcdcdc;
+    --btn-fg: #121212;
     --btn-outline-border: #555;
     --btn-outline-hover-border: #666;
     --btn-outline-hover-bg: #141414;
     --menu-toggle-border: #333;
     --menu-toggle-hover-bg: #151515;
+    --panel-elev: none;
     color-scheme: dark;
 }
 
 @media (prefers-color-scheme: light) {
     :root {
-        /* Light mode */
-        --bg: #f3f4f6;
-        --panel: #ffffff;
-        --line: #e5e7eb;
-        --text: #111827;
-        --muted: #6b7280;
-        --muted-2: #9ca3af;
+        /* Light mode (softer) */
+        --bg: #eceff3;
+        --panel: #f7f8fa;
+        --line: #d9dee5;
+        --text: #0f172a;
+        --muted: #64748b;
+        --muted-2: #94a3b8;
         /* Keep teal accent for brand consistency */
         --accent: #3fb7ac;
         --accent-soft: #9edfd8;
         --shadow: 0 0 0 2px rgba(63, 183, 172, 0.15);
-        --header-bg: rgba(255, 255, 255, 0.86);
-        --mobile-menu-bg: rgba(255, 255, 255, 0.95);
-        --nav-hover-bg: rgba(63, 183, 172, 0.12);
-        --nav-active-bg: rgba(63, 183, 172, 0.1);
+        --header-bg: rgba(247, 248, 250, 0.86);
+        --mobile-menu-bg: rgba(247, 248, 250, 0.95);
+        --nav-hover-bg: rgba(63, 183, 172, 0.10);
+        --nav-active-bg: rgba(63, 183, 172, 0.08);
         --nav-active-border: var(--line);
-        --btn-bg: #0f172a; /* subtle dark text on light */
+        --btn-bg: #0f172a; /* primary/dark button by default in light */
         --btn-bg-hover: #111827;
+        --btn-fg: #ffffff;
+        --menu-toggle-border: #e5e7eb;
+        --menu-toggle-hover-bg: rgba(63, 183, 172, 0.12);
+        --panel-elev: 0 1px 2px rgba(15, 23, 42, 0.04),
+            0 4px 14px rgba(15, 23, 42, 0.06);
         --btn-outline-border: var(--line);
         --btn-outline-hover-border: var(--accent);
         --btn-outline-hover-bg: rgba(63, 183, 172, 0.12);
@@ -61,6 +68,28 @@
         /* Option: swap heading font to DM Sans in light mode */
         /* Uncomment to try: */
         /* --font-heading: 'DM Sans', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; */
+    }
+    .header { box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06); }
+    /* Invert hero button only in light mode for contrast */
+    .hero {
+        background: radial-gradient(
+                120% 120% at 20% 0%,
+                rgba(112, 160, 255, 0.05) 0%,
+                rgba(0, 0, 0, 0) 60%
+            ),
+            radial-gradient(
+                100% 100% at 100% 0%,
+                rgba(76, 128, 255, 0.04) 0%,
+                rgba(0, 0, 0, 0) 60%
+            );
+    }
+    .hero::before {
+        /* Make dot grid more prominent in light mode */
+        opacity: 0.28;
+        background-image: radial-gradient(
+            rgba(63, 183, 172, 0.26) 1.1px,
+            rgba(0, 0, 0, 0) 1.6px
+        );
     }
     /* Invert hero button only in light mode for contrast */
     .hero .btn {
@@ -87,6 +116,228 @@
         color: var(--panel) !important;
         border-color: #0f172a !important;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18), var(--shadow) !important;
+    }
+    /* Calm panels (remove teal overlay gradients on light) */
+    #value .card,
+    #solutions .card,
+    #how .card {
+        background: var(--panel);
+    }
+}
+
+/* ---------- Theme overrides (force light/dark regardless of OS) ---------- */
+/* Force Light (soft) */
+body[data-theme='light'] {
+    color-scheme: light;
+    --bg: #eceff3;
+    --panel: #f7f8fa;
+    --line: #d9dee5;
+    --text: #0f172a;
+    --muted: #64748b;
+    --muted-2: #94a3b8;
+    --accent: #3fb7ac;
+    --accent-soft: #9edfd8;
+    --shadow: 0 0 0 2px rgba(63, 183, 172, 0.15);
+    --header-bg: rgba(247, 248, 250, 0.86);
+    --mobile-menu-bg: rgba(247, 248, 250, 0.95);
+    --nav-hover-bg: rgba(63, 183, 172, 0.10);
+    --nav-active-bg: rgba(63, 183, 172, 0.08);
+    --nav-active-border: var(--line);
+    --btn-bg: #0f172a;
+    --btn-bg-hover: #111827;
+    --btn-fg: #ffffff;
+    --menu-toggle-border: #e5e7eb;
+    --menu-toggle-hover-bg: rgba(63, 183, 172, 0.12);
+    --panel-elev: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 14px rgba(15, 23, 42, 0.06);
+    --btn-outline-border: var(--line);
+    --btn-outline-hover-border: var(--accent);
+    --btn-outline-hover-bg: rgba(63, 183, 172, 0.12);
+}
+body[data-theme='light'] .header { box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06); }
+body[data-theme='light'] .hero {
+    background: radial-gradient(120% 120% at 20% 0%, rgba(112, 160, 255, 0.05) 0%, rgba(0, 0, 0, 0) 60%),
+        radial-gradient(100% 100% at 100% 0%, rgba(76, 128, 255, 0.04) 0%, rgba(0, 0, 0, 0) 60%);
+}
+body[data-theme='light'] .hero::before {
+    opacity: 0.28;
+    background-image: radial-gradient(rgba(63, 183, 172, 0.26) 1.1px, rgba(0, 0, 0, 0) 1.6px);
+}
+body[data-theme='light'] #value .card,
+body[data-theme='light'] #solutions .card,
+body[data-theme='light'] #how .card { background: var(--panel); }
+
+/* Force Dark */
+body[data-theme='dark'] {
+    color-scheme: dark;
+    --bg: #151515;
+    --panel: #1f1f1f;
+    --line: #262626;
+    --muted: #b8b8b8;
+    --muted-2: #a3a3a3;
+    --text: #e8e8e8;
+    --accent: #3fb7ac;
+    --accent-soft: #9edfd8;
+    --shadow: 0 0 0 2px rgba(63, 183, 172, 0.15);
+    --header-bg: rgba(20, 20, 20, 0.8);
+    --mobile-menu-bg: rgba(20, 20, 20, 0.7);
+    --nav-hover-bg: #161616;
+    --nav-active-bg: #202020;
+    --nav-active-border: #2a2a2a;
+    --btn-bg: #e6e6e6;
+    --btn-bg-hover: #dcdcdc;
+    --btn-fg: #121212;
+    --btn-outline-border: #555;
+    --btn-outline-hover-border: #666;
+    --btn-outline-hover-bg: #141414;
+    --menu-toggle-border: #333;
+    --menu-toggle-hover-bg: #151515;
+    --panel-elev: none;
+}
+
+/* Forced Light variants */
+body[data-theme='light'][data-light='fog'] {
+    /* Fog Teal (original saturation) */
+    --bg: #eaf2f0;
+    --panel: var(--bg);
+    --line: #cfe1dd;
+    --text: #0f172a;
+    --muted: #5b7f79;
+    --muted-2: #88a9a3;
+    --header-bg: var(--bg);
+    --mobile-menu-bg: var(--bg);
+    --nav-hover-bg: rgba(63, 183, 172, 0.12);
+    --nav-active-bg: rgba(63, 183, 172, 0.10);
+    --panel-elev: 0 1px 2px rgba(5, 32, 28, 0.04), 0 4px 14px rgba(5, 32, 28, 0.06);
+}
+body[data-theme='light'][data-light='fog'] .hero {
+    background: radial-gradient(120% 120% at 20% 0%, rgba(63, 183, 172, 0.08) 0%, rgba(0,0,0,0) 60%),
+        radial-gradient(100% 100% at 100% 0%, rgba(63, 183, 172, 0.05) 0%, rgba(0,0,0,0) 60%);
+}
+body[data-theme='light'][data-light='fog'] .hero::before {
+    opacity: 0.26;
+    background-image: radial-gradient(rgba(63, 183, 172, 0.28) 1.1px, rgba(0,0,0,0) 1.6px);
+}
+
+body[data-theme='light'][data-light='warm'] {
+    --bg: #f3efe7;
+    --panel: #fbf8f2;
+    --line: #e6ded1;
+    --text: #1f2937;
+    --muted: #7a6f60;
+    --muted-2: #a49786;
+    --header-bg: rgba(251, 248, 242, 0.86);
+    --mobile-menu-bg: rgba(251, 248, 242, 0.95);
+    --nav-hover-bg: rgba(63, 183, 172, 0.10);
+    --nav-active-bg: rgba(63, 183, 172, 0.08);
+    --panel-elev: 0 1px 2px rgba(31, 41, 55, 0.04), 0 4px 14px rgba(31, 41, 55, 0.06);
+}
+body[data-theme='light'][data-light='warm'] .hero {
+    background: radial-gradient(120% 120% at 20% 0%, rgba(255, 205, 158, 0.10) 0%, rgba(0,0,0,0) 60%),
+        radial-gradient(100% 100% at 100% 0%, rgba(255, 205, 158, 0.06) 0%, rgba(0,0,0,0) 60%);
+}
+body[data-theme='light'][data-light='warm'] .hero::before {
+    opacity: 0.22;
+    background-image: radial-gradient(rgba(63, 183, 172, 0.24) 1.1px, rgba(0,0,0,0) 1.6px);
+}
+
+/* Graphite Paper: cool gray with subtle blue undertone */
+body[data-theme='light'][data-light='graphite'] {
+    --bg: #eef1f5;
+    --panel: #f8fafc;
+    --line: #d5dde7;
+    --text: #0f172a;
+    --muted: #5b6b82;   /* slate-ish */
+    --muted-2: #8c98ad;
+    --header-bg: rgba(248, 250, 252, 0.86);
+    --mobile-menu-bg: rgba(248, 250, 252, 0.95);
+    --nav-hover-bg: rgba(63, 183, 172, 0.10);
+    --nav-active-bg: rgba(63, 183, 172, 0.08);
+    --panel-elev: 0 1px 2px rgba(9, 20, 33, 0.04), 0 4px 14px rgba(9, 20, 33, 0.06);
+}
+body[data-theme='light'][data-light='graphite'] .hero {
+    background: radial-gradient(120% 120% at 20% 0%, rgba(120, 150, 210, 0.10) 0%, rgba(0,0,0,0) 60%),
+        radial-gradient(100% 100% at 100% 0%, rgba(120, 150, 210, 0.06) 0%, rgba(0,0,0,0) 60%);
+}
+body[data-theme='light'][data-light='graphite'] .hero::before {
+    opacity: 0.24;
+    /* keep teal dots for brand consistency, slightly toned */
+    background-image: radial-gradient(rgba(63, 183, 172, 0.22) 1.1px, rgba(0,0,0,0) 1.6px);
+}
+
+/* ---------- Optional light theme variants (toggle via body[data-light]) ---------- */
+@media (prefers-color-scheme: light) {
+    /* Fog Teal: cool, teal‑tinted paper */
+    body[data-light='fog'] {
+        /* Fog Teal (original saturation) */
+        --bg: #eaf2f0;
+        --panel: var(--bg);
+        --line: #cfe1dd;
+        --text: #0f172a;
+        --muted: #5b7f79;
+        --muted-2: #88a9a3;
+        --header-bg: var(--bg);
+        --mobile-menu-bg: var(--bg);
+        --nav-hover-bg: rgba(63, 183, 172, 0.12);
+        --nav-active-bg: rgba(63, 183, 172, 0.10);
+        --btn-outline-border: var(--line);
+        --btn-outline-hover-border: var(--accent);
+        --btn-outline-hover-bg: rgba(63, 183, 172, 0.12);
+        --panel-elev: 0 1px 2px rgba(5, 32, 28, 0.04), 0 4px 14px rgba(5, 32, 28, 0.06);
+    }
+    body[data-light='fog'] .hero {
+        background: radial-gradient(120% 120% at 20% 0%, rgba(63, 183, 172, 0.08) 0%, rgba(0,0,0,0) 60%),
+            radial-gradient(100% 100% at 100% 0%, rgba(63, 183, 172, 0.05) 0%, rgba(0,0,0,0) 60%);
+    }
+    body[data-light='fog'] .hero::before {
+        opacity: 0.26;
+        background-image: radial-gradient(rgba(63, 183, 172, 0.28) 1.1px, rgba(0,0,0,0) 1.6px);
+    }
+
+    /* Warm Sandstone: gentle warm neutrals */
+    body[data-light='warm'] {
+        --bg: #f3efe7;
+        --panel: #fbf8f2;
+        --line: #e6ded1;
+        --text: #1f2937;
+        --muted: #7a6f60;
+        --muted-2: #a49786;
+        --header-bg: rgba(251, 248, 242, 0.86);
+        --mobile-menu-bg: rgba(251, 248, 242, 0.95);
+        --nav-hover-bg: rgba(63, 183, 172, 0.10);
+        --nav-active-bg: rgba(63, 183, 172, 0.08);
+        --btn-outline-border: var(--line);
+        --btn-outline-hover-border: var(--accent);
+        --btn-outline-hover-bg: rgba(63, 183, 172, 0.10);
+        --panel-elev: 0 1px 2px rgba(31, 41, 55, 0.04), 0 4px 14px rgba(31, 41, 55, 0.06);
+    }
+    body[data-light='warm'] .hero {
+        background: radial-gradient(120% 120% at 20% 0%, rgba(255, 205, 158, 0.10) 0%, rgba(0,0,0,0) 60%),
+            radial-gradient(100% 100% at 100% 0%, rgba(255, 205, 158, 0.06) 0%, rgba(0,0,0,0) 60%);
+    }
+    body[data-light='warm'] .hero::before {
+        opacity: 0.22;
+        background-image: radial-gradient(rgba(63, 183, 172, 0.24) 1.1px, rgba(0,0,0,0) 1.6px);
+    }
+    body[data-light='graphite'] {
+        --bg: #eef1f5;
+        --panel: #f8fafc;
+        --line: #d5dde7;
+        --text: #0f172a;
+        --muted: #5b6b82;
+        --muted-2: #8c98ad;
+        --header-bg: rgba(248, 250, 252, 0.86);
+        --mobile-menu-bg: rgba(248, 250, 252, 0.95);
+        --nav-hover-bg: rgba(63, 183, 172, 0.10);
+        --nav-active-bg: rgba(63, 183, 172, 0.08);
+        --panel-elev: 0 1px 2px rgba(9, 20, 33, 0.04), 0 4px 14px rgba(9, 20, 33, 0.06);
+    }
+    body[data-light='graphite'] .hero {
+        background: radial-gradient(120% 120% at 20% 0%, rgba(120, 150, 210, 0.10) 0%, rgba(0,0,0,0) 60%),
+            radial-gradient(100% 100% at 100% 0%, rgba(120, 150, 210, 0.06) 0%, rgba(0,0,0,0) 60%);
+    }
+    body[data-light='graphite'] .hero::before {
+        opacity: 0.24;
+        background-image: radial-gradient(rgba(63, 183, 172, 0.22) 1.1px, rgba(0,0,0,0) 1.6px);
     }
 }
 
@@ -168,6 +419,7 @@ a:hover {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 1.25rem;
+    box-shadow: var(--panel-elev);
 }
 
 /* Simple utility used by CTA */
@@ -178,16 +430,24 @@ a:hover {
     text-decoration: underline;
 }
 
+/* A11y utility */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
 /* CTA styling tweaks */
 #cta .card {
     max-width: 680px;
     margin: 0 auto;
-    background: linear-gradient(
-            180deg,
-            rgba(63, 183, 172, 0.06),
-            rgba(63, 183, 172, 0) 55%
-        ),
-        var(--panel);
+    background: var(--panel);
 }
 #cta .cta-head {
     text-align: center;
@@ -351,8 +611,8 @@ a:hover {
 .btn,
 .button {
     display: inline-block;
-    background: #e6e6e6; /* less stark than pure white */
-    color: #121212;
+    background: var(--btn-bg);
+    color: var(--btn-fg);
     padding: 0.65rem 1.1rem;
     border-radius: 8px;
     font-weight: 600;
@@ -361,7 +621,7 @@ a:hover {
 }
 .btn:hover,
 .button:hover {
-    background: #dcdcdc;
+    background: var(--btn-bg-hover);
 }
 .btn-accent {
     background: var(--accent);
@@ -412,17 +672,17 @@ a:hover {
 .menu-toggle {
     display: none;
     background: transparent;
-    border: 1px solid #333;
+    border: 1px solid var(--menu-toggle-border);
     border-radius: 8px;
     padding: 6px;
 }
 .menu-toggle:hover {
-    background: transparent;
+    background: var(--menu-toggle-hover-bg);
 }
 
 .mobile-menu {
     border-top: 1px solid var(--line);
-    background: rgba(20, 20, 20, 0.7);
+    background: var(--mobile-menu-bg);
     backdrop-filter: saturate(150%) blur(8px);
 }
 .mobile-menu .container {
@@ -439,7 +699,7 @@ a:hover {
 .mobile-nav a {
     padding: 0.4rem 0.2rem;
     border-radius: 6px;
-    color: #eee;
+    color: var(--text);
 }
 .mobile-nav a:hover {
     background: var(--nav-hover-bg);
@@ -458,7 +718,7 @@ a:hover {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: #ddd;
+        color: var(--muted);
     }
 }
 
@@ -519,7 +779,7 @@ a:hover {
         rgba(0, 0, 0, 0) 1.6px
     );
     background-size: 18px 18px; /* slightly denser */
-    opacity: 0.5; /* a touch more presence */
+    opacity: 0.4; /* slightly dimmer */
     /* Soften edges so dots fade out toward sides/top */
     -webkit-mask-image: radial-gradient(
         120% 100% at 50% 0%,
@@ -750,7 +1010,7 @@ a:hover {
 }
 #solutions .card p:last-child {
     margin-top: 0.75rem;
-    color: #ddd;
+    color: var(--text);
     font-weight: 600;
 }
 #how .card p:last-child {
@@ -873,7 +1133,7 @@ input[type='range']:focus-visible {
 
 /* Highlight selected tick by wrapping it with .is-active on the parent or using inline color */
 .slider-ticks .is-active {
-    color: #fff;
+    color: var(--text);
     font-weight: 600;
 }
 
@@ -912,11 +1172,11 @@ summary {
     font-weight: 600;
 }
 details[open] summary {
-    color: #eaeaea;
+    color: var(--text);
 }
 details p {
     margin: 0.5rem 0 0.25rem;
-    color: #d0d0d0;
+    color: var(--muted);
 }
 
 /* ---------- Footer ---------- */
@@ -952,10 +1212,11 @@ details p {
     position: absolute;
     left: -999px;
     top: 8px;
-    background: #fff;
-    color: #111;
+    background: var(--panel);
+    color: var(--text);
     padding: 6px 10px;
     border-radius: 6px;
+    border: 1px solid var(--line);
     z-index: 999;
 }
 .skip-link:focus {

@@ -15,6 +15,28 @@ try {
   requestAnimationFrame(() => document.body.classList.add('app-ready'));
 } catch {}
 
+// Apply Fog Teal for light mode and Dark for dark mode, based on system
+try {
+  const b = document.body;
+  const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+  const apply = () => {
+    try {
+      if (mq && mq.matches) {
+        b.setAttribute('data-theme', 'dark');
+        b.removeAttribute('data-light');
+      } else {
+        b.setAttribute('data-theme', 'light');
+        b.setAttribute('data-light', 'fog');
+      }
+    } catch {}
+  };
+  apply();
+  if (mq) {
+    if (mq.addEventListener) mq.addEventListener('change', apply);
+    else if (mq.addListener) mq.addListener(apply); // Safari fallback
+  }
+} catch {}
+
 // IntersectionObserver for [data-reveal] (init after first paint)
 function initReveal() {
   try {

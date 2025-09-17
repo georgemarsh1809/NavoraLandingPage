@@ -147,6 +147,8 @@ function Header() {
 
     const navClass = (id) => (current === id ? 'active' : '');
 
+    // Theme selector removed; theme defaults applied in main.jsx
+
     return (
         <header className="header">
             <div className="container flex-between">
@@ -195,6 +197,7 @@ function Header() {
                 <a href="#cta" className="btn intro delay-2">
                     Book a Call
                 </a>
+                {/* Theme selector removed */}
 
                 <button
                     className="menu-toggle"
@@ -212,7 +215,7 @@ function Header() {
                         >
                             <path
                                 d="M6 6l12 12M18 6L6 18"
-                                stroke="#ddd"
+                                stroke="currentColor"
                                 strokeWidth="2"
                                 strokeLinecap="round"
                             />
@@ -227,7 +230,7 @@ function Header() {
                         >
                             <path
                                 d="M4 6h16M4 12h16M4 18h16"
-                                stroke="#ddd"
+                                stroke="currentColor"
                                 strokeWidth="2"
                                 strokeLinecap="round"
                             />
@@ -314,9 +317,10 @@ function Hero() {
                     <span className="highlight">Actionable Insights</span>
                 </h1>
                 <p className="intro delay-1">
-                    We help founders, operations & finance teams make smarter
-                    decisions based on their data. No fuss, no manual reporting,
-                    just reliable dashboards and digital solutions.
+                    We build digital solutions for teams make better decisions
+                    based on their business data. Less manual work, more time
+                    saved, and more time for you to focus on what really matters
+                    for your business.
                 </p>
                 <div className="buttons intro delay-2">
                     <a href="#cta" className="btn">
@@ -327,7 +331,7 @@ function Hero() {
                     </a>
                 </div>
                 <p className="small intro delay-3" style={{ marginTop: 8 }}>
-                    20‑min audit + tailored plan.
+                    30‑min audit + tailored plan.
                 </p>
             </div>
         </section>
@@ -347,7 +351,7 @@ function ValueProps() {
             icon: faLightbulb,
         },
         {
-            title: 'Make smarter decisions',
+            title: 'Make Smarter Decisions',
             desc: 'Clear dashboards and alerts for the KPIs that drive business.',
             icon: faChartLine,
         },

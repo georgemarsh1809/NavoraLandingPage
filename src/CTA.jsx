@@ -48,7 +48,7 @@ export default function CTA() {
                 </h2>
                 <p
                     style={{
-                        color: '#888',
+                        color: 'var(--muted)',
                         maxWidth: 540,
                         margin: '0 auto 1.5rem auto',
                     }}
@@ -78,7 +78,7 @@ export default function CTA() {
                 </a>
                 <p
                     className="small"
-                    style={{ marginTop: '0.5rem', color: '#9aa' }}
+                    style={{ marginTop: '0.5rem', color: 'var(--muted-2)' }}
                 >
                     20‑min audit + tailored plan.
                 </p>
@@ -87,7 +87,7 @@ export default function CTA() {
                     className="small"
                     style={{
                         marginTop: '1rem',
-                        color: '#9aa',
+                        color: 'var(--muted-2)',
                     }}
                 >
                     Prefer email? Reach us at{' '}
@@ -100,7 +100,7 @@ export default function CTA() {
                     className="small"
                     style={{
                         marginTop: '0.25rem',
-                        color: '#bbb',
+                        color: 'var(--muted-2)',
                     }}
                 >
                     Typically replies within 1 business day
