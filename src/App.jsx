@@ -30,10 +30,10 @@ function Router() {
             </div>
         );
     }
-    return <NavoraLanding />;
+    return <GBMGroupLanding />;
 }
 
-function NavoraLanding() {
+function GBMGroupLanding() {
     // Scroll to hash target on initial load (e.g., /#solutions)
     useEffect(() => {
         const hash =
@@ -67,6 +67,7 @@ function NavoraLanding() {
                     </a>
                 </div>
                 <PricingCalculator />
+                <TechStack />
                 <CTA />
                 <FAQ />
             </main>
@@ -341,18 +342,18 @@ function Hero() {
 function ValueProps() {
     const items = [
         {
-            title: 'Unify Your Data',
-            desc: 'One source of truth across finance, ops, and growth.',
+            title: 'Streamline Operations',
+            desc: 'Replace clunky spreadsheets and manual processes with simple tools that save hours every week.',
             icon: faSitemap,
         },
         {
-            title: 'Gain Insight',
-            desc: 'Get the clarity of a data team at a fraction of the cost.',
+            title: 'Make Smarter Decisions',
+            desc: 'Get clear visibility of your business with dashboards and insights built around your data.',
             icon: faLightbulb,
         },
         {
-            title: 'Make Smarter Decisions',
-            desc: 'Clear dashboards and alerts for the KPIs that drive business.',
+            title: 'Future-Proof with AI',
+            desc: 'Adopt practical AI solutions tailored to your workflows to unlock growth and stay competitive.',
             icon: faChartLine,
         },
     ];
@@ -382,29 +383,33 @@ function ValueProps() {
 function Solutions() {
     const items = [
         {
-            title: 'Package A — Decision Preview (Prototype, 7–10 days)',
+            title: 'Starter — Digital Essentials (1–2 weeks)',
             bullets: [
-                'Deliverables: 1 connected data pipe (e.g., Sheets/CSV), 1 KPI set (3–7), 1 dashboard, 1 automated email report.',
-                'Outcome: Validate the metrics & workflow on real data.',
-                'Risk reducer: If it doesn’t earn a rollout, you don’t pay.',
+                'Replace 1–2 key spreadsheets with a simple custom app.',
+                'Build a single dashboard to track 3–5 key metrics.',
+                'Basic automation (auto-updating reports, email alerts).',
             ],
-            price: '£1,000–£2,500 + £200-£500/mo',
+            price: '£1.5k–£2.5k + £200–£300/mo',
         },
         {
-            title: 'Package B — Ops Visibility Pack (Core Build, 2–4 weeks)',
+            title: 'Growth — Operations Upgrade (2–4 weeks)',
             bullets: [
-                'Deliverables: 2 dashboards (Exec + Ops), source modeling, data dictionary, anomaly alerts, daily refresh by 9am.',
-                'Outcome: Cut manual reporting by 70–90%; leaders get the same numbers, every day.',
+                'Multiple dashboards pulling from different systems.',
+                'Workflow automation (invoice handling, scheduling, CRM updates).',
+                'Basic AI integration (summaries, auto-generated reports).',
+                'User access control / simple login for teams.',
             ],
-            price: '£2,500–£8,000 + £400–£800/mo',
+            price: '£4k–£8k + £400–£700/mo',
         },
         {
-            title: 'Package C — Run & Automate Suite (Scale, 6–12 weeks)',
+            title: 'Pro — AI‑Driven Business (4–6 weeks)',
             bullets: [
-                'Deliverables: 5–10 sources, role-based access, multi-page boards, SLAs, incident monitoring, forecasting.',
-                'Outcome: One source of truth across teams; proactive alerts, not reactive fire-drills.',
+                'Bespoke internal platform combining dashboards + automation + AI.',
+                'Advanced AI features (forecasting, natural language query, assistants).',
+                'Covers multiple departments (finance, ops, sales, logistics).',
+                'Ongoing AI advisory + optimisation.',
             ],
-            price: '£8,000–£20,000 + £1,000–£2,500/mo',
+            price: '£10k–£18k + £1.5k+/mo',
         },
     ];
     const splitTitle = (t) => {
@@ -433,9 +438,10 @@ function Solutions() {
                 <div className="grid">
                     {items.map((card) => {
                         const { label, name, meta } = splitTitle(card.title);
-                        const icon = card.title.includes('Decision Preview')
+                        const title = card.title.toLowerCase();
+                        const icon = title.includes('starter')
                             ? faSeedling
-                            : card.title.includes('Ops Visibility')
+                            : title.includes('growth')
                             ? faLayerGroup
                             : faSitemap;
                         const noteMatch = card.price.match(/\(([^)]+)\)/);
@@ -602,5 +608,68 @@ function Footer() {
                 <p className="small">© {new Date().getFullYear()} GBMGroup</p>
             </div>
         </footer>
+    );
+}
+
+function TechStack() {
+    const logos = [
+        {
+            name: 'React',
+            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+        },
+        {
+            name: 'Next.js',
+            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg',
+            invertOnDark: true,
+        },
+        {
+            name: 'FastAPI',
+            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
+        },
+        {
+            name: 'Express',
+            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg',
+            invertOnDark: true,
+        },
+        {
+            name: 'Node.js',
+            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+        },
+        {
+            name: 'Firebase',
+            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
+        },
+        {
+            name: 'Postgres',
+            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+        },
+        {
+            name: 'BigQuery',
+            src: 'https://cdn.simpleicons.org/googlebigquery/4285F4',
+        },
+    ];
+    return (
+        <section id="tech" className="section">
+            <div className="container">
+                <h2 className="section-title">
+                    <FontAwesomeIcon icon={faLayerGroup} style={{ marginRight: 8 }} />
+                    Technologies We Work With
+                </h2>
+                <div className="tech-logos">
+                    {logos.map((l) => (
+                        <img
+                            key={l.name}
+                            src={l.src}
+                            alt={l.name}
+                            loading="lazy"
+                            height={40}
+                            data-invert-on-dark={
+                                l.invertOnDark ? 'true' : undefined
+                            }
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
     );
 }

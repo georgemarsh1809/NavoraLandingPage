@@ -80,7 +80,7 @@ export default function CTA() {
                     className="small"
                     style={{ marginTop: '0.5rem', color: 'var(--muted-2)' }}
                 >
-                    20‑min audit + tailored plan.
+                    30‑min audit + tailored plan.
                 </p>
 
                 <p

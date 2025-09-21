@@ -7,6 +7,7 @@ import {
     faWandMagicSparkles,
     faGears,
     faRocket,
+    faArrowsRotate,
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function HowItWorks() {
@@ -23,15 +24,17 @@ export default function HowItWorks() {
                         </span>
                     </h1>
                     <p>
-                        Practical steps that add up to real results. End-to-end
-                        solutions delivered with clear communication and a clean
-                        handover.
+                        We build digital solutions that turn scattered business
+                        data into clear, actionable insights. Less manual work,
+                        more time saved, and more focus on what really matters
+                        for your business.
                     </p>
                     <div className="buttons">
-                        <a className="btn" href="#cta">
-                            Book a Free Data Audit
-                        </a>
+                        <a className="btn" href="#cta">Book a Free Data Audit</a>
                     </div>
+                    <p className="small" style={{ marginTop: 8 }}>
+                        30‑min audit + tailored plan.
+                    </p>
                 </div>
             </section>
 
@@ -49,17 +52,13 @@ export default function HowItWorks() {
                             </h3>
                             <ul style={{ marginTop: 8, paddingLeft: 18 }}>
                                 <li>
-                                    <strong>Unify your data.</strong> One source
-                                    of truth across finance, ops, and growth.
+                                    <strong>Unify Your Data.</strong> One source of truth across finance, ops, and growth.
                                 </li>
                                 <li>
-                                    <strong>Automate reporting.</strong> Cut
-                                    manual work and reduce errors.
+                                    <strong>Gain Insight.</strong> Get the clarity of a data team at a fraction of the cost.
                                 </li>
                                 <li>
-                                    <strong>Surface what matters.</strong> Clear
-                                    dashboards and alerts for the KPIs that
-                                    drive decisions.
+                                    <strong>Make Smarter Decisions.</strong> Clear dashboards and alerts for the KPIs that drive business.
                                 </li>
                             </ul>
                         </div>
@@ -90,12 +89,9 @@ export default function HowItWorks() {
             </section>
 
             {/* Inline CTA above Process */}
-            <div
-                className="container text-center"
-                style={{ marginTop: 8, marginBottom: 8 }}
-            >
+            <div className="container text-center" style={{ marginTop: 8, marginBottom: 8 }}>
                 <a href="#cta" className="btn cta-inline">
-                    Yes, This Is Me — Let’s Talk
+                    Book a Free Data Discovery Call
                 </a>
             </div>
 
@@ -120,28 +116,28 @@ export default function HowItWorks() {
                         {[
                             {
                                 title: '1. Discover',
-                                desc: 'We kick things off with a discovery call to understand your goals, your key metrics, and where your data lives. This ensures we focus on the insights that matter most to your business..',
+                                desc: '30‑min discovery to align on goals, 3–5 key metrics, and where your data lives. We confirm scope and success criteria, then propose a tailored plan.',
                                 icon: faMagnifyingGlass,
                             },
                             {
                                 title: '2. Prototype',
-                                desc: 'Next, we create a simple, interactive prototype so you can see your data come to life. This quick win gives you confidence in the approach and lets us fine-tune before we scale.',
+                                desc: 'A quick, interactive prototype (often in week one) to validate the approach on real data — typically a small dashboard or simple app replacing a spreadsheet.',
                                 icon: faWandMagicSparkles,
                             },
                             {
                                 title: '3. Build',
-                                desc: 'With the direction confirmed, we turn the prototype into a full solution; integrating more data, adding tailored views for teams, and creating clear, actionable reports that make decision-making effortless.',
+                                desc: 'Expand to the required sources, add dashboards and workflows, and wire up basic AI where useful. Ship in small, reviewable increments.',
                                 icon: faGears,
                             },
                             {
-                                title: '4. Launch ',
-                                desc: 'We hand everything over with clear documentation and light training, so your team feels at home straight away. ',
+                                title: '4. Launch',
+                                desc: 'Deploy to your accounts with clear docs and light training. Set up access control/SSO where needed so teams can use it day‑to‑day.',
                                 icon: faRocket,
                             },
                             {
-                                title: '5. Support & Improve',
-                                desc: 'If you’d like ongoing support, we offer a monthly service to keep your dashboards fresh, reliable, and growing with your business.',
-                                icon: faRocket,
+                                title: '5. Run & Improve',
+                                desc: 'Optional monthly support to keep things fresh: updates, monitoring, small enhancements, and ongoing AI optimisation as your needs evolve.',
+                                icon: faArrowsRotate,
                             },
                         ].map((s, i) => (
                             <div

@@ -430,6 +430,32 @@ a:hover {
     text-decoration: underline;
 }
 
+/* Tech logos */
+.tech-logos {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    gap: 1.1rem;
+    padding: 0.9rem 0;
+}
+.tech-logos img {
+    max-width: 200px;
+    height: 48px;
+    object-fit: contain;
+    opacity: 0.95;
+    filter: saturate(1.1);
+    transition: transform 0.16s ease, opacity 0.16s ease;
+}
+.tech-logos img:hover { opacity: 1; transform: translateY(-1px); }
+
+@media (prefers-color-scheme: dark) {
+    .tech-logos img[data-invert-on-dark='true'] { filter: invert(1) brightness(1.1); }
+}
+body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
+    filter: invert(1) brightness(1.1);
+}
+
 /* A11y utility */
 .visually-hidden {
     position: absolute !important;

@@ -8,6 +8,17 @@ const fmtGBP = new Intl.NumberFormat('en-GB', {
     maximumFractionDigits: 0,
 });
 
+// Compact GBP formatter: £10k instead of £10,000
+function formatGBPCompact(n) {
+    const abs = Math.abs(n);
+    if (abs >= 1000) {
+        const v = n / 1000;
+        const s = Number.isInteger(v) ? String(v) : v.toFixed(1).replace(/\.0$/, '');
+        return `£${s}k`;
+    }
+    return fmtGBP.format(n);
+}
+
 const BANDS = [0, 50, 100];
 const bandOf = (p) => {
     let best = 0,
@@ -26,62 +37,63 @@ export default function PricingCalculator() {
     const tiers = {
         simple: {
             key: 'simple',
-            name: 'Decision Preview (Prototype)',
-            base: 1000,
-            retainer: [0, 0],
-            eta: '7–10 days',
+            name: 'Starter — Digital Essentials',
+            buildRange: [1500, 2500],
+            retainer: [200, 300],
+            eta: '1–2 weeks',
         },
         moderate: {
             key: 'moderate',
-            name: 'Ops Visibility  (Most popular)',
-            base: 2500,
-            retainer: [400, 800],
+            name: 'Growth — Operations Upgrade',
+            buildRange: [4000, 8000],
+            retainer: [400, 700],
             eta: '2–4 weeks',
         },
         complex: {
             key: 'complex',
-            name: 'Run & Automate Suite',
-            base: 8000,
-            retainer: [1000, 2500],
-            eta: '6–12 weeks',
+            name: 'Pro — AI‑Driven Business',
+            buildRange: [10000, 18000],
+            // Show "+" in UI by leaving upper undefined
+            retainer: [1500, null],
+            eta: '4–6 weeks',
         },
     };
 
     const tierScales = {
         simple: {
             data: [
-                { key: 'low', w: 1, label: 'Sheets/CSV only (×1)' },
-                { key: 'med', w: 1.5, label: 'Mix of Sheets + APIs (×1.5)' },
-                { key: 'high', w: 2, label: 'APIs + DBs, joins (×2)' },
+                { key: 'low', label: '1 source (Sheets/CSV)' },
+                { key: 'med', label: '1–2 sources (mix)' },
+                { key: 'high', label: '2–3 sources' },
             ],
             features: [
-                { key: 'low', w: 1, label: 'Core KPIs & email report (×1)' },
-                { key: 'med', w: 1.5, label: 'Filters + alerts (×1.5)' },
-                { key: 'high', w: 2, label: 'Forecasting + roles/SSO (×2)' },
+                { key: 'low', label: 'KPIs + email reports' },
+                { key: 'med', label: 'Dashboard + alerts' },
+                { key: 'high', label: 'Dashboard + simple app' },
             ],
         },
         moderate: {
             data: [
-                { key: 'low', w: 1, label: 'Sheets/CSV only (×1)' },
-                { key: 'med', w: 1.5, label: 'Mix of Sheets + APIs (×1.5)' },
-                { key: 'high', w: 2, label: 'APIs + DBs, joins (×2)' },
+                { key: 'low', label: '2–4 sources' },
+                { key: 'med', label: '4–6 sources' },
+                { key: 'high', label: '6–8 sources' },
             ],
             features: [
-                { key: 'low', w: 1, label: 'Core KPIs & email report (×1)' },
-                { key: 'med', w: 1.5, label: 'Filters + alerts (×1.5)' },
-                { key: 'high', w: 2, label: 'Forecasting + roles/SSO (×2)' },
+                { key: 'low', label: 'Multi-dashboards' },
+                { key: 'med', label: 'Workflow automations' },
+                { key: 'high', label: 'Basic AI + access control' },
             ],
         },
         complex: {
             data: [
-                { key: 'low', w: 1, label: 'Sheets/CSV only (×1)' },
-                { key: 'med', w: 1.5, label: 'Mix of Sheets + APIs (×1.5)' },
-                { key: 'high', w: 2, label: 'APIs + DBs, joins (×2)' },
+                { key: 'low', label: '5–8 sources' },
+                { key: 'med', label: '8–12 sources' },
+                { key: 'high', label: '12+ sources/DBs' },
             ],
             features: [
-                { key: 'low', w: 1, label: 'Core KPIs & email report (×1)' },
-                { key: 'med', w: 1.5, label: 'Filters + alerts (×1.5)' },
-                { key: 'high', w: 2, label: 'Forecasting + roles/SSO (×2)' },
+                { key: 'low', label: 'Dashboards + automations' },
+                { key: 'med', label: 'Advanced AI (forecasting/NLQ)' },
+                { key: 'high', label: 'Assistants + multi‑dept' },
             ],
         },
     };
@@ -127,9 +139,12 @@ export default function PricingCalculator() {
     const tier = tiers[selTier];
 
     const estimate = useMemo(() => {
-        const wData = scale.data[bandOf(dataIdx)].w;
-        const wFeat = scale.features[bandOf(featIdx)].w;
-        let price = tier.base * wData * wFeat;
+        const min = tier.buildRange[0];
+        const max = tier.buildRange[1];
+        const di = bandOf(dataIdx) / 2; // 0, .5, 1
+        const fi = bandOf(featIdx) / 2; // 0, .5, 1
+        const t = (di + fi) / 2; // average slider position 0..1
+        let price = min + t * (max - min);
         if (rush) price *= 1.25;
         // Round to nearest £100 for friendlier numbers
         return Math.round(price / 100) * 100;
@@ -276,12 +291,17 @@ export default function PricingCalculator() {
                                 }}
                                 aria-live="polite"
                             >
-                                {fmtGBP.format(estimate)}
+                                {formatGBPCompact(estimate)}
                             </div>
                             <div className="small">
                                 Typical Run & Improve:{' '}
-                                {fmtGBP.format(tier.retainer[0])}–
-                                {fmtGBP.format(tier.retainer[1])}/mo
+                                {(() => {
+                                    const [lo, hi] = tier.retainer;
+                                    if (hi == null) {
+                                        return `${fmtGBP.format(lo)}+/mo`;
+                                    }
+                                    return `${fmtGBP.format(lo)}–${fmtGBP.format(hi)}/mo`;
+                                })()}
                             </div>
                             <div className="small">
                                 Final pricing confirmed after a 30-minute
