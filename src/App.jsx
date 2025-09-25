@@ -318,10 +318,10 @@ function Hero() {
                     <span className="highlight">Actionable Insights</span>
                 </h1>
                 <p className="intro delay-1">
-                    We build digital solutions for teams make better decisions
-                    based on their business data. Less manual work, more time
-                    saved, and more time for you to focus on what really matters
-                    for your business.
+                    We build custom digital solutions for teams make better
+                    decisions based on their business data. Less manual work,
+                    more time saved, and more time for you to focus on what
+                    really matters for your business.
                 </p>
                 <div className="buttons intro delay-2">
                     <a href="#cta" className="btn">
@@ -652,7 +652,10 @@ function TechStack() {
         <section id="tech" className="section">
             <div className="container">
                 <h2 className="section-title">
-                    <FontAwesomeIcon icon={faLayerGroup} style={{ marginRight: 8 }} />
+                    <FontAwesomeIcon
+                        icon={faLayerGroup}
+                        style={{ marginRight: 8 }}
+                    />
                     Technologies We Work With
                 </h2>
                 <div className="tech-logos">
@@ -661,6 +664,7 @@ function TechStack() {
                             key={l.name}
                             src={l.src}
                             alt={l.name}
+                            title={l.name}
                             loading="lazy"
                             height={40}
                             data-invert-on-dark={
