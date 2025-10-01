@@ -6,7 +6,14 @@ export default function MeetTheTeam() {
     return (
         <section id="team" className="section">
             <div className="container">
-                <h2 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+                <h2
+                    className="section-title"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.6rem',
+                    }}
+                >
                     <FontAwesomeIcon icon={faUsers} aria-hidden="true" />
                     Meet The Team
                 </h2>
@@ -25,12 +32,11 @@ export default function MeetTheTeam() {
                             Government applications; managing client
                             relationships and leading service & technical
                             operations. He has extensive experience managing
-                            data and building bespoke software, and is
-                            passionate about helping businesses turn messy
-                            operational data into dashboards teams can act on.
-                            He leads each engagement from discovery through to
-                            adoption, making sure every insight lands with the
-                            people running the day-to-day.
+                            data and building bespoke software, and has a family
+                            background in Transport & Logistics. He leads each
+                            engagement from discovery through to adoption,
+                            making sure every insight lands with the people
+                            running the day-to-day.
                         </p>
                         <div className="team-links">
                             <a

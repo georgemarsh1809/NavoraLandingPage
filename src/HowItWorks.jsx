@@ -12,7 +12,7 @@ import {
     faArrowsRotate,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function HowItWorks() {
+export default function HowItWorks({ ctaHref = '#team' }) {
     return (
         <div id="how">
             {/* Hero */}
@@ -32,7 +32,7 @@ export default function HowItWorks() {
                         smarter decisions.
                     </p>
                     <div className="buttons">
-                        <a className="btn" href="#team">
+                        <a className="btn" href={ctaHref}>
                             Book a Free KPI Discovery Call
                         </a>
                     </div>
@@ -200,7 +200,7 @@ export default function HowItWorks() {
                 className="container text-center"
                 style={{ marginTop: 8, marginBottom: 8 }}
             >
-                <a href="#team" className="btn cta-inline">
+                <a href={ctaHref} className="btn cta-inline">
                     Book a Free KPI Discovery Call
                 </a>
             </div>

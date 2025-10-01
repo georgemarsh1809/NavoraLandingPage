@@ -14,8 +14,11 @@ import PricingCalculator from './PricingCalculator.jsx';
 import HowItWorks from './HowItWorks.jsx';
 import CTA from './CTA.jsx';
 import MeetTheTeam from './MeetTheTeam.jsx';
+import useIsMobile from './hooks/useIsMobile.js';
 
 function Router() {
+    const isMobile = useIsMobile();
+    const ctaHref = isMobile ? '#cta' : '#team';
     const path = typeof window !== 'undefined' ? window.location.pathname : '/';
     if (path === '/how-we-work') {
         return (
@@ -23,18 +26,18 @@ function Router() {
                 <a href="#main" className="skip-link">
                     Skip to content
                 </a>
-                <Header />
+                <Header ctaHref={ctaHref} />
                 <main id="main">
-                    <HowItWorks />
+                    <HowItWorks ctaHref={ctaHref} />
                 </main>
                 <Footer />
             </div>
         );
     }
-    return <GBMGroupLanding />;
+    return <GBMGroupLanding ctaHref={ctaHref} />;
 }
 
-function GBMGroupLanding() {
+function GBMGroupLanding({ ctaHref = '#team' }) {
     // Scroll to hash target on initial load (e.g., /#solutions)
     useEffect(() => {
         const hash =
@@ -53,9 +56,9 @@ function GBMGroupLanding() {
             <a href="#main" className="skip-link">
                 Skip to content
             </a>
-            <Header />
+            <Header ctaHref={ctaHref} />
             <main id="main">
-                <Hero />
+                <Hero ctaHref={ctaHref} />
                 <ValueProps />
                 <Solutions />
                 {/* Inline CTA after Solutions on homepage */}
@@ -63,11 +66,11 @@ function GBMGroupLanding() {
                     className="container text-center"
                     style={{ marginTop: 0, marginBottom: 30 }}
                 >
-                    <a href="#team" className="btn cta-inline">
+                    <a href={ctaHref} className="btn cta-inline">
                         Book a Free KPI Discovery Call
                     </a>
                 </div>
-                <PricingCalculator />
+                <PricingCalculator ctaHref={ctaHref} />
                 <MeetTheTeam />
                 <CTA />
                 <FAQ />
@@ -79,7 +82,7 @@ function GBMGroupLanding() {
 
 export default Router;
 
-function Header() {
+function Header({ ctaHref = '#team' }) {
     const [open, setOpen] = useState(false);
     const [current, setCurrent] = useState('');
     const close = () => setOpen(false);
@@ -196,7 +199,7 @@ function Header() {
                         How We Work
                     </a>
                 </nav>
-                <a href="#team" className="btn intro delay-2">
+                <a href={ctaHref} className="btn intro delay-2">
                     Book a Call
                 </a>
                 {/* Theme selector removed */}
@@ -299,7 +302,7 @@ function Header() {
                                 FAQ
                             </a>
                         </nav>
-                        <a href="#team" className="btn" onClick={close}>
+                        <a href={ctaHref} className="btn" onClick={close}>
                             Book your KPI Discovery Call
                         </a>
                     </div>
@@ -309,7 +312,7 @@ function Header() {
     );
 }
 
-function Hero() {
+function Hero({ ctaHref = '#team' }) {
     return (
         <section className="hero">
             <div className="container">
@@ -327,7 +330,7 @@ function Hero() {
                     leakage, and take back control of your business.
                 </p>
                 <div className="buttons intro delay-2">
-                    <a href="#team" className="btn">
+                    <a href={ctaHref} className="btn">
                         Book a Free Discovery Call
                     </a>
                     <a href="#pricing" className="btn btn-outline">

@@ -39,7 +39,7 @@ const bandOf = (p) => {
     return best; // 0,1,2
 };
 
-export default function PricingCalculator() {
+export default function PricingCalculator({ ctaHref = '#team' }) {
     const tiers = {
         simple: {
             key: 'simple',
@@ -374,9 +374,9 @@ export default function PricingCalculator() {
                                         flexWrap: 'wrap',
                                     }}
                                 >
-                                    <a
-                                        className="button"
-                                        href="#team"
+                                <a
+                                    className="button"
+                                    href={ctaHref}
                                         aria-label="Pressure-test my estimate with an expert"
                                     >
                                         <FontAwesomeIcon
