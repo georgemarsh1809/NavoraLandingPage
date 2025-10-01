@@ -68,7 +68,6 @@ function GBMGroupLanding() {
                     </a>
                 </div>
                 <PricingCalculator />
-                <TechStack />
                 <MeetTheTeam />
                 <CTA />
                 <FAQ />
@@ -393,7 +392,6 @@ function Solutions() {
                 'Automated reporting for ops and finance managers.',
                 'Handover call to demonstrate business implementation.',
             ],
-            price: '£1.5k–£2.5k + £150–£250/mo',
         },
         {
             title: 'Operations Control Tower — Depot Overview (2–4 weeks)',
@@ -402,7 +400,6 @@ function Solutions() {
                 'Exception alerts for absence, unplanned downtime, and customer issues.',
                 'Specific views that highlight where money can be saved each week.',
             ],
-            price: '£2.5k–£5k + £250–£500/mo',
         },
         {
             title: 'Command Centre — Integrated Insights (4-6 weeks)',
@@ -411,7 +408,6 @@ function Solutions() {
                 'Role-based dashboards for directors, ops, and finance teams with drill-down analytics.',
                 'Optimisation, light AI forecasting, and bespoke integrations for your family-run fleet.',
             ],
-            price: '£5k–£10k + £500+/mo',
         },
     ];
     const splitTitle = (t) => {
@@ -446,18 +442,6 @@ function Solutions() {
                             : title.includes('control')
                             ? faLayerGroup
                             : faSitemap;
-                        const noteMatch = card.price.match(/\(([^)]+)\)/);
-                        const note = noteMatch ? noteMatch[1] : '';
-                        const noNote = card.price
-                            .replace(/\s*\([^)]*\)\s*/g, '')
-                            .trim();
-                        let build = noNote;
-                        let retainer = '';
-                        if (noNote.includes('+')) {
-                            const parts = noNote.split('+');
-                            build = (parts[0] || '').trim();
-                            retainer = (parts.slice(1).join('+') || '').trim();
-                        }
                         return (
                             <div key={card.title} className="card">
                                 {label ? (
@@ -501,19 +485,6 @@ function Solutions() {
                                         <li key={b}>{b}</li>
                                     ))}
                                 </ul>
-                                <div style={{ marginTop: 8 }}>
-                                    <div className="price-build">{build}</div>
-                                    {retainer ? (
-                                        <div className="price-retainer">
-                                            Scale & Improve: {retainer}
-                                        </div>
-                                    ) : null}
-                                    {note ? (
-                                        <div className="price-note small">
-                                            {note}
-                                        </div>
-                                    ) : null}
-                                </div>
                             </div>
                         );
                     })}
@@ -610,72 +581,5 @@ function Footer() {
                 <p className="small">© {new Date().getFullYear()} GBMGroup</p>
             </div>
         </footer>
-    );
-}
-
-function TechStack() {
-    const logos = [
-        {
-            name: 'React',
-            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
-        },
-        {
-            name: 'Next.js',
-            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original-wordmark.svg',
-            invertOnDark: true,
-        },
-        {
-            name: 'FastAPI',
-            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
-        },
-        {
-            name: 'Express',
-            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original-wordmark.svg',
-            invertOnDark: true,
-        },
-        {
-            name: 'Node.js',
-            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
-        },
-        {
-            name: 'Firebase',
-            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
-        },
-        {
-            name: 'Postgres',
-            src: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
-        },
-        {
-            name: 'BigQuery',
-            src: 'https://cdn.simpleicons.org/googlebigquery/4285F4',
-        },
-    ];
-    return (
-        <section id="tech" className="section">
-            <div className="container">
-                <h2 className="section-title">
-                    <FontAwesomeIcon
-                        icon={faLayerGroup}
-                        style={{ marginRight: 8 }}
-                    />
-                    Technologies We Work With
-                </h2>
-                <div className="tech-logos">
-                    {logos.map((l) => (
-                        <img
-                            key={l.name}
-                            src={l.src}
-                            alt={l.name}
-                            title={l.name}
-                            loading="lazy"
-                            height={40}
-                            data-invert-on-dark={
-                                l.invertOnDark ? 'true' : undefined
-                            }
-                        />
-                    ))}
-                </div>
-            </div>
-        </section>
     );
 }

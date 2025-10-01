@@ -475,11 +475,16 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     border: 3px solid rgba(63, 183, 172, 0.35);
     box-shadow: 0 16px 38px rgba(10, 18, 26, 0.35);
 }
+.team-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.85rem;
+}
 .team-link {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
-    margin-top: 0.75rem;
     font-weight: 600;
     color: var(--accent);
     transition: color 0.18s ease;
@@ -489,6 +494,140 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
 }
 .team-link svg {
     font-size: 1.1rem;
+}
+
+.pricing-card {
+    position: relative;
+    padding: 1.75rem;
+    border: 1px solid rgba(63, 183, 172, 0.28);
+    border-radius: var(--radius);
+    background: linear-gradient(
+            135deg,
+            rgba(63, 183, 172, 0.08),
+            rgba(63, 183, 172, 0)
+        ),
+        var(--panel);
+    box-shadow: 0 16px 32px rgba(13, 24, 34, 0.24),
+        0 0 26px rgba(63, 183, 172, 0.1),
+        0 0 0 1px rgba(63, 183, 172, 0.08);
+    transform: translateY(0);
+    transition: transform 0.28s ease, box-shadow 0.28s ease,
+        border-color 0.28s ease;
+    overflow: hidden;
+}
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    inset: -120px;
+    background: radial-gradient(
+        circle at top right,
+        rgba(63, 183, 172, 0.32),
+        rgba(63, 183, 172, 0) 65%
+    );
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;
+}
+.pricing-card:hover,
+.pricing-card.is-open {
+    transform: translateY(-4px);
+    border-color: rgba(63, 183, 172, 0.52);
+    box-shadow: 0 20px 48px rgba(12, 22, 32, 0.32),
+        0 0 42px rgba(63, 183, 172, 0.16),
+        0 0 0 1px rgba(63, 183, 172, 0.16);
+}
+.pricing-card:hover::before,
+.pricing-card.is-open::before {
+    opacity: 0.3;
+}
+.cta-card {
+    position: relative;
+    text-align: center;
+    padding: 2.6rem 2.2rem;
+    border-radius: var(--radius);
+    border: 1px solid rgba(63, 183, 172, 0.28);
+    background: linear-gradient(
+            145deg,
+            rgba(63, 183, 172, 0.08),
+            rgba(63, 183, 172, 0)
+        ),
+        var(--panel);
+    box-shadow: 0 14px 32px rgba(13, 24, 34, 0.22),
+        0 0 26px rgba(63, 183, 172, 0.1),
+        0 0 0 1px rgba(63, 183, 172, 0.08);
+    overflow: hidden;
+    transition: transform 0.28s ease, box-shadow 0.28s ease,
+        border-color 0.28s ease;
+}
+.cta-card::before {
+    content: '';
+    position: absolute;
+    inset: -140px;
+    background: radial-gradient(
+        circle at 15% 15%,
+        rgba(63, 183, 172, 0.24),
+        rgba(63, 183, 172, 0) 65%
+    );
+    opacity: 0;
+    transition: opacity 0.28s ease;
+    pointer-events: none;
+}
+.cta-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(63, 183, 172, 0.48);
+    box-shadow: 0 18px 44px rgba(12, 22, 32, 0.28),
+        0 0 36px rgba(63, 183, 172, 0.16),
+        0 0 0 1px rgba(63, 183, 172, 0.14);
+}
+.cta-card:hover::before {
+    opacity: 0.25;
+}
+.collapsible-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.collapsible-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 0.85rem;
+    border-radius: calc(var(--radius) - 4px);
+    border: 1px solid var(--line);
+    background: var(--panel);
+    color: inherit;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.18s ease, color 0.18s ease,
+        border-color 0.18s ease;
+}
+.collapsible-toggle:hover {
+    background: rgba(63, 183, 172, 0.12);
+    border-color: rgba(63, 183, 172, 0.4);
+}
+.collapsible-toggle svg {
+    transition: transform 0.2s ease;
+}
+.collapsible-toggle.is-open svg {
+    transform: rotate(180deg);
+}
+.collapsible-body {
+    margin-top: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition: max-height 0.35s ease, opacity 0.25s ease,
+        transform 0.25s ease;
+}
+.collapsible-body.is-open {
+    max-height: 1600px; /* enough room for content */
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 @media (max-width: 720px) {
@@ -501,6 +640,12 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     }
     .team-photo {
         margin: 0 auto;
+    }
+    .team-links {
+        justify-content: center;
+    }
+    .collapsible-header {
+        align-items: flex-start;
     }
 }
 
@@ -636,20 +781,6 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
 }
 #value .card:hover p {
     color: inherit;
-}
-
-/* Solutions price formatting */
-#solutions .card .price-build {
-    font-weight: 700;
-    font-size: 1.05rem;
-}
-#solutions .card .price-retainer {
-    color: var(--muted);
-    margin-top: 4px;
-}
-#solutions .card .price-note {
-    color: var(--muted);
-    margin-top: 4px;
 }
 
 /* ---------- Navigation ---------- */

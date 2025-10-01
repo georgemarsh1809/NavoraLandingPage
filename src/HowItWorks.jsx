@@ -1,5 +1,6 @@
 import CTA from './CTA.jsx';
 import MeetTheTeam from './MeetTheTeam.jsx';
+import TechStack from './TechStack.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faListCheck,
@@ -279,6 +280,7 @@ export default function HowItWorks() {
                 </div>
             </section>
 
+            <TechStack />
             <MeetTheTeam />
             <CTA />
         </div>

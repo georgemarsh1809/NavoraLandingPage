@@ -1,6 +1,10 @@
 import { useMemo, useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComments } from '@fortawesome/free-solid-svg-icons';
+import {
+    faComments,
+    faChevronDown,
+    faCalculator,
+} from '@fortawesome/free-solid-svg-icons';
 
 const fmtGBP = new Intl.NumberFormat('en-GB', {
     style: 'currency',
@@ -129,6 +133,7 @@ export default function PricingCalculator() {
     const [selTier, setSelTier] = useState('simple');
     const [dataIdx, setDataIdx] = useState(0); // 0/50/100
     const [featIdx, setFeatIdx] = useState(0); // 0/50/100
+    const [pricingOpen, setPricingOpen] = useState(false);
 
     // Init from URL
     useEffect(() => {
@@ -178,184 +183,237 @@ export default function PricingCalculator() {
     return (
         <section id="pricing" className="section">
             <div className="container">
-                <div className="card">
-                    <h3 style={{ marginTop: 0 }}>
-                        Transport KPI Pricing Guide
-                    </h3>
-                    <p className="small">
-                        Budget for KPI Data Insights software tailored to your
-                        fleet. We finalise scope and pricing after a short
-                        discovery call. <br /> Not sure which tier fits? Pick
-                        your best guess — we’ll guide you the rest of the way.
-                    </p>
-                    <p className="small"></p>
-                    {/* Tier selector */}
-                    <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
-                        <legend id="tier-legend" className="small">
-                            Select a tier
-                        </legend>
-                        <div
-                            role="radiogroup"
-                            aria-labelledby="tier-legend"
+                <div
+                    className={`card pricing-card${
+                        pricingOpen ? ' is-open' : ''
+                    }`}
+                >
+                    <div className="collapsible-header">
+                        <h3
+                            id="pricing-guide-title"
                             style={{
-                                display: 'grid',
-                                gap: 12,
-                                gridTemplateColumns:
-                                    'repeat(auto-fit, minmax(260px, 1fr))',
-                                marginTop: 16,
+                                margin: 0,
+                                fontSize: '1.35rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.6rem',
                             }}
                         >
-                            {Object.values(tiers).map((t) => (
-                                <label
-                                    key={t.key}
-                                    tabIndex={0}
-                                    onKeyDown={(e) =>
-                                        (e.key === 'Enter' || e.key === ' ') &&
-                                        setSelTier(t.key)
-                                    }
-                                    className="card"
-                                    style={{
-                                        cursor: 'pointer',
-                                        borderColor:
-                                            selTier === t.key
-                                                ? 'var(--accent)'
-                                                : 'var(--line)',
-                                        boxShadow:
-                                            selTier === t.key
-                                                ? 'var(--shadow)'
-                                                : 'none',
-                                    }}
-                                >
-                                    <div
+                            <FontAwesomeIcon
+                                icon={faCalculator}
+                                aria-hidden="true"
+                            />
+                            Interactive Pricing Guide
+                        </h3>
+                        <button
+                            type="button"
+                            className={`collapsible-toggle${
+                                pricingOpen ? ' is-open' : ''
+                            }`}
+                            onClick={() => setPricingOpen((v) => !v)}
+                            aria-expanded={pricingOpen}
+                            aria-controls="pricing-body"
+                            aria-labelledby="pricing-guide-title"
+                        >
+                            <span>
+                                {pricingOpen ? 'Hide Details' : 'Show Details'}
+                            </span>
+                            <FontAwesomeIcon
+                                icon={faChevronDown}
+                                aria-hidden="true"
+                            />
+                        </button>
+                    </div>
+                    <div
+                        id="pricing-body"
+                        className={`collapsible-body${
+                            pricingOpen ? ' is-open' : ''
+                        }`}
+                        aria-hidden={!pricingOpen}
+                    >
+                        <p className="small" style={{ marginTop: 16 }}>
+                            Budget for KPI data insights tailored to your fleet.
+                            Lock scope and pricing after a quick discovery call.
+                            <br /> Not sure which tier fits? Pick your best
+                            guess — we’ll guide you the rest of the way.
+                        </p>
+                        <p className="small"></p>
+                        <p className="small"></p>
+                        {/* Tier selector */}
+                        <fieldset
+                            style={{ border: 'none', padding: 0, margin: 0 }}
+                        >
+                            <legend id="tier-legend" className="small">
+                                Select a tier
+                            </legend>
+                            <div
+                                role="radiogroup"
+                                aria-labelledby="tier-legend"
+                                style={{
+                                    display: 'grid',
+                                    gap: 12,
+                                    gridTemplateColumns:
+                                        'repeat(auto-fit, minmax(260px, 1fr))',
+                                    marginTop: 16,
+                                }}
+                            >
+                                {Object.values(tiers).map((t) => (
+                                    <label
+                                        key={t.key}
+                                        tabIndex={0}
+                                        onKeyDown={(e) =>
+                                            (e.key === 'Enter' ||
+                                                e.key === ' ') &&
+                                            setSelTier(t.key)
+                                        }
+                                        className="card"
                                         style={{
-                                            display: 'flex',
-                                            alignItems: 'center',
-                                            justifyContent: 'space-between',
+                                            cursor: 'pointer',
+                                            borderColor:
+                                                selTier === t.key
+                                                    ? 'var(--accent)'
+                                                    : 'var(--line)',
+                                            boxShadow:
+                                                selTier === t.key
+                                                    ? 'var(--shadow)'
+                                                    : 'none',
                                         }}
                                     >
                                         <div
                                             style={{
                                                 display: 'flex',
                                                 alignItems: 'center',
-                                                gap: 10,
+                                                justifyContent: 'space-between',
                                             }}
                                         >
-                                            <input
-                                                type="radio"
-                                                name="tier"
-                                                value={t.key}
-                                                checked={selTier === t.key}
-                                                onChange={() =>
-                                                    setSelTier(t.key)
-                                                }
-                                                aria-label={t.name}
-                                            />
-                                            <strong>{t.name}</strong>
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    alignItems: 'center',
+                                                    gap: 10,
+                                                }}
+                                            >
+                                                <input
+                                                    type="radio"
+                                                    name="tier"
+                                                    value={t.key}
+                                                    checked={selTier === t.key}
+                                                    onChange={() =>
+                                                        setSelTier(t.key)
+                                                    }
+                                                    aria-label={t.name}
+                                                />
+                                                <strong>{t.name}</strong>
+                                            </div>
                                         </div>
-                                    </div>
-                                </label>
-                            ))}
-                        </div>
-                    </fieldset>
+                                    </label>
+                                ))}
+                            </div>
+                        </fieldset>
 
-                    {/* Discrete “slider” controls */}
-                    <BandSlider
-                        label="Data Complexity"
-                        value={dataIdx}
-                        onChange={setDataIdx}
-                        ticks={scale.data}
-                    />
-                    <BandSlider
-                        label="Features"
-                        value={featIdx}
-                        onChange={setFeatIdx}
-                        ticks={scale.features}
-                    />
-                    {/* Output + CTA */}
-                    <div
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: '1fr auto',
-                            alignItems: 'start',
-                            marginTop: 16,
-                            columnGap: 16,
-                            rowGap: 12,
-                        }}
-                    >
-                        <div>
-                            <div className="small">Estimated Build Price</div>
-                            <div
-                                style={{
-                                    fontSize: 28,
-                                    fontWeight: 800,
-                                    fontVariantNumeric: 'tabular-nums',
-                                }}
-                                aria-live="polite"
-                            >
-                                {formatGBPCompact(estimate)}
-                            </div>
-                            <div className="small">
-                                Typical Run & Improve:{' '}
-                                {(() => {
-                                    const [lo, hi] = tier.retainer;
-                                    if (hi == null) {
-                                        return `${fmtGBP.format(lo)}+/mo`;
-                                    }
-                                    return `${fmtGBP.format(
-                                        lo
-                                    )}–${fmtGBP.format(hi)}/mo`;
-                                })()}
-                            </div>
-                            <div className="small">
-                                Final pricing confirmed after a 30-minute
-                                discovery call.
-                            </div>
-
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    gap: 10,
-                                    marginTop: 20,
-                                    flexWrap: 'wrap',
-                                }}
-                            >
-                                <a
-                                    className="button"
-                                    href="#team"
-                                    aria-label="Pressure-test my estimate with an expert"
-                                >
-                                    <FontAwesomeIcon
-                                        icon={faComments}
-                                        style={{ marginRight: 8 }}
-                                    />
-                                    Discuss My Plan
-                                </a>
-                                <div
-                                    className="small"
-                                    style={{ width: '100%' }}
-                                >
-                                    We’ll discuss data scope and confirm a fixed
-                                    price.
-                                </div>
-                            </div>
-                        </div>
+                        {/* Discrete “slider” controls */}
+                        <BandSlider
+                            label="Data Complexity"
+                            value={dataIdx}
+                            onChange={setDataIdx}
+                            ticks={scale.data}
+                        />
+                        <BandSlider
+                            label="Features"
+                            value={featIdx}
+                            onChange={setFeatIdx}
+                            ticks={scale.features}
+                        />
+                        {/* Output + CTA */}
                         <div
                             style={{
-                                alignSelf: 'start',
-                                display: 'flex',
-                                justifyContent: 'flex-end',
+                                display: 'grid',
+                                gridTemplateColumns: '1fr auto',
+                                alignItems: 'start',
+                                marginTop: 16,
+                                columnGap: 16,
+                                rowGap: 12,
                             }}
                         >
-                            <button
-                                className="button secondary"
-                                type="button"
-                                onClick={() => {
-                                    navigator.clipboard?.writeText(shareUrl);
+                            <div>
+                                <div className="small">
+                                    Estimated Build Price
+                                </div>
+                                <div
+                                    style={{
+                                        fontSize: 28,
+                                        fontWeight: 800,
+                                        fontVariantNumeric: 'tabular-nums',
+                                    }}
+                                    aria-live="polite"
+                                >
+                                    {formatGBPCompact(estimate)}
+                                </div>
+                                <div className="small">
+                                    Typical Run & Improve:{' '}
+                                    {(() => {
+                                        const [lo, hi] = tier.retainer;
+                                        if (hi == null) {
+                                            return `${fmtGBP.format(lo)}+/mo`;
+                                        }
+                                        return `${fmtGBP.format(
+                                            lo
+                                        )}–${fmtGBP.format(hi)}/mo`;
+                                    })()}
+                                </div>
+                                <div className="small">
+                                    Final pricing confirmed after a 30-minute
+                                    discovery call.
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        gap: 10,
+                                        marginTop: 20,
+                                        flexWrap: 'wrap',
+                                    }}
+                                >
+                                    <a
+                                        className="button"
+                                        href="#team"
+                                        aria-label="Pressure-test my estimate with an expert"
+                                    >
+                                        <FontAwesomeIcon
+                                            icon={faComments}
+                                            style={{ marginRight: 8 }}
+                                        />
+                                        Discuss My Plan
+                                    </a>
+                                    <div
+                                        className="small"
+                                        style={{ width: '100%' }}
+                                    >
+                                        We’ll discuss data scope and confirm a
+                                        fixed price.
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                style={{
+                                    alignSelf: 'start',
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
                                 }}
-                                aria-label="Copy shareable estimate link"
                             >
-                                Copy share link
-                            </button>
+                                <button
+                                    className="button secondary"
+                                    type="button"
+                                    onClick={() => {
+                                        navigator.clipboard?.writeText(
+                                            shareUrl
+                                        );
+                                    }}
+                                    aria-label="Copy shareable estimate link"
+                                >
+                                    Copy share link
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
