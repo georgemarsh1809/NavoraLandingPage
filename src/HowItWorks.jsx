@@ -1,4 +1,5 @@
 import CTA from './CTA.jsx';
+import MeetTheTeam from './MeetTheTeam.jsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faListCheck,
@@ -20,20 +21,22 @@ export default function HowItWorks() {
                         <span>The GBM Way </span>
                         <br />
                         <span className="highlight">
-                            Discover. Prototype. Launch.
+                            KPI Data Insights for Transport & Logistics
                         </span>
                     </h1>
                     <p>
-                        We build digital solutions that turn scattered business
-                        data into clear, actionable insights. Less manual work,
-                        more time saved, and more focus on what really matters
-                        for your business.
+                        We build KPI Data Insights software that turns messy job
+                        sheets, telematics exports, and finance spreadsheets
+                        into clear dashboards so UK fleets can make faster,
+                        smarter decisions.
                     </p>
                     <div className="buttons">
-                        <a className="btn" href="#cta">Book a Free Data Audit</a>
+                        <a className="btn" href="#team">
+                            Book a Free KPI Discovery Call
+                        </a>
                     </div>
                     <p className="small" style={{ marginTop: 8 }}>
-                        30‑min audit + tailored plan.
+                        30‑min call to map your fleet KPIs.
                     </p>
                 </div>
             </section>
@@ -41,57 +44,163 @@ export default function HowItWorks() {
             {/* What we do */}
             <section className="section">
                 <div className="container">
-                    <div className="grid">
-                        <div className="card" data-reveal>
-                            <h3>
-                                <FontAwesomeIcon
-                                    icon={faListCheck}
-                                    style={{ marginRight: 8 }}
-                                />
-                                What We Do
+                    <div
+                        style={{
+                            display: 'grid',
+                            gap: 'var(--gap)',
+                            gridTemplateColumns:
+                                'repeat(auto-fit, minmax(280px, 1fr))',
+                            alignItems: 'stretch',
+                        }}
+                    >
+                        <div
+                            className="card"
+                            data-reveal
+                            style={{
+                                textAlign: 'center',
+                                height: '100%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                            }}
+                        >
+                            <h3 style={{ marginTop: 0 }}>
+                                The Problem We Solve
                             </h3>
-                            <ul style={{ marginTop: 8, paddingLeft: 18 }}>
-                                <li>
-                                    <strong>Unify Your Data.</strong> One source of truth across finance, ops, and growth.
-                                </li>
-                                <li>
-                                    <strong>Gain Insight.</strong> Get the clarity of a data team at a fraction of the cost.
-                                </li>
-                                <li>
-                                    <strong>Make Smarter Decisions.</strong> Clear dashboards and alerts for the KPIs that drive business.
-                                </li>
-                            </ul>
+                            <div
+                                style={{
+                                    margin: '12px auto 0 auto',
+                                    textAlign: 'left',
+                                    maxWidth: 480,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    gap: 12,
+                                }}
+                            >
+                                <div>
+                                    <h4 style={{ margin: '0 0 1px 0' }}>
+                                        Messy Data and Spreadsheets
+                                    </h4>
+                                    <p style={{ margin: 0 }}>
+                                        No single source of truth for jobs,
+                                        costs, or vehicles.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 style={{ margin: '0 0 1px 0' }}>
+                                        Slow, Inconsistent Reporting
+                                    </h4>
+                                    <p style={{ margin: 0 }}>
+                                        Managers spend hours each week compiling
+                                        numbers instead of making decisions.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 style={{ margin: '0 0 1px 0' }}>
+                                        Margin Leakage
+                                    </h4>
+                                    <p style={{ margin: 0 }}>
+                                        Duplicate data entry, invoice disputes,
+                                        and unnoticed overspending quietly erode
+                                        profits.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 style={{ margin: '0 0 1px 0' }}>
+                                        Customer and Compliance Pressure
+                                    </h4>
+                                    <p style={{ margin: 0 }}>
+                                        Hard to prove KPIs, track safety, or
+                                        provide transparency when asked.
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 style={{ margin: '0 0 1px 0' }}>
+                                        Stress and Frustration
+                                    </h4>
+                                    <p style={{ margin: 0 }}>
+                                        Directors feel like they’re flying
+                                        blind, and staff morale drops when
+                                        mistakes become routine.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div className="card" data-reveal data-reveal-delay="60ms">
-                            <h3>
-                                <FontAwesomeIcon
-                                    icon={faUsers}
-                                    style={{ marginRight: 8 }}
-                                />
-                                Who It’s For
-                            </h3>
-                            <ul style={{ marginTop: 8, paddingLeft: 18 }}>
-                                <li>
-                                    Founders and leadership who need
-                                    decision‑ready metrics.
-                                </li>
-                                <li>
-                                    Ops & finance teams tired of manual
-                                    reporting.
-                                </li>
-                                <li>
-                                    SMEs & mid‑market without a full data team.
-                                </li>
-                            </ul>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: 'var(--gap)',
+                                height: '100%',
+                            }}
+                        >
+                            <div className="card" data-reveal>
+                                <h3>
+                                    <FontAwesomeIcon
+                                        icon={faListCheck}
+                                        style={{ marginRight: 8 }}
+                                    />
+                                    How We Help
+                                </h3>
+                                <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+                                    <li>
+                                        <strong>Fleet-Wide Visibility.</strong>{' '}
+                                        Bring plan, cost and H&S data into a
+                                        single source of truth.
+                                    </li>
+                                    <li>
+                                        <strong>Operational Clarity.</strong>{' '}
+                                        Surface safety, compliance,
+                                        profitability, and absence KPIs at a
+                                        glance.
+                                    </li>
+                                    <li>
+                                        <strong>Decisions in Minutes.</strong>{' '}
+                                        Alerts and dashboards highlight where to
+                                        recover 5–10% margin.
+                                    </li>
+                                </ul>
+                            </div>
+                            <div
+                                className="card"
+                                data-reveal
+                                data-reveal-delay="60ms"
+                            >
+                                <h3>
+                                    <FontAwesomeIcon
+                                        icon={faUsers}
+                                        style={{ marginRight: 8 }}
+                                    />
+                                    Who It’s For
+                                </h3>
+                                <ul style={{ marginTop: 8, paddingLeft: 18 }}>
+                                    <li>
+                                        Ops and finance managers in UK fleets
+                                        with 10–50 vehicles who need
+                                        decision-ready KPIs.
+                                    </li>
+                                    <li>
+                                        Family-run, second-generation transport
+                                        businesses modernising their reporting.
+                                    </li>
+                                    <li>
+                                        Teams duplicating data entry across
+                                        spreadsheets and spending hours
+                                        compiling reports.
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* Inline CTA above Process */}
-            <div className="container text-center" style={{ marginTop: 8, marginBottom: 8 }}>
-                <a href="#cta" className="btn cta-inline">
-                    Book a Free Data Discovery Call
+            <div
+                className="container text-center"
+                style={{ marginTop: 8, marginBottom: 8 }}
+            >
+                <a href="#team" className="btn cta-inline">
+                    Book a Free KPI Discovery Call
                 </a>
             </div>
 
@@ -116,27 +225,27 @@ export default function HowItWorks() {
                         {[
                             {
                                 title: '1. Discover',
-                                desc: '30‑min discovery to align on goals, 3–5 key metrics, and where your data lives. We confirm scope and success criteria, then propose a tailored plan.',
+                                desc: '30‑min discovery to align on fleet goals, 3–5 critical KPIs, and where data lives. We confirm scope, data access, and success criteria before locking a plan.',
                                 icon: faMagnifyingGlass,
                             },
                             {
                                 title: '2. Prototype',
-                                desc: 'A quick, interactive prototype (often in week one) to validate the approach on real data — typically a small dashboard or simple app replacing a spreadsheet.',
+                                desc: 'A quick prototype (often in week one) using real spreadsheets or telematics exports to prove the insight and refine the metrics that matter most.',
                                 icon: faWandMagicSparkles,
                             },
                             {
                                 title: '3. Build',
-                                desc: 'Expand to the required sources, add dashboards and workflows, and wire up basic AI where useful. Ship in small, reviewable increments.',
+                                desc: 'Connect TMS, finance, and workshop systems, automate refreshes, and layer in AI summaries or alerts. Everything ships in reviewable increments.',
                                 icon: faGears,
                             },
                             {
                                 title: '4. Launch',
-                                desc: 'Deploy to your accounts with clear docs and light training. Set up access control/SSO where needed so teams can use it day‑to‑day.',
+                                desc: 'Deploy into your accounts with clear docs and light training so depot managers, drivers, and directors can use it day-to-day.',
                                 icon: faRocket,
                             },
                             {
                                 title: '5. Run & Improve',
-                                desc: 'Optional monthly support to keep things fresh: updates, monitoring, small enhancements, and ongoing AI optimisation as your needs evolve.',
+                                desc: 'Optional monthly support to keep dashboards accurate, add new data sources, and continue squeezing margin leakage out of the business.',
                                 icon: faArrowsRotate,
                             },
                         ].map((s, i) => (
@@ -170,6 +279,7 @@ export default function HowItWorks() {
                 </div>
             </section>
 
+            <MeetTheTeam />
             <CTA />
         </div>
     );

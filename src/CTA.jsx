@@ -44,7 +44,7 @@ export default function CTA() {
                         icon={faCalendarCheck}
                         style={{ marginRight: 8 }}
                     />
-                    Book Your Free Data Discovery Call
+                    Book Your Transport KPI Discovery Call
                 </h2>
                 <p
                     style={{
@@ -53,8 +53,9 @@ export default function CTA() {
                         margin: '0 auto 1.5rem auto',
                     }}
                 >
-                    Find out how we can turn your business data into actionable
-                    insights.
+                    Discover how KPI Data Insights recovers 5–10% margin
+                    leakage and delivers decision-ready reports for UK
+                    transport and logistics teams.
                 </p>
 
                 <a
@@ -80,7 +81,7 @@ export default function CTA() {
                     className="small"
                     style={{ marginTop: '0.5rem', color: 'var(--muted-2)' }}
                 >
-                    30‑min audit + tailored plan.
+                    30‑min session to map safety, cost, and performance KPIs.
                 </p>
 
                 <p

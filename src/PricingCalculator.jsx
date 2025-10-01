@@ -13,7 +13,9 @@ function formatGBPCompact(n) {
     const abs = Math.abs(n);
     if (abs >= 1000) {
         const v = n / 1000;
-        const s = Number.isInteger(v) ? String(v) : v.toFixed(1).replace(/\.0$/, '');
+        const s = Number.isInteger(v)
+            ? String(v)
+            : v.toFixed(1).replace(/\.0$/, '');
         return `£${s}k`;
     }
     return fmtGBP.format(n);
@@ -37,63 +39,89 @@ export default function PricingCalculator() {
     const tiers = {
         simple: {
             key: 'simple',
-            name: 'Starter — Digital Essentials',
+            name: 'KPI Kickstart',
             buildRange: [1500, 2500],
-            retainer: [200, 300],
+            retainer: [150, 250],
             eta: '1–2 weeks',
         },
         moderate: {
             key: 'moderate',
-            name: 'Growth — Operations Upgrade',
-            buildRange: [4000, 8000],
-            retainer: [400, 700],
+            name: 'Operations Control Tower',
+            buildRange: [2500, 5000],
+            retainer: [250, 500],
             eta: '2–4 weeks',
         },
         complex: {
             key: 'complex',
-            name: 'Pro — AI‑Driven Business',
-            buildRange: [10000, 18000],
-            // Show "+" in UI by leaving upper undefined
-            retainer: [1500, null],
-            eta: '4–6 weeks',
+            name: 'Command Centre',
+            buildRange: [5000, 10000],
+            retainer: [500, null],
+            eta: '4-6 weeks',
         },
     };
 
     const tierScales = {
         simple: {
             data: [
-                { key: 'low', label: '1 source (Sheets/CSV)' },
-                { key: 'med', label: '1–2 sources (mix)' },
-                { key: 'high', label: '2–3 sources' },
+                { key: 'low', label: '1 source (Sheets or job log)' },
+                { key: 'med', label: '2 sources (Sheets + telematics)' },
+                {
+                    key: 'high',
+                    label: '3 sources (TMS + telematics + finance)',
+                },
             ],
             features: [
-                { key: 'low', label: 'KPIs + email reports' },
-                { key: 'med', label: 'Dashboard + alerts' },
-                { key: 'high', label: 'Dashboard + simple app' },
+                { key: 'low', label: 'Core KPIs + scheduled reports' },
+                { key: 'med', label: 'Fleet dashboard + daily alerts' },
+                {
+                    key: 'high',
+                    label: 'Role-based views for ops & finance',
+                },
             ],
         },
         moderate: {
             data: [
-                { key: 'low', label: '2–4 sources' },
-                { key: 'med', label: '4–6 sources' },
-                { key: 'high', label: '6–8 sources' },
+                { key: 'low', label: '3–4 sources (TMS, telematics, finance)' },
+                {
+                    key: 'med',
+                    label: '5 sources incl. workshop & maintenance',
+                },
+                {
+                    key: 'high',
+                    label: '6+ sources incl. customer service data',
+                },
             ],
             features: [
-                { key: 'low', label: 'Multi-dashboards' },
-                { key: 'med', label: 'Workflow automations' },
-                { key: 'high', label: 'Basic AI + access control' },
+                { key: 'low', label: 'Multi-depot cost dashboards' },
+                {
+                    key: 'med',
+                    label: 'Exception alerts & variance tracking',
+                },
+                {
+                    key: 'high',
+                    label: 'Scenario planning & savings finder',
+                },
             ],
         },
         complex: {
             data: [
-                { key: 'low', label: '5–8 sources' },
-                { key: 'med', label: '8–12 sources' },
-                { key: 'high', label: '12+ sources/DBs' },
+                { key: 'low', label: '7 sources incl. ERP & telematics' },
+                {
+                    key: 'med',
+                    label: '9 sources with API/database feeds',
+                },
+                {
+                    key: 'high',
+                    label: '10+ sources across warehouse & fleet',
+                },
             ],
             features: [
-                { key: 'low', label: 'Dashboards + automations' },
-                { key: 'med', label: 'Advanced AI (forecasting/NLQ)' },
-                { key: 'high', label: 'Assistants + multi‑dept' },
+                { key: 'low', label: 'Dashboards + automated refreshes' },
+                {
+                    key: 'med',
+                    label: 'Predictive forecasting & margin insights',
+                },
+                { key: 'high', label: 'AI assistants & multi-role portals' },
             ],
         },
     };
@@ -101,7 +129,6 @@ export default function PricingCalculator() {
     const [selTier, setSelTier] = useState('simple');
     const [dataIdx, setDataIdx] = useState(0); // 0/50/100
     const [featIdx, setFeatIdx] = useState(0); // 0/50/100
-    const [rush, setRush] = useState(false);
 
     // Init from URL
     useEffect(() => {
@@ -109,12 +136,10 @@ export default function PricingCalculator() {
         const t = qp.get('tier');
         const d = qp.get('data');
         const f = qp.get('features');
-        const r = qp.get('rush');
         const tierKey = t === 'basic' ? 'simple' : t;
         if (tierKey && tiers[tierKey]) setSelTier(tierKey);
         if (d !== null) setDataIdx(normalizeBandParam(d));
         if (f !== null) setFeatIdx(normalizeBandParam(f));
-        if (r !== null) setRush(r === '1');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -124,10 +149,9 @@ export default function PricingCalculator() {
         qp.set('tier', selTier);
         qp.set('data', String(dataIdx));
         qp.set('features', String(featIdx));
-        qp.set('rush', rush ? '1' : '0');
         const url = `${window.location.pathname}?${qp.toString()}`;
         window.history.replaceState({}, '', url);
-    }, [selTier, dataIdx, featIdx, rush]);
+    }, [selTier, dataIdx, featIdx]);
 
     // Reset bands when tier changes
     useEffect(() => {
@@ -145,10 +169,9 @@ export default function PricingCalculator() {
         const fi = bandOf(featIdx) / 2; // 0, .5, 1
         const t = (di + fi) / 2; // average slider position 0..1
         let price = min + t * (max - min);
-        if (rush) price *= 1.25;
         // Round to nearest £100 for friendlier numbers
         return Math.round(price / 100) * 100;
-    }, [selTier, dataIdx, featIdx, rush]);
+    }, [selTier, dataIdx, featIdx]);
 
     const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
@@ -156,12 +179,14 @@ export default function PricingCalculator() {
         <section id="pricing" className="section">
             <div className="container">
                 <div className="card">
-                    <h3 style={{ marginTop: 0 }}>Interactive Pricing Guide</h3>
+                    <h3 style={{ marginTop: 0 }}>
+                        Transport KPI Pricing Guide
+                    </h3>
                     <p className="small">
-                        This estimate helps you budget confidently. We finalise
-                        scope and pricing after a short discovery call. <br />
-                        Not sure which tier fits? Pick your best guess — we’ll
-                        guide you the rest of the way.
+                        Budget for KPI Data Insights software tailored to your
+                        fleet. We finalise scope and pricing after a short
+                        discovery call. <br /> Not sure which tier fits? Pick
+                        your best guess — we’ll guide you the rest of the way.
                     </p>
                     <p className="small"></p>
                     {/* Tier selector */}
@@ -246,30 +271,6 @@ export default function PricingCalculator() {
                         onChange={setFeatIdx}
                         ticks={scale.features}
                     />
-                    {/* Rush toggle */}
-                    <div
-                        style={{
-                            display: 'flex',
-                            gap: 16,
-                            flexWrap: 'wrap',
-                            marginTop: 12,
-                        }}
-                    >
-                        <label
-                            style={{
-                                display: 'inline-flex',
-                                alignItems: 'center',
-                                gap: 8,
-                            }}
-                        >
-                            <input
-                                type="checkbox"
-                                checked={rush}
-                                onChange={(e) => setRush(e.target.checked)}
-                            />
-                            Faster delivery (+25%)
-                        </label>
-                    </div>
                     {/* Output + CTA */}
                     <div
                         style={{
@@ -300,7 +301,9 @@ export default function PricingCalculator() {
                                     if (hi == null) {
                                         return `${fmtGBP.format(lo)}+/mo`;
                                     }
-                                    return `${fmtGBP.format(lo)}–${fmtGBP.format(hi)}/mo`;
+                                    return `${fmtGBP.format(
+                                        lo
+                                    )}–${fmtGBP.format(hi)}/mo`;
                                 })()}
                             </div>
                             <div className="small">
@@ -318,7 +321,7 @@ export default function PricingCalculator() {
                             >
                                 <a
                                     className="button"
-                                    href="#cta"
+                                    href="#team"
                                     aria-label="Pressure-test my estimate with an expert"
                                 >
                                     <FontAwesomeIcon

@@ -13,6 +13,7 @@ import { useState, useEffect } from 'react';
 import PricingCalculator from './PricingCalculator.jsx';
 import HowItWorks from './HowItWorks.jsx';
 import CTA from './CTA.jsx';
+import MeetTheTeam from './MeetTheTeam.jsx';
 
 function Router() {
     const path = typeof window !== 'undefined' ? window.location.pathname : '/';
@@ -62,12 +63,13 @@ function GBMGroupLanding() {
                     className="container text-center"
                     style={{ marginTop: 0, marginBottom: 30 }}
                 >
-                    <a href="#cta" className="btn cta-inline">
-                        Book a Free Data Discovery Call
+                    <a href="#team" className="btn cta-inline">
+                        Book a Free KPI Discovery Call
                     </a>
                 </div>
                 <PricingCalculator />
                 <TechStack />
+                <MeetTheTeam />
                 <CTA />
                 <FAQ />
             </main>
@@ -195,7 +197,7 @@ function Header() {
                         How We Work
                     </a>
                 </nav>
-                <a href="#cta" className="btn intro delay-2">
+                <a href="#team" className="btn intro delay-2">
                     Book a Call
                 </a>
                 {/* Theme selector removed */}
@@ -298,8 +300,8 @@ function Header() {
                                 FAQ
                             </a>
                         </nav>
-                        <a href="#cta" className="btn" onClick={close}>
-                            Book your Data Discovery Call
+                        <a href="#team" className="btn" onClick={close}>
+                            Book your KPI Discovery Call
                         </a>
                     </div>
                 </div>
@@ -313,26 +315,28 @@ function Hero() {
         <section className="hero">
             <div className="container">
                 <h1 className="intro">
-                    <span>Transform Data Chaos Into</span>
+                    <span>From Chaos to Clarity</span>
                     <br />
-                    <span className="highlight">Actionable Insights</span>
+                    <span className="highlight">
+                        with Custom Tools, Built Around You
+                    </span>
                 </h1>
                 <p className="intro delay-1">
-                    We build custom digital solutions for teams make better
-                    decisions based on their business data. Less manual work,
-                    more time saved, and more time for you to focus on what
-                    really matters for your business.
+                    Custom dashboards for UK Transport and Logistics teams that
+                    turn scattered spreadsheets and messy KPIs into clear, daily
+                    insights. Improve safety & cost metrics, prevent margin
+                    leakage, and take back control of your business.
                 </p>
                 <div className="buttons intro delay-2">
-                    <a href="#cta" className="btn">
-                        Book a Free Data Audit
+                    <a href="#team" className="btn">
+                        Book a Free Discovery Call
                     </a>
                     <a href="#pricing" className="btn btn-outline">
-                        See Pricing & Plans
+                        Explore Pricing & Plans
                     </a>
                 </div>
                 <p className="small intro delay-3" style={{ marginTop: 8 }}>
-                    30‑min audit + tailored plan.
+                    30‑min call to understand your data.
                 </p>
             </div>
         </section>
@@ -342,18 +346,18 @@ function Hero() {
 function ValueProps() {
     const items = [
         {
-            title: 'Streamline Operations',
-            desc: 'Replace clunky spreadsheets and manual processes with simple tools that save hours every week.',
+            title: 'Recover Hidden Margin',
+            desc: 'Expose leakage across your business with dashboards designed around your context and  needs.',
             icon: faSitemap,
         },
         {
-            title: 'Make Smarter Decisions',
-            desc: 'Get clear visibility of your business with dashboards and insights built around your data.',
+            title: 'Clarity on Critical KPIs',
+            desc: 'Track safety, compliance, P&L, absence, and customer issues in one place so nothing slips. ',
             icon: faLightbulb,
         },
         {
-            title: 'Future-Proof with AI',
-            desc: 'Adopt practical AI solutions tailored to your workflows to unlock growth and stay competitive.',
+            title: 'Decisions in Minutes',
+            desc: 'Automated reporting delivers insights in seconds instead of hours, keeping teams proactive.',
             icon: faChartLine,
         },
     ];
@@ -383,33 +387,31 @@ function ValueProps() {
 function Solutions() {
     const items = [
         {
-            title: 'Starter — Digital Essentials (1–2 weeks)',
+            title: 'KPI Kickstart — Snapshot (1–2 weeks)',
             bullets: [
-                'Replace 1–2 key spreadsheets with a simple custom app.',
-                'Build a single dashboard to track 3–5 key metrics.',
-                'Basic automation (auto-updating reports, email alerts).',
+                'Live dashboard covering safety, compliance, and daily profitability KPIs for one depot or fleet segment.',
+                'Automated reporting for ops and finance managers.',
+                'Handover call to demonstrate business implementation.',
             ],
-            price: '£1.5k–£2.5k + £200–£300/mo',
+            price: '£1.5k–£2.5k + £150–£250/mo',
         },
         {
-            title: 'Growth — Operations Upgrade (2–4 weeks)',
+            title: 'Operations Control Tower — Depot Overview (2–4 weeks)',
             bullets: [
-                'Multiple dashboards pulling from different systems.',
-                'Workflow automation (invoice handling, scheduling, CRM updates).',
-                'Basic AI integration (summaries, auto-generated reports).',
-                'User access control / simple login for teams.',
+                'Combine multiple data sources for cost and plan vs. actual insight.',
+                'Exception alerts for absence, unplanned downtime, and customer issues.',
+                'Specific views that highlight where money can be saved each week.',
             ],
-            price: '£4k–£8k + £400–£700/mo',
+            price: '£2.5k–£5k + £250–£500/mo',
         },
         {
-            title: 'Pro — AI‑Driven Business (4–6 weeks)',
+            title: 'Command Centre — Integrated Insights (4-6 weeks)',
             bullets: [
-                'Bespoke internal platform combining dashboards + automation + AI.',
-                'Advanced AI features (forecasting, natural language query, assistants).',
-                'Covers multiple departments (finance, ops, sales, logistics).',
-                'Ongoing AI advisory + optimisation.',
+                'End-to-end KPI Insights software covering finance, operations, and customer service.',
+                'Role-based dashboards for directors, ops, and finance teams with drill-down analytics.',
+                'Optimisation, light AI forecasting, and bespoke integrations for your family-run fleet.',
             ],
-            price: '£10k–£18k + £1.5k+/mo',
+            price: '£5k–£10k + £500+/mo',
         },
     ];
     const splitTitle = (t) => {
@@ -439,9 +441,9 @@ function Solutions() {
                     {items.map((card) => {
                         const { label, name, meta } = splitTitle(card.title);
                         const title = card.title.toLowerCase();
-                        const icon = title.includes('starter')
+                        const icon = title.includes('kickstart')
                             ? faSeedling
-                            : title.includes('growth')
+                            : title.includes('control')
                             ? faLayerGroup
                             : faSitemap;
                         const noteMatch = card.price.match(/\(([^)]+)\)/);
@@ -532,23 +534,23 @@ function FAQ() {
     const items = [
         {
             q: 'What problems do you typically solve?',
-            a: 'Automated reporting, single‑source‑of‑truth dashboards, KPI consolidation across tools, and lightweight workflow automations for ops, finance, and leadership teams.',
+            a: 'Connecting telematics, workshop, TMS, and finance data so transport and logistics teams see safety, compliance, profitability, and absence metrics without juggling spreadsheets.',
         },
         {
             q: 'How long does a project take?',
-            a: 'Basic solutions typically ship in ~1 week. Moderate builds land in 2–4 weeks. Complex, multi‑source solutions run 6–12 weeks depending on integrations and scope.',
+            a: 'Fleet snapshot dashboards land in 1–2 weeks, multi-depot control towers take 2–3 weeks, and integrated command centres typically wrap in 3–5 weeks based on data access.',
         },
         {
             q: 'How is pricing structured?',
-            a: 'Transparent build pricing by complexity (see the calculator), plus an optional monthly retainer for maintenance and small enhancements. Typical retainers range from £200–£2,500/mo.',
+            a: 'Transparent build pricing between £1.5k and £5k depending on complexity, with optional monthly support (£150–£400+/mo) for maintenance, new data sources, and optimisation.',
         },
         {
             q: 'What do you need from us to start?',
-            a: 'Your objectives and KPIs, a quick list of data sources, and read‑only access where possible. We can sign an NDA and use time‑boxed discovery to finalise scope.',
+            a: 'Clarity on the KPIs you need, a list of data sources (Sheets, TMS, telematics, ERPs), and read-only credentials where possible. We can sign an NDA and run a focused discovery to lock scope.',
         },
         {
             q: 'How do you handle data security?',
-            a: 'Least‑privilege access, read‑only credentials wherever feasible, encrypted secrets, and revocable access on project end. We can work within your SSO and security policies.',
+            a: 'Least-privilege access with audit trails, read-only credentials wherever feasible, encrypted secrets, and revocable access on project end. We work within your SSO and security policies.',
         },
         {
             q: 'Who owns the deliverables?',
@@ -556,7 +558,7 @@ function FAQ() {
         },
         {
             q: 'What stack do you use?',
-            a: 'We meet you where you are. Typical setups use Looker Studio for simple needs, and React/Next.js with FastAPI + Postgres for custom apps and integrations.',
+            a: 'Whatever fits your fleet. Many MVPs use Looker Studio or Power BI for speed; custom builds lean on React/Next.js with FastAPI + Postgres, and we integrate with existing transport systems.',
         },
     ];
 

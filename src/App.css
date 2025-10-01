@@ -456,6 +456,54 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     filter: invert(1) brightness(1.1);
 }
 
+.team-card {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--gap) * 1.5);
+    padding: 1.75rem;
+    flex-wrap: wrap;
+}
+.team-card > div {
+    flex: 1;
+    min-width: 220px;
+}
+.team-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(63, 183, 172, 0.35);
+    box-shadow: 0 16px 38px rgba(10, 18, 26, 0.35);
+}
+.team-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    font-weight: 600;
+    color: var(--accent);
+    transition: color 0.18s ease;
+}
+.team-link:hover {
+    color: var(--accent-soft);
+}
+.team-link svg {
+    font-size: 1.1rem;
+}
+
+@media (max-width: 720px) {
+    .team-card {
+        justify-content: center;
+        text-align: center;
+    }
+    .team-card > div {
+        text-align: center;
+    }
+    .team-photo {
+        margin: 0 auto;
+    }
+}
+
 /* A11y utility */
 .visually-hidden {
     position: absolute !important;
