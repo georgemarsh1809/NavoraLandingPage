@@ -30,8 +30,9 @@ export default function CTA() {
                             margin: '0 auto 1.5rem auto',
                         }}
                     >
-                        Map out the AI opportunities in your operation, what
-                        data we will use, and the quickest route to results.
+                        Map out the AI opportunities in your operation,
+                        potential solutions, and the quickest route to
+                        measurable results.
                     </p>
 
                     <a
@@ -60,8 +61,7 @@ export default function CTA() {
                             color: 'var(--muted-2)',
                         }}
                     >
-                        Free 30‑minute focused session. No obligation — just
-                        clarity on your next steps.
+                        Free 30‑minute focused session. No obligations.
                     </p>
 
                     <p

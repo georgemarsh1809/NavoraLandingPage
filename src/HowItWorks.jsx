@@ -83,11 +83,11 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                                     },
                                     {
                                         title: 'Siloed Communication',
-                                        body: 'Information lives in emails, chat threads, and isolated systems — causing delays, duplication, and missed opportunities for collaboration.',
+                                        body: 'Information lives in emails, chat threads, and isolated systems, causing delays, duplication, and missed opportunities for collaboration.',
                                     },
                                     {
                                         title: 'Compliance & customer pressure',
-                                        body: 'Boards, auditors, and clients expect rapid evidence packs—even when the team is already stretched thin.',
+                                        body: 'Boards, auditors, and clients expect rapid evidence, even when the team is already stretched thin.',
                                     },
                                     {
                                         title: 'Limited build capacity',
@@ -136,7 +136,7 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                                     icon: faListCheck,
                                     items: [
                                         {
-                                            label: 'Discovery blueprints',
+                                            label: 'Discovery sessions',
                                             body: 'Structured sprints to pinpoint opportunities.',
                                         },
                                         {
@@ -249,6 +249,17 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                     >
                         Our Process
                     </h2>
+                    <p
+                        className="small"
+                        style={{
+                            textAlign: 'center',
+                            maxWidth: 620,
+                            margin: '0 auto',
+                            color: 'var(--muted)',
+                        }}
+                    >
+                        There is never any obligation to move from one phase to the next. Each phase is scoped, delivered, and closed independently—and we only advance when it makes sense for your business.
+                    </p>
                     <div
                         style={{
                             display: 'flex',
@@ -271,12 +282,12 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                             },
                             {
                                 title: '3. Implementation',
-                                desc: 'Integrate ops, finance, HR, and compliance data with weekly increments you can put to work and quickly see ROI.',
+                                desc: 'Integrate ops, finance, HR, and compliance data with weekly increments you can get to work and quickly see a ROI.',
                                 icon: faGears,
                             },
                             {
                                 title: '4. Launch & Adoption',
-                                desc: 'Training, documentation, and playbooks so depot leads, planners, and drivers adopt with confidence.',
+                                desc: 'Training, documentation, and playbooks so leads and stakeholders adopt with confidence.',
                                 icon: faRocket,
                             },
                             {

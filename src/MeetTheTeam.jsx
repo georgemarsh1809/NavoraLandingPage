@@ -25,16 +25,15 @@ export default function MeetTheTeam() {
                         loading="lazy"
                     />
                     <div>
-                        <h3>George — Founder &amp; Lead Engineer</h3>
+                        <h3>George Marsh | Founder &amp; Lead Consultant</h3>
                         <p>
                             George leads GBM’s AI transformation engagements,
                             blending 5+ years delivering mission-critical
                             software for Government with deep, family-rooted
-                            knowledge of transport & logistics. He guides every
-                            project from discovery interviews to implementation
-                            and long-term support, making sure depot managers,
-                            planners, finance, and compliance teams all see the
-                            impact in their day-to-day work.
+                            knowledge of transport & logistics. He guides each
+                            engagement from discovery through to implementation
+                            and ongoing support, ensuring every team, from
+                            operations to finance, sees real, measurable impact.
                         </p>
                         <div className="team-links">
                             <a

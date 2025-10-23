@@ -18,7 +18,7 @@ const tiers = {
         ],
         duration: '1–2 weeks',
         investment:
-            'Free Initial Meeting → £300–£1000 full consultation depending on company size.',
+            'Free Initial Meeting → £300–£1,000 full consultation depending on company size.',
         note: 'Ideal first step to validate value and build internal momentum before investing in delivery.',
     },
     implement: {

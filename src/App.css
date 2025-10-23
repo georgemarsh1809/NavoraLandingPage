@@ -142,8 +142,8 @@ body[data-theme='light'] {
     --nav-hover-bg: #ececec;
     --nav-active-bg: #e8e8e8;
     --nav-active-border: #cccccc;
-    --btn-bg: #1c355e;
-    --btn-bg-hover: #152949;
+    --btn-bg: #165a7a;
+    --btn-bg-hover: #114661;
     --btn-fg: #ffffff;
     --menu-toggle-border: #d6d6d6;
     --menu-toggle-hover-bg: #efefef;
@@ -153,16 +153,42 @@ body[data-theme='light'] {
     --btn-outline-hover-bg: #f5f5f5;
 }
 body[data-theme='light'] .header { box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06); }
+:root[data-theme='light'] .hero,
+:root[data-theme='light'] .hero,
 body[data-theme='light'] .hero {
-    background: var(--panel);
+    background: linear-gradient(
+            135deg,
+            rgba(42, 163, 153, 0.12),
+            rgba(28, 53, 94, 0.08)
+        ),
+        linear-gradient(
+            to bottom,
+            rgba(243, 243, 243, 1) 0%,
+            rgba(243, 243, 243, 0.98) 45%,
+            rgba(248, 248, 248, 0.95) 70%,
+            rgba(249, 249, 249, 0.92) 82%,
+            rgba(249, 249, 249, 1) 100%
+        ),
+        var(--bg);
 }
+:root[data-theme='light'] .hero::before,
 body[data-theme='light'] .hero::before {
     opacity: 0;
     background-image: none;
 }
+:root[data-theme='light'] .hero::after,
 body[data-theme='light'] .hero::after {
-    opacity: 0;
-    background-image: none;
+    opacity: 1;
+    inset: 0;
+    background-image: linear-gradient(
+        to bottom,
+        rgba(249, 249, 249, 0) 0%,
+        rgba(249, 249, 249, 0.85) 55%,
+        rgba(249, 249, 249, 1) 95%
+    );
+    -webkit-mask-image: none;
+    mask-image: none;
+    animation: none;
 }
 body[data-theme='light'] #value .card,
 body[data-theme='light'] #solutions .card,
@@ -1022,6 +1048,20 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     display: inline-block;
     font-weight: 500;
     font-size: 0.92em;
+}
+
+:root[data-theme='light'] .hero .highlight,
+body[data-theme='light'] .hero .highlight {
+    background: linear-gradient(120deg, #0f172a 0%, #1c355e 40%, #2aa399 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+}
+
+:root[data-theme='light'] .hero .highlight::after,
+body[data-theme='light'] .hero .highlight::after {
+    display: none;
 }
 .hero .highlight::after {
     content: '';

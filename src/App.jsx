@@ -106,7 +106,8 @@ function Header({ ctaHref = '#team' }) {
     }, [open]);
 
     useEffect(() => {
-        const ids = ['value', 'solutions', 'pricing', 'team', 'faq'];
+        if (onHowItWorks) return () => {};
+        const ids = ['hero', 'value', 'solutions', 'pricing', 'team', 'faq'];
         const getEls = () =>
             ids.map((id) => document.getElementById(id)).filter(Boolean);
         let raf = 0;
@@ -139,10 +140,18 @@ function Header({ ctaHref = '#team' }) {
             window.removeEventListener('scroll', onScroll);
             window.removeEventListener('resize', onScroll);
         };
-    }, []);
+    }, [onHowItWorks]);
 
     useEffect(() => {
-        const valid = new Set(['value', 'solutions', 'pricing', 'team', 'faq']);
+        if (onHowItWorks) return () => {};
+        const valid = new Set([
+            'hero',
+            'value',
+            'solutions',
+            'pricing',
+            'team',
+            'faq',
+        ]);
         const setFromHash = () => {
             const id = (window.location.hash || '').replace('#', '');
             if (valid.has(id)) setCurrent(id);
@@ -150,7 +159,7 @@ function Header({ ctaHref = '#team' }) {
         setFromHash();
         window.addEventListener('hashchange', setFromHash);
         return () => window.removeEventListener('hashchange', setFromHash);
-    }, []);
+    }, [onHowItWorks]);
 
     useEffect(() => {
         const syncTheme = (event) => {
@@ -174,7 +183,8 @@ function Header({ ctaHref = '#team' }) {
         }
     };
 
-    const navClass = (id) => (current === id ? 'active' : '');
+    const navClass = (id) =>
+        onHowItWorks ? '' : current === id ? 'active' : '';
 
     return (
         <header className="header">
@@ -184,12 +194,14 @@ function Header({ ctaHref = '#team' }) {
                 </a>
                 <nav className="nav intro delay-1">
                     <a
-                        href={onHowItWorks ? '/#value' : '#value'}
-                        className={navClass('value')}
+                        href={onHowItWorks ? '/#top' : '#top'}
+                        className={navClass('hero')}
                         aria-current={
-                            current === 'value' ? 'location' : undefined
+                            !onHowItWorks && current === 'hero'
+                                ? 'location'
+                                : undefined
                         }
-                        onClick={() => setCurrent('value')}
+                        onClick={() => setCurrent('hero')}
                     >
                         Home
                     </a>
@@ -197,17 +209,28 @@ function Header({ ctaHref = '#team' }) {
                         href={onHowItWorks ? '/#solutions' : '#solutions'}
                         className={navClass('solutions')}
                         aria-current={
-                            current === 'solutions' ? 'location' : undefined
+                            !onHowItWorks && current === 'solutions'
+                                ? 'location'
+                                : undefined
                         }
                         onClick={() => setCurrent('solutions')}
                     >
                         Services
                     </a>
                     <a
+                        href="/how-we-work"
+                        className={onHowItWorks ? 'active' : ''}
+                        aria-current={onHowItWorks ? 'page' : undefined}
+                    >
+                        How We Work
+                    </a>
+                    <a
                         href={onHowItWorks ? '/#pricing' : '#pricing'}
                         className={navClass('pricing')}
                         aria-current={
-                            current === 'pricing' ? 'location' : undefined
+                            !onHowItWorks && current === 'pricing'
+                                ? 'location'
+                                : undefined
                         }
                         onClick={() => setCurrent('pricing')}
                     >
@@ -217,7 +240,9 @@ function Header({ ctaHref = '#team' }) {
                         href={onHowItWorks ? '/#team' : '#team'}
                         className={navClass('team')}
                         aria-current={
-                            current === 'team' ? 'location' : undefined
+                            !onHowItWorks && current === 'team'
+                                ? 'location'
+                                : undefined
                         }
                         onClick={() => setCurrent('team')}
                     >
@@ -227,18 +252,13 @@ function Header({ ctaHref = '#team' }) {
                         href={onHowItWorks ? '/#faq' : '#faq'}
                         className={navClass('faq')}
                         aria-current={
-                            current === 'faq' ? 'location' : undefined
+                            !onHowItWorks && current === 'faq'
+                                ? 'location'
+                                : undefined
                         }
                         onClick={() => setCurrent('faq')}
                     >
                         FAQ
-                    </a>
-                    <a
-                        href="/how-we-work"
-                        className={onHowItWorks ? 'active' : ''}
-                        aria-current={onHowItWorks ? 'page' : undefined}
-                    >
-                        How We Work
                     </a>
                 </nav>
                 <div className="header-actions">
@@ -313,13 +333,15 @@ function Header({ ctaHref = '#team' }) {
                                 How We Work
                             </a>
                             <a
-                                href={onHowItWorks ? '/#value' : '#value'}
-                                className={navClass('value')}
+                                href={onHowItWorks ? '/#top' : '#top'}
+                                className={navClass('hero')}
                                 aria-current={
-                                    current === 'value' ? 'location' : undefined
+                                    !onHowItWorks && current === 'hero'
+                                        ? 'location'
+                                        : undefined
                                 }
                                 onClick={() => {
-                                    setCurrent('value');
+                                    setCurrent('hero');
                                     close();
                                 }}
                             >
@@ -331,7 +353,7 @@ function Header({ ctaHref = '#team' }) {
                                 }
                                 className={navClass('solutions')}
                                 aria-current={
-                                    current === 'solutions'
+                                    !onHowItWorks && current === 'solutions'
                                         ? 'location'
                                         : undefined
                                 }
@@ -343,10 +365,18 @@ function Header({ ctaHref = '#team' }) {
                                 Services
                             </a>
                             <a
+                                href="/how-we-work"
+                                className={onHowItWorks ? 'active' : ''}
+                                aria-current={onHowItWorks ? 'page' : undefined}
+                                onClick={() => close()}
+                            >
+                                How We Work
+                            </a>
+                            <a
                                 href={onHowItWorks ? '/#pricing' : '#pricing'}
                                 className={navClass('pricing')}
                                 aria-current={
-                                    current === 'pricing'
+                                    !onHowItWorks && current === 'pricing'
                                         ? 'location'
                                         : undefined
                                 }
@@ -361,7 +391,9 @@ function Header({ ctaHref = '#team' }) {
                                 href={onHowItWorks ? '/#team' : '#team'}
                                 className={navClass('team')}
                                 aria-current={
-                                    current === 'team' ? 'location' : undefined
+                                    !onHowItWorks && current === 'team'
+                                        ? 'location'
+                                        : undefined
                                 }
                                 onClick={() => {
                                     setCurrent('team');
@@ -374,7 +406,9 @@ function Header({ ctaHref = '#team' }) {
                                 href={onHowItWorks ? '/#faq' : '#faq'}
                                 className={navClass('faq')}
                                 aria-current={
-                                    current === 'faq' ? 'location' : undefined
+                                    !onHowItWorks && current === 'faq'
+                                        ? 'location'
+                                        : undefined
                                 }
                                 onClick={() => {
                                     setCurrent('faq');
@@ -427,8 +461,8 @@ function Hero({ ctaHref = '#team' }) {
                 <p className="intro delay-1">
                     We help operations-heavy businesses turn fragmented data and
                     manual workflows into efficient, automated systems that save
-                    time and money, giving you back time to focus on what really
-                    matters.
+                    you money, and give you back the time to focus on what
+                    really matters.
                 </p>
                 <div className="buttons intro delay-2">
                     <a href={ctaHref} className="btn">
@@ -440,7 +474,7 @@ function Hero({ ctaHref = '#team' }) {
                 </div>
                 <p className="small intro delay-3" style={{ marginTop: 8 }}>
                     30‑minute call to understand your operation, data sources,
-                    and quick wins.
+                    and opportunities.
                 </p>
             </div>
         </section>
@@ -451,7 +485,7 @@ function ValueProps() {
     const items = [
         {
             title: 'Streamline Operations',
-            desc: 'Eliminate repetitive manual work, reduce admin overhead and free up your team’s time through smart automation. Focus on the tasks that truly drive growth and service quality',
+            desc: 'Eliminate repetitive manual work, reduce admin overhead and free up your team’s time through smart automation. Focus on the tasks that truly drive growth and service quality.',
             icon: faGears,
         },
         {
@@ -461,7 +495,7 @@ function ValueProps() {
         },
         {
             title: 'Deliver Measurable ROI',
-            desc: 'Every system is designed to show real, quantifiable impact in time saved, costs reduced, or revenue uplifted. AI isn’t about hype, it’s about building tools that pay for themselves',
+            desc: 'Every system is designed to show real, quantifiable impact in time saved, costs reduced, or revenue uplifted. AI isn’t about hype, it’s about building tools that pay for themselves.',
             icon: faChartLine,
         },
     ];
@@ -503,18 +537,18 @@ function Solutions() {
             title: 'Implementation',
             icon: faLayerGroup,
             bullets: [
-                'Pilot high-impact automations and solutions with live data.',
-                'Integrate with current processes, from Finance and HR, to customer and compliance.',
-                'Weekly updates with training so teams leads can adopt fast, without friction.',
+                'Integrate high-impact automations and solutions with live data.',
+                'Integrate with current processes, from finance and HR, to customer and compliance.',
+                'Weekly updates & training so team leads can adopt fast, without friction.',
             ],
         },
         {
             title: 'Support & Evolution',
             icon: faLifeRing,
             bullets: [
-                'Testing, monitoring, and support to keep solutions sharp & up-to-date.',
+                'Testing, monitoring, and CI to keep solutions sharp & up-to-date.',
                 'New data sources, system enhancements, and change requests bundled.',
-                'Dedicated channels for ops, finance, and IT stakeholders.',
+                'Continued direct communications with GBM for stakeholders.',
             ],
         },
     ];
