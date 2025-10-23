@@ -5,31 +5,10 @@ import {
     faCalendarDays,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function CTA() {
-    const buildCalendlyUrl = () => {
-        const base = 'https://calendly.com/georgemarsh1809/30min';
-        if (typeof window === 'undefined') return base;
-        const qp = new URLSearchParams(window.location.search);
-        const tier = qp.get('tier') || '';
-        const data = qp.get('data') || '';
-        const features = qp.get('features') || '';
-        const rush = qp.get('rush') || '';
+const CALENDLY_URL = 'https://calendly.com/georgemarsh1809/30min';
 
-        const url = new URL(base);
-        // Preserve original params
-        qp.forEach((v, k) => url.searchParams.set(k, v));
-        // UTM context
-        if (tier) url.searchParams.set('utm_campaign', `tier_${tier}`);
-        url.searchParams.set('utm_source', 'site');
-        url.searchParams.set('utm_medium', 'pricing_calculator');
-        // Custom fields a1..a4
-        if (tier) url.searchParams.set('a1', `tier=${tier}`);
-        if (data) url.searchParams.set('a2', `data=${data}`);
-        if (features) url.searchParams.set('a3', `features=${features}`);
-        if (rush) url.searchParams.set('a4', `rush=${rush}`);
-        return url.toString();
-    };
-    const calendlyHref = buildCalendlyUrl();
+export default function CTA() {
+    const calendlyHref = CALENDLY_URL;
     return (
         <section id="cta" className="section">
             <div className="container">
@@ -72,7 +51,7 @@ export default function CTA() {
                             icon={faCalendarDays}
                             style={{ marginRight: 8 }}
                         />
-                        Reserve time on Calendly
+                        Book on Calendly
                     </a>
                     <p
                         className="small"
@@ -81,7 +60,8 @@ export default function CTA() {
                             color: 'var(--muted-2)',
                         }}
                     >
-                        Free 30‑minute focused session. No obligation — just clarity on your next steps.
+                        Free 30‑minute focused session. No obligation — just
+                        clarity on your next steps.
                     </p>
 
                     <p

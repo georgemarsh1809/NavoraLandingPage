@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faComments,
@@ -49,36 +49,11 @@ const tiers = {
     },
 };
 
-const legacyTierMap = {
-    discovery: 'discover',
-    basic: 'discover',
-    simple: 'discover',
-    implementation: 'implement',
-    moderate: 'implement',
-    support: 'support',
-    complex: 'support',
-};
-
 export default function PricingCalculator({ ctaHref = '#team' }) {
     const [selTier, setSelTier] = useState('implement');
     const [pricingOpen, setPricingOpen] = useState(false);
 
-    useEffect(() => {
-        const qp = new URLSearchParams(window.location.search);
-        const t = qp.get('tier');
-        const tierKey = t ? legacyTierMap[t] || t : null;
-        if (tierKey && tiers[tierKey]) setSelTier(tierKey);
-    }, []);
-
-    useEffect(() => {
-        const qp = new URLSearchParams(window.location.search);
-        qp.set('tier', selTier);
-        const url = `${window.location.pathname}?${qp.toString()}`;
-        window.history.replaceState({}, '', url);
-    }, [selTier]);
-
     const tier = tiers[selTier];
-    const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
     return (
         <section id="pricing" className="section">
@@ -303,18 +278,6 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                 <p className="small" style={{ marginTop: 8 }}>
                                     {tier.note}
                                 </p>
-                                <button
-                                    className="button secondary"
-                                    type="button"
-                                    onClick={() => {
-                                        navigator.clipboard?.writeText(
-                                            shareUrl
-                                        );
-                                    }}
-                                    aria-label="Copy shareable plan link"
-                                >
-                                    Copy share link
-                                </button>
                             </div>
                         </div>
                     </div>

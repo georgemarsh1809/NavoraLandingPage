@@ -38,8 +38,8 @@ export default function TechStack() {
                 </h2>
                 <p className="section-lede">
                     From data pipelines to AI orchestration, we work with the
-                    stack your transport business already owns — or help you
-                    select the right fit for growth.
+                    stack your business already owns, or help you select the
+                    right fit for growth.
                 </p>
                 <div className="tech-logos">
                     {logos.map((l) => (
