@@ -81,8 +81,7 @@ export default function CTA() {
                             color: 'var(--muted-2)',
                         }}
                     >
-                        Free 30‑minute focused session. No obligation.
-                        operations.
+                        Free 30‑minute focused session. No obligation — just clarity on your next steps.
                     </p>
 
                     <p
