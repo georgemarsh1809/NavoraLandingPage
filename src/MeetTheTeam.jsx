@@ -27,16 +27,14 @@ export default function MeetTheTeam() {
                     <div>
                         <h3>George — Founder &amp; Lead Engineer</h3>
                         <p>
-                            Founder at GBM, George is a Software Engineer with
-                            over 5 years experience supporting critical
-                            Government applications; managing client
-                            relationships and leading service & technical
-                            operations. He has extensive experience managing
-                            data and building bespoke software, and has a family
-                            background in Transport & Logistics. He leads each
-                            engagement from discovery through to adoption,
-                            making sure every insight lands with the people
-                            running the day-to-day.
+                            George leads GBM’s AI transformation engagements,
+                            blending 5+ years delivering mission-critical
+                            software for Government with deep, family-rooted
+                            knowledge of transport & logistics. He guides every
+                            project from discovery interviews to implementation
+                            and long-term support, making sure depot managers,
+                            planners, finance, and compliance teams all see the
+                            impact in their day-to-day work.
                         </p>
                         <div className="team-links">
                             <a

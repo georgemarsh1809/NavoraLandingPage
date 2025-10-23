@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faComments,
@@ -6,178 +6,78 @@ import {
     faCalculator,
 } from '@fortawesome/free-solid-svg-icons';
 
-const fmtGBP = new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP',
-    maximumFractionDigits: 0,
-});
+const tiers = {
+    discover: {
+        key: 'discover',
+        name: 'Discover',
+        focus: 'Identify opportunities across people, process, and data.',
+        deliverables: [
+            'Discovery sessions with leadership and frontline teams',
+            'AI Opportunity Report outlining quick wins and risks',
+            'ROI summary and roadmap you can share internally',
+        ],
+        duration: '1–2 weeks',
+        investment:
+            'Free Initial Meeting → £300–£1000 full consultation depending on company size.',
+        note: 'Ideal first step to validate value and build internal momentum before investing in delivery.',
+    },
+    implement: {
+        key: 'implement',
+        name: 'Implement',
+        focus: 'Design and deploy the systems that automate the work.',
+        deliverables: [
+            'Prototyping to prove value using your live data',
+            'Full builds: automations, dashboards, and AI assistants',
+            'Documentation, training, and handover playbooks',
+        ],
+        duration: '2–6 weeks',
+        investment: '£1,000–£5,000+ project build',
+        note: 'Scope flexes with integrations, environments, and the number of workflows we automate.',
+    },
+    support: {
+        key: 'support',
+        name: 'Support',
+        focus: 'Keep automation sharp and your team confident post-launch.',
+        deliverables: [
+            'Monthly testing and performance tracking',
+            'Upgrades, change requests, and backlog shaping',
+            'Cost management to keep stack spend under control',
+        ],
+        duration: 'Ongoing',
+        investment: '£200–£1,000 per month',
+        note: 'Retainers scale up or down so you get the blend of monitoring and iteration you need.',
+    },
+};
 
-// Compact GBP formatter: £10k instead of £10,000
-function formatGBPCompact(n) {
-    const abs = Math.abs(n);
-    if (abs >= 1000) {
-        const v = n / 1000;
-        const s = Number.isInteger(v)
-            ? String(v)
-            : v.toFixed(1).replace(/\.0$/, '');
-        return `£${s}k`;
-    }
-    return fmtGBP.format(n);
-}
-
-const BANDS = [0, 50, 100];
-const bandOf = (p) => {
-    let best = 0,
-        dist = Infinity;
-    for (let i = 0; i < BANDS.length; i++) {
-        const d = Math.abs(p - BANDS[i]);
-        if (d < dist) {
-            dist = d;
-            best = i;
-        }
-    }
-    return best; // 0,1,2
+const legacyTierMap = {
+    discovery: 'discover',
+    basic: 'discover',
+    simple: 'discover',
+    implementation: 'implement',
+    moderate: 'implement',
+    support: 'support',
+    complex: 'support',
 };
 
 export default function PricingCalculator({ ctaHref = '#team' }) {
-    const tiers = {
-        simple: {
-            key: 'simple',
-            name: 'KPI Kickstart',
-            buildRange: [1500, 2500],
-            retainer: [150, 250],
-            eta: '1–2 weeks',
-        },
-        moderate: {
-            key: 'moderate',
-            name: 'Operations Control Tower',
-            buildRange: [2500, 5000],
-            retainer: [250, 500],
-            eta: '2–4 weeks',
-        },
-        complex: {
-            key: 'complex',
-            name: 'Command Centre',
-            buildRange: [5000, 10000],
-            retainer: [500, null],
-            eta: '4-6 weeks',
-        },
-    };
-
-    const tierScales = {
-        simple: {
-            data: [
-                { key: 'low', label: '1 source (Sheets or job log)' },
-                { key: 'med', label: '2 sources (Sheets + telematics)' },
-                {
-                    key: 'high',
-                    label: '3 sources (TMS + telematics + finance)',
-                },
-            ],
-            features: [
-                { key: 'low', label: 'Core KPIs + scheduled reports' },
-                { key: 'med', label: 'Fleet dashboard + daily alerts' },
-                {
-                    key: 'high',
-                    label: 'Role-based views for ops & finance',
-                },
-            ],
-        },
-        moderate: {
-            data: [
-                { key: 'low', label: '3–4 sources (TMS, telematics, finance)' },
-                {
-                    key: 'med',
-                    label: '5 sources incl. workshop & maintenance',
-                },
-                {
-                    key: 'high',
-                    label: '6+ sources incl. customer service data',
-                },
-            ],
-            features: [
-                { key: 'low', label: 'Multi-depot cost dashboards' },
-                {
-                    key: 'med',
-                    label: 'Exception alerts & variance tracking',
-                },
-                {
-                    key: 'high',
-                    label: 'Scenario planning & savings finder',
-                },
-            ],
-        },
-        complex: {
-            data: [
-                { key: 'low', label: '7 sources incl. ERP & telematics' },
-                {
-                    key: 'med',
-                    label: '9 sources with API/database feeds',
-                },
-                {
-                    key: 'high',
-                    label: '10+ sources across warehouse & fleet',
-                },
-            ],
-            features: [
-                { key: 'low', label: 'Dashboards + automated refreshes' },
-                {
-                    key: 'med',
-                    label: 'Predictive forecasting & margin insights',
-                },
-                { key: 'high', label: 'AI assistants & multi-role portals' },
-            ],
-        },
-    };
-
-    const [selTier, setSelTier] = useState('simple');
-    const [dataIdx, setDataIdx] = useState(0); // 0/50/100
-    const [featIdx, setFeatIdx] = useState(0); // 0/50/100
+    const [selTier, setSelTier] = useState('implement');
     const [pricingOpen, setPricingOpen] = useState(false);
 
-    // Init from URL
     useEffect(() => {
         const qp = new URLSearchParams(window.location.search);
         const t = qp.get('tier');
-        const d = qp.get('data');
-        const f = qp.get('features');
-        const tierKey = t === 'basic' ? 'simple' : t;
+        const tierKey = t ? legacyTierMap[t] || t : null;
         if (tierKey && tiers[tierKey]) setSelTier(tierKey);
-        if (d !== null) setDataIdx(normalizeBandParam(d));
-        if (f !== null) setFeatIdx(normalizeBandParam(f));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Sync URL on changes (debounced feel without timer: write immediately; it’s fine here)
     useEffect(() => {
         const qp = new URLSearchParams(window.location.search);
         qp.set('tier', selTier);
-        qp.set('data', String(dataIdx));
-        qp.set('features', String(featIdx));
         const url = `${window.location.pathname}?${qp.toString()}`;
         window.history.replaceState({}, '', url);
-    }, [selTier, dataIdx, featIdx]);
-
-    // Reset bands when tier changes
-    useEffect(() => {
-        setDataIdx(0);
-        setFeatIdx(0);
     }, [selTier]);
 
-    const scale = tierScales[selTier];
     const tier = tiers[selTier];
-
-    const estimate = useMemo(() => {
-        const min = tier.buildRange[0];
-        const max = tier.buildRange[1];
-        const di = bandOf(dataIdx) / 2; // 0, .5, 1
-        const fi = bandOf(featIdx) / 2; // 0, .5, 1
-        const t = (di + fi) / 2; // average slider position 0..1
-        let price = min + t * (max - min);
-        // Round to nearest £100 for friendlier numbers
-        return Math.round(price / 100) * 100;
-    }, [selTier, dataIdx, featIdx]);
-
     const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
 
     return (
@@ -203,7 +103,7 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                 icon={faCalculator}
                                 aria-hidden="true"
                             />
-                            Interactive Pricing Guide
+                            AI Transformation Investment Guide
                         </h3>
                         <button
                             type="button"
@@ -232,19 +132,16 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                         aria-hidden={!pricingOpen}
                     >
                         <p className="small" style={{ marginTop: 16 }}>
-                            Budget for KPI data insights tailored to your fleet.
-                            Lock scope and pricing after a quick discovery call.
-                            <br /> Not sure which tier fits? Pick your best
-                            guess — we’ll guide you the rest of the way.
+                            Choose the phase that matches where you are in the
+                            journey. We confirm scope and commercials during a
+                            rapid discovery call.
                         </p>
-                        <p className="small"></p>
-                        <p className="small"></p>
-                        {/* Tier selector */}
+
                         <fieldset
                             style={{ border: 'none', padding: 0, margin: 0 }}
                         >
                             <legend id="tier-legend" className="small">
-                                Select a tier
+                                Select a phase
                             </legend>
                             <div
                                 role="radiogroup"
@@ -284,6 +181,7 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'space-between',
+                                                gap: 8,
                                             }}
                                         >
                                             <div
@@ -303,7 +201,17 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                                     }
                                                     aria-label={t.name}
                                                 />
-                                                <strong>{t.name}</strong>
+                                                <div>
+                                                    <strong>{t.name}</strong>
+                                                    <div
+                                                        className="small"
+                                                        style={{
+                                                            color: 'var(--muted)',
+                                                        }}
+                                                    >
+                                                        {t.duration}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </label>
@@ -311,96 +219,90 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                             </div>
                         </fieldset>
 
-                        {/* Discrete “slider” controls */}
-                        <BandSlider
-                            label="Data Complexity"
-                            value={dataIdx}
-                            onChange={setDataIdx}
-                            ticks={scale.data}
-                        />
-                        <BandSlider
-                            label="Features"
-                            value={featIdx}
-                            onChange={setFeatIdx}
-                            ticks={scale.features}
-                        />
-                        {/* Output + CTA */}
                         <div
                             style={{
                                 display: 'grid',
-                                gridTemplateColumns: '1fr auto',
+                                gridTemplateColumns:
+                                    'minmax(0,1.6fr) minmax(0,1fr)',
+                                gap: 20,
+                                marginTop: 20,
                                 alignItems: 'start',
-                                marginTop: 16,
-                                columnGap: 16,
-                                rowGap: 12,
                             }}
                         >
                             <div>
-                                <div className="small">
-                                    Estimated Build Price
-                                </div>
+                                <div className="small">Focus</div>
+                                <p style={{ marginTop: 6 }}>{tier.focus}</p>
                                 <div
-                                    style={{
-                                        fontSize: 28,
-                                        fontWeight: 800,
-                                        fontVariantNumeric: 'tabular-nums',
-                                    }}
-                                    aria-live="polite"
+                                    className="small"
+                                    style={{ marginTop: 18 }}
                                 >
-                                    {formatGBPCompact(estimate)}
+                                    What’s included
                                 </div>
-                                <div className="small">
-                                    Typical Run & Improve:{' '}
-                                    {(() => {
-                                        const [lo, hi] = tier.retainer;
-                                        if (hi == null) {
-                                            return `${fmtGBP.format(lo)}+/mo`;
-                                        }
-                                        return `${fmtGBP.format(
-                                            lo
-                                        )}–${fmtGBP.format(hi)}/mo`;
-                                    })()}
-                                </div>
-                                <div className="small">
-                                    Final pricing confirmed after a 30-minute
-                                    discovery call.
-                                </div>
-
+                                <ul
+                                    style={{
+                                        marginTop: 6,
+                                        paddingLeft: 20,
+                                        display: 'grid',
+                                        gap: 8,
+                                    }}
+                                >
+                                    {tier.deliverables.map((item) => (
+                                        <li key={item}>{item}</li>
+                                    ))}
+                                </ul>
                                 <div
                                     style={{
                                         display: 'flex',
                                         gap: 10,
-                                        marginTop: 20,
+                                        marginTop: 24,
                                         flexWrap: 'wrap',
                                     }}
                                 >
-                                <a
-                                    className="button"
-                                    href={ctaHref}
-                                        aria-label="Pressure-test my estimate with an expert"
+                                    <a
+                                        className="button"
+                                        href={ctaHref}
+                                        aria-label="Discuss this plan with GBM"
                                     >
                                         <FontAwesomeIcon
                                             icon={faComments}
                                             style={{ marginRight: 8 }}
                                         />
-                                        Discuss My Plan
+                                        Pressure-test my plan
                                     </a>
-                                    <div
+                                    <span
                                         className="small"
                                         style={{ width: '100%' }}
                                     >
-                                        We’ll discuss data scope and confirm a
-                                        fixed price.
-                                    </div>
+                                        We’ll confirm scope, timing, and any
+                                        system add-ons together.
+                                    </span>
                                 </div>
                             </div>
                             <div
                                 style={{
-                                    alignSelf: 'start',
-                                    display: 'flex',
-                                    justifyContent: 'flex-end',
+                                    display: 'grid',
+                                    gap: 12,
                                 }}
                             >
+                                <div>
+                                    <div className="small">
+                                        Typical duration
+                                    </div>
+                                    <p style={{ marginTop: 4 }}>
+                                        {tier.duration}
+                                    </p>
+                                </div>
+                                <div>
+                                    <div className="small">
+                                        Typical investment
+                                    </div>
+                                    <p style={{ marginTop: 4 }}>
+                                        {tier.investment}
+                                    </p>
+                                </div>
+                                <p className="small" style={{ marginTop: 8 }}>
+                                    {tier.note}
+                                </p>
                                 <button
                                     className="button secondary"
                                     type="button"
@@ -409,7 +311,7 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                             shareUrl
                                         );
                                     }}
-                                    aria-label="Copy shareable estimate link"
+                                    aria-label="Copy shareable plan link"
                                 >
                                     Copy share link
                                 </button>
@@ -419,75 +321,5 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                 </div>
             </div>
         </section>
-    );
-}
-
-function normalizeBandParam(nStr) {
-    const n = Number(nStr);
-    if (Number.isNaN(n)) return 0;
-    // Support old 0/1/2 values
-    if (Number.isInteger(n) && n >= 0 && n <= 2) return n * 50;
-    // Clamp to 0/50/100
-    if (n <= 25) return 0;
-    if (n <= 75) return 50;
-    return 100;
-}
-
-function BandSlider({ label, value, onChange, ticks }) {
-    const i = bandOf(value); // 0/1/2
-    const active = ticks[i];
-    return (
-        <div
-            className="card"
-            style={{ padding: 16, width: '100%', marginTop: 16 }}
-            role="group"
-            aria-label={label}
-        >
-            <div
-                style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'baseline',
-                    gap: 12,
-                }}
-            >
-                <strong>{label}</strong>
-                <span className="small" aria-live="polite">
-                    {active.label}
-                </span>
-            </div>
-            <input
-                type="range"
-                min={0}
-                max={100}
-                step={50}
-                value={value}
-                onChange={(e) => onChange(parseInt(e.target.value, 10))}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-valuenow={value}
-                aria-valuetext={`${label}: ${active.label}`}
-                style={{ width: '100%', marginTop: 10 }}
-            />
-            <div
-                className="slider-ticks"
-                style={{
-                    marginTop: 10,
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(3,1fr)',
-                    gap: 8,
-                }}
-            >
-                {ticks.map((t, idx) => (
-                    <span
-                        key={t.key}
-                        className={i === idx ? 'is-active' : ''}
-                        style={{ textAlign: 'center' }}
-                    >
-                        {t.label}
-                    </span>
-                ))}
-            </div>
-        </div>
     );
 }

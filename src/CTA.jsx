@@ -42,7 +42,7 @@ export default function CTA() {
                             icon={faCalendarCheck}
                             style={{ marginRight: 8 }}
                         />
-                        Book Your Transport KPI Discovery Call
+                        Book Your AI Discovery Session
                     </h2>
                     <p
                         style={{
@@ -51,8 +51,8 @@ export default function CTA() {
                             margin: '0 auto 1.5rem auto',
                         }}
                     >
-                        Discover how KPI Data Insights can recover margin
-                        leakage and improve data clarity for your business.
+                        Map out the AI opportunities in your operation, what
+                        data we will use, and the quickest route to results.
                     </p>
 
                     <a
@@ -72,14 +72,17 @@ export default function CTA() {
                             icon={faCalendarDays}
                             style={{ marginRight: 8 }}
                         />
-                        Book on Calendly
+                        Reserve time on Calendly
                     </a>
                     <p
                         className="small"
-                        style={{ marginTop: '0.5rem', color: 'var(--muted-2)' }}
+                        style={{
+                            marginTop: '0.5rem',
+                            color: 'var(--muted-2)',
+                        }}
                     >
-                        30‑min session to map safety, cost, and performance
-                        KPIs.
+                        Free 30‑minute focused session. No obligation.
+                        operations.
                     </p>
 
                     <p
@@ -105,7 +108,7 @@ export default function CTA() {
                             color: 'var(--muted-2)',
                         }}
                     >
-                        Typically replies within 1 business day
+                        We typically reply within 1 working day.
                     </p>
                 </div>
             </div>

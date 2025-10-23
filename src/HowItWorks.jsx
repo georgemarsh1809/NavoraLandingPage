@@ -15,34 +15,32 @@ import {
 export default function HowItWorks({ ctaHref = '#team' }) {
     return (
         <div id="how">
-            {/* Hero */}
             <section className="hero">
                 <div className="container">
                     <h1>
-                        <span>The GBM Way </span>
+                        <span>The GBM Approach</span>
                         <br />
                         <span className="highlight">
-                            KPI Data Insights for Transport & Logistics
+                            Clarity to build trust. Honesty to build
+                            partnerships.
                         </span>
                     </h1>
                     <p>
-                        We build KPI Data Insights software that turns messy job
-                        sheets, telematics exports, and finance spreadsheets
-                        into clear dashboards so UK fleets can make faster,
-                        smarter decisions.
+                        Discovery-to-support engagements that replace
+                        spreadsheet chaos with AI co-pilots, live dashboards,
+                        and operations-ready system builds.
                     </p>
                     <div className="buttons">
                         <a className="btn" href={ctaHref}>
-                            Book a Free KPI Discovery Call
+                            Book an AI Discovery Call
                         </a>
                     </div>
                     <p className="small" style={{ marginTop: 8 }}>
-                        30‑min call to map your fleet KPIs.
+                        30‑minute session to map depots, data, and quick wins.
                     </p>
                 </div>
             </section>
 
-            {/* What we do */}
             <section className="section">
                 <div className="container">
                     <div
@@ -64,148 +62,185 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                                 flexDirection: 'column',
                             }}
                         >
-                            <h3 style={{ marginTop: 0 }}>
-                                The Problem We Solve
-                            </h3>
+                            <h3 style={{ marginTop: 0 }}>Where We Focus</h3>
                             <div
                                 style={{
                                     margin: '12px auto 0 auto',
                                     textAlign: 'left',
-                                    maxWidth: 480,
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    gap: 12,
+                                    maxWidth: 520,
+                                    display: 'grid',
+                                    gap: 18,
                                 }}
                             >
-                                <div>
-                                    <h4 style={{ margin: '0 0 1px 0' }}>
-                                        Messy Data and Spreadsheets
-                                    </h4>
-                                    <p style={{ margin: 0 }}>
-                                        No single source of truth for jobs,
-                                        costs, or vehicles.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h4 style={{ margin: '0 0 1px 0' }}>
-                                        Slow, Inconsistent Reporting
-                                    </h4>
-                                    <p style={{ margin: 0 }}>
-                                        Managers spend hours each week compiling
-                                        numbers instead of making decisions.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h4 style={{ margin: '0 0 1px 0' }}>
-                                        Margin Leakage
-                                    </h4>
-                                    <p style={{ margin: 0 }}>
-                                        Duplicate data entry, invoice disputes,
-                                        and unnoticed overspending quietly erode
-                                        profits.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h4 style={{ margin: '0 0 1px 0' }}>
-                                        Customer and Compliance Pressure
-                                    </h4>
-                                    <p style={{ margin: 0 }}>
-                                        Hard to prove KPIs, track safety, or
-                                        provide transparency when asked.
-                                    </p>
-                                </div>
-                                <div>
-                                    <h4 style={{ margin: '0 0 1px 0' }}>
-                                        Stress and Frustration
-                                    </h4>
-                                    <p style={{ margin: 0 }}>
-                                        Directors feel like they’re flying
-                                        blind, and staff morale drops when
-                                        mistakes become routine.
-                                    </p>
-                                </div>
+                                {[
+                                    {
+                                        title: 'Fragmented systems & data',
+                                        body: 'CRMs, spreadsheets, trackers, and finance tools rarely speak to one another, so teams waste time stitching together the story.',
+                                    },
+                                    {
+                                        title: 'Reactive planning & reporting',
+                                        body: 'Leaders chase updates and compile reports by hand, meaning insights arrive after the moment to act has passed.',
+                                    },
+                                    {
+                                        title: 'Siloed Communication',
+                                        body: 'Information lives in emails, chat threads, and isolated systems — causing delays, duplication, and missed opportunities for collaboration.',
+                                    },
+                                    {
+                                        title: 'Compliance & customer pressure',
+                                        body: 'Boards, auditors, and clients expect rapid evidence packs—even when the team is already stretched thin.',
+                                    },
+                                    {
+                                        title: 'Limited build capacity',
+                                        body: 'You can see the value in automation, but internal teams lack the time and specialist skills to ship and maintain it.',
+                                    },
+                                ].map((item) => (
+                                    <div
+                                        key={item.title}
+                                        style={{
+                                            display: 'grid',
+                                            gap: 6,
+                                            background:
+                                                'rgba(47, 165, 160, 0.08)',
+                                            border: '1px solid rgba(47, 165, 160, 0.18)',
+                                            borderRadius: 12,
+                                            padding: '14px 16px',
+                                            textAlign: 'left',
+                                        }}
+                                    >
+                                        <h4
+                                            style={{
+                                                margin: 0,
+                                                textTransform: 'uppercase',
+                                                letterSpacing: '0.04em',
+                                                fontSize: '0.78rem',
+                                                color: 'var(--muted)',
+                                            }}
+                                        >
+                                            {item.title}
+                                        </h4>
+                                        <p style={{ margin: 0 }}>{item.body}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                         <div
                             style={{
-                                display: 'flex',
-                                flexDirection: 'column',
+                                display: 'grid',
                                 gap: 'var(--gap)',
                                 height: '100%',
                             }}
                         >
-                            <div className="card" data-reveal>
-                                <h3>
-                                    <FontAwesomeIcon
-                                        icon={faListCheck}
-                                        style={{ marginRight: 8 }}
-                                    />
-                                    How We Help
-                                </h3>
-                                <ul style={{ marginTop: 8, paddingLeft: 18 }}>
-                                    <li>
-                                        <strong>Fleet-Wide Visibility.</strong>{' '}
-                                        Bring plan, cost and H&S data into a
-                                        single source of truth.
-                                    </li>
-                                    <li>
-                                        <strong>Operational Clarity.</strong>{' '}
-                                        Surface safety, compliance,
-                                        profitability, and absence KPIs at a
-                                        glance.
-                                    </li>
-                                    <li>
-                                        <strong>Decisions in Minutes.</strong>{' '}
-                                        Alerts and dashboards highlight where to
-                                        recover 5–10% margin.
-                                    </li>
-                                </ul>
-                            </div>
-                            <div
-                                className="card"
-                                data-reveal
-                                data-reveal-delay="60ms"
-                            >
-                                <h3>
-                                    <FontAwesomeIcon
-                                        icon={faUsers}
-                                        style={{ marginRight: 8 }}
-                                    />
-                                    Who It’s For
-                                </h3>
-                                <ul style={{ marginTop: 8, paddingLeft: 18 }}>
-                                    <li>
-                                        Ops and finance managers in UK fleets
-                                        with 10–50 vehicles who need
-                                        decision-ready KPIs.
-                                    </li>
-                                    <li>
-                                        Family-run, second-generation transport
-                                        businesses modernising their reporting.
-                                    </li>
-                                    <li>
-                                        Teams duplicating data entry across
-                                        spreadsheets and spending hours
-                                        compiling reports.
-                                    </li>
-                                </ul>
-                            </div>
+                            {[
+                                {
+                                    title: 'How We Help',
+                                    icon: faListCheck,
+                                    items: [
+                                        {
+                                            label: 'Discovery blueprints',
+                                            body: 'Structured sprints to pinpoint opportunities.',
+                                        },
+                                        {
+                                            label: 'Implementation cycles',
+                                            body: 'Focused delivery that ships powerful solutions.',
+                                        },
+                                        {
+                                            label: 'Support & evolution',
+                                            body: 'CI, testing, and release notes so the solutions keep up.',
+                                        },
+                                    ],
+                                },
+                                {
+                                    title: 'Who It’s For',
+                                    icon: faUsers,
+                                    items: [
+                                        {
+                                            label: 'Ops-led organisations',
+                                            body: 'Operations-heavy teams ready to modernise.',
+                                        },
+                                        {
+                                            label: 'Multi-system environments',
+                                            body: 'Businesses juggling multiple tools, compliance requirements, and customer expectations.',
+                                        },
+                                        {
+                                            label: 'Ambitious leaders',
+                                            body: 'Leaders who want to use AI to unlock measurable gains.',
+                                        },
+                                    ],
+                                    delay: '60ms',
+                                },
+                            ].map((column) => (
+                                <div
+                                    key={column.title}
+                                    className="card"
+                                    data-reveal
+                                    {...(column.delay
+                                        ? { 'data-reveal-delay': column.delay }
+                                        : {})}
+                                    style={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        gap: 16,
+                                    }}
+                                >
+                                    <h3>
+                                        <FontAwesomeIcon
+                                            icon={column.icon}
+                                            style={{ marginRight: 8 }}
+                                        />
+                                        {column.title}
+                                    </h3>
+                                    <div
+                                        style={{
+                                            display: 'grid',
+                                            gap: 16,
+                                        }}
+                                    >
+                                        {column.items.map((item) => (
+                                            <div
+                                                key={item.label}
+                                                style={{
+                                                    background:
+                                                        'rgba(47, 165, 160, 0.08)',
+                                                    border: '1px solid rgba(47, 165, 160, 0.18)',
+                                                    borderRadius: 12,
+                                                    padding: '14px 16px',
+                                                    display: 'grid',
+                                                    gap: 6,
+                                                }}
+                                            >
+                                                <strong
+                                                    style={{
+                                                        textTransform:
+                                                            'uppercase',
+                                                        letterSpacing: '0.04em',
+                                                        fontSize: '0.78rem',
+                                                        color: 'var(--muted)',
+                                                    }}
+                                                >
+                                                    {item.label}
+                                                </strong>
+                                                <p style={{ margin: 0 }}>
+                                                    {item.body}
+                                                </p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Inline CTA above Process */}
             <div
                 className="container text-center"
                 style={{ marginTop: 8, marginBottom: 8 }}
             >
                 <a href={ctaHref} className="btn cta-inline">
-                    Book a Free KPI Discovery Call
+                    Build Your Roadmap
                 </a>
             </div>
 
-            {/* Process (zoomed in, vertical, centered) */}
             <section className="section">
                 <div className="container">
                     <h2
@@ -225,28 +260,28 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                     >
                         {[
                             {
-                                title: '1. Discover',
-                                desc: '30‑min discovery to align on fleet goals, 3–5 critical KPIs, and where data lives. We confirm scope, data access, and success criteria before locking a plan.',
+                                title: '1. Discovery',
+                                desc: 'Initial sprint with stakeholder and team interviews, data audit, and AI opportunity canvas aligned to your KPIs and metrics.',
                                 icon: faMagnifyingGlass,
                             },
                             {
-                                title: '2. Prototype',
-                                desc: 'A quick prototype (often in week one) using real spreadsheets or telematics exports to prove the insight and refine the metrics that matter most.',
+                                title: '2. Prototype & Pilot',
+                                desc: 'Rapid proof using live data to validate automations, dashboards, or workflow co-pilots before scaling.',
                                 icon: faWandMagicSparkles,
                             },
                             {
-                                title: '3. Build',
-                                desc: 'Connect TMS, finance, and workshop systems, automate refreshes, and layer in AI summaries or alerts. Everything ships in reviewable increments.',
+                                title: '3. Implementation',
+                                desc: 'Integrate ops, finance, HR, and compliance data with weekly increments you can put to work and quickly see ROI.',
                                 icon: faGears,
                             },
                             {
-                                title: '4. Launch',
-                                desc: 'Deploy into your accounts with clear docs and light training so depot managers, drivers, and directors can use it day-to-day.',
+                                title: '4. Launch & Adoption',
+                                desc: 'Training, documentation, and playbooks so depot leads, planners, and drivers adopt with confidence.',
                                 icon: faRocket,
                             },
                             {
-                                title: '5. Run & Improve',
-                                desc: 'Optional monthly support to keep dashboards accurate, add new data sources, and continue squeezing margin leakage out of the business.',
+                                title: '5. Support & Evolution',
+                                desc: 'Optional retainers for CI, enhancements, and new AI initiatives as your roadmap grows.',
                                 icon: faArrowsRotate,
                             },
                         ].map((s, i) => (

@@ -15,26 +15,43 @@ try {
   requestAnimationFrame(() => document.body.classList.add('app-ready'));
 } catch {}
 
-// Apply Fog Teal for light mode and Dark for dark mode, based on system
+// Theme management: default dark, allow manual overrides
 try {
   const b = document.body;
-  const mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
-  const apply = () => {
+  const root = document.documentElement;
+  const THEME_KEY = 'themePreference';
+
+  const applyTheme = (mode) => {
+    const next = mode === 'light' ? 'light' : 'dark';
     try {
-      if (mq && mq.matches) {
+      if (next === 'light') {
+        b.setAttribute('data-theme', 'light');
+        b.removeAttribute('data-light');
+        root.setAttribute('data-theme', 'light');
+        root.removeAttribute('data-light');
+      } else {
         b.setAttribute('data-theme', 'dark');
         b.removeAttribute('data-light');
-      } else {
-        b.setAttribute('data-theme', 'light');
-        b.setAttribute('data-light', 'fog');
+        root.setAttribute('data-theme', 'dark');
+        root.removeAttribute('data-light');
       }
+      window.localStorage?.setItem?.(THEME_KEY, next);
+      window.dispatchEvent(
+        new CustomEvent('themechange', {
+          detail: next,
+        }),
+      );
     } catch {}
   };
-  apply();
-  if (mq) {
-    if (mq.addEventListener) mq.addEventListener('change', apply);
-    else if (mq.addListener) mq.addListener(apply); // Safari fallback
-  }
+
+  const stored = window.localStorage?.getItem?.(THEME_KEY);
+  applyTheme(stored === 'light' ? 'light' : 'dark');
+
+  window.__setTheme = applyTheme;
+  window.__toggleTheme = () => {
+    const current = b.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+    applyTheme(current === 'light' ? 'dark' : 'light');
+  };
 } catch {}
 
 // IntersectionObserver for [data-reveal] (init after first paint)
