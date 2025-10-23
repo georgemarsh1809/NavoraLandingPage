@@ -184,7 +184,7 @@ function Header({ ctaHref = '#team' }) {
     };
 
     const navClass = (id) =>
-        onHowItWorks ? '' : current === id ? 'active' : '';
+        onHowItWorks ? '' : current === id ? 'active' : typeof id === 'string' ? current === id : '';
 
     return (
         <header className="header">

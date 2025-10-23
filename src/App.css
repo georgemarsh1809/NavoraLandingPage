@@ -32,6 +32,7 @@
     --btn-outline-hover-bg: #141414;
     --menu-toggle-border: #333;
     --menu-toggle-hover-bg: #151515;
+    --menu-toggle-divider: rgba(255,255,255,0.12);
     --panel-elev: none;
     color-scheme: dark;
 }
@@ -58,6 +59,7 @@
         --btn-fg: #ffffff;
         --menu-toggle-border: #d6d6d6;
         --menu-toggle-hover-bg: #efefef;
+        --menu-toggle-divider: rgba(0,0,0,0.08);
         --panel-elev: 0 12px 28px rgba(22, 30, 46, 0.08);
         --btn-outline-border: #cccccc;
         --btn-outline-hover-border: #bbbbbb;
@@ -405,6 +407,8 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     align-items: center;
     gap: 1rem;
     margin-left: 0.75rem;
+    border-left: 1px solid var(--menu-toggle-divider);
+    padding-left: 0.75rem;
 }
 
 .theme-toggle {
