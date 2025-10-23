@@ -242,7 +242,7 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                             icon={faComments}
                                             style={{ marginRight: 8 }}
                                         />
-                                        Pressure-test my plan
+                                        Discuss this plan with GBM
                                     </a>
                                     <span
                                         className="small"
