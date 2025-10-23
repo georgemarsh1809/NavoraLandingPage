@@ -400,6 +400,13 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     gap: 0.75rem;
 }
 
+.header-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: 0.75rem;
+}
+
 .theme-toggle {
     display: inline-flex;
     align-items: center;
@@ -902,6 +909,10 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     }
     .header-actions {
         gap: 0.5rem;
+    }
+    .header-controls {
+        gap: 0.5rem;
+        margin-left: 0.25rem;
     }
     .menu-toggle {
         display: inline-flex;

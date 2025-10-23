@@ -194,7 +194,7 @@ function Header({ ctaHref = '#team' }) {
                 </a>
                 <nav className="nav intro delay-1">
                     <a
-                        href={onHowItWorks ? '/#top' : '#top'}
+                        href={onHowItWorks ? '/#hero' : '#hero'}
                         className={navClass('hero')}
                         aria-current={
                             !onHowItWorks && current === 'hero'
@@ -262,6 +262,11 @@ function Header({ ctaHref = '#team' }) {
                     </a>
                 </nav>
                 <div className="header-actions">
+                    <a href={ctaHref} className="btn intro delay-2">
+                        Book a Call
+                    </a>
+                </div>
+                <div className="header-controls">
                     <button
                         type="button"
                         className="theme-toggle"
@@ -279,61 +284,50 @@ function Header({ ctaHref = '#team' }) {
                             mode
                         </span>
                     </button>
-                    <a href={ctaHref} className="btn intro delay-2">
-                        Book a Call
-                    </a>
+                    <button
+                        className="menu-toggle"
+                        aria-expanded={open}
+                        aria-label={open ? 'Close menu' : 'Open menu'}
+                        onClick={() => setOpen((v) => !v)}
+                    >
+                        {open ? (
+                            <svg
+                                width="22"
+                                height="22"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M6 6l12 12M18 6L6 18"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                        ) : (
+                            <svg
+                                width="22"
+                                height="22"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                            >
+                                <path
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                        )}
+                    </button>
                 </div>
-                <button
-                    className="menu-toggle"
-                    aria-expanded={open}
-                    aria-label={open ? 'Close menu' : 'Open menu'}
-                    onClick={() => setOpen((v) => !v)}
-                >
-                    {open ? (
-                        <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M6 6l12 12M18 6L6 18"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                            />
-                        </svg>
-                    ) : (
-                        <svg
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                        >
-                            <path
-                                d="M4 6h16M4 12h16M4 18h16"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                            />
-                        </svg>
-                    )}
-                </button>
             </div>
             {open && (
                 <div className="mobile-menu">
                     <div className="container">
                         <nav className="mobile-nav">
                             <a
-                                href="/how-we-work"
-                                className={onHowItWorks ? 'active' : ''}
-                                aria-current={onHowItWorks ? 'page' : undefined}
-                                onClick={() => close()}
-                            >
-                                How We Work
-                            </a>
-                            <a
-                                href={onHowItWorks ? '/#top' : '#top'}
+                                href={onHowItWorks ? '/#hero' : '#hero'}
                                 className={navClass('hero')}
                                 aria-current={
                                     !onHowItWorks && current === 'hero'
@@ -419,23 +413,6 @@ function Header({ ctaHref = '#team' }) {
                             </a>
                         </nav>
                         <div className="mobile-actions">
-                            <button
-                                type="button"
-                                className="theme-toggle"
-                                onClick={handleThemeToggle}
-                                aria-label={`Switch to ${
-                                    theme === 'light' ? 'dark' : 'light'
-                                } mode`}
-                            >
-                                <FontAwesomeIcon
-                                    icon={theme === 'light' ? faMoon : faSun}
-                                    aria-hidden="true"
-                                />
-                                <span className="sr-only">
-                                    Toggle to{' '}
-                                    {theme === 'light' ? 'dark' : 'light'} mode
-                                </span>
-                            </button>
                             <a href={ctaHref} className="btn" onClick={close}>
                                 Book your AI Discovery Call
                             </a>

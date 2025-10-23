@@ -50,7 +50,7 @@ const tiers = {
 };
 
 export default function PricingCalculator({ ctaHref = '#team' }) {
-    const [selTier, setSelTier] = useState('implement');
+    const [selTier, setSelTier] = useState('discover');
     const [pricingOpen, setPricingOpen] = useState(false);
 
     const tier = tiers[selTier];
