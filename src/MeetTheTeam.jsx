@@ -25,7 +25,7 @@ export default function MeetTheTeam() {
                         loading="lazy"
                     />
                     <div>
-                        <h3>George Marsh | Founder &amp; Lead Consultant</h3>
+                        <h3>George Marsh | Founder &amp; Lead AI Consultant</h3>
                         <p>
                             George leads GBM’s AI transformation engagements,
                             blending 5+ years delivering mission-critical
@@ -57,6 +57,54 @@ export default function MeetTheTeam() {
                                     aria-hidden="true"
                                 />
                                 <span>Email George</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div className="team-card card">
+                    <img
+                        src="/bigTheadshot2.png"
+                        alt="Tony, founder of GBMGroup"
+                        className="team-photo"
+                        loading="lazy"
+                    />
+                    <div>
+                        <h3>
+                            Tony Marsh | Co-founder &amp; Operations Consultant
+                        </h3>
+                        <p>
+                            Tony brings 30+ years of hands-on experience across
+                            transport & logistics. Having led depot teams,
+                            managed national contracts, and overseen large-scale
+                            networks, he understands the daily realities that
+                            drive operational performance. He combines decades
+                            of practical leadership with a forward-thinking
+                            approach, to help teams modernise systems, improve
+                            utilisation, and strengthen compliance through
+                            smarter, data-driven processes.
+                        </p>
+                        <div className="team-links">
+                            <a
+                                href="https://www.linkedin.com/in/tony-marsh-7a5745178/"
+                                className="team-link"
+                                target="_blank"
+                                rel="noreferrer noopener"
+                            >
+                                <FontAwesomeIcon
+                                    icon={faLinkedin}
+                                    aria-hidden="true"
+                                />
+                                <span>Connect on LinkedIn</span>
+                            </a>
+                            <a
+                                href="mailto:tonymarsh4888@gmail.com"
+                                className="team-link"
+                            >
+                                <FontAwesomeIcon
+                                    icon={faEnvelope}
+                                    aria-hidden="true"
+                                />
+                                <span>Email Tony</span>
                             </a>
                         </div>
                     </div>

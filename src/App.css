@@ -32,7 +32,7 @@
     --btn-outline-hover-bg: #141414;
     --menu-toggle-border: #333;
     --menu-toggle-hover-bg: #151515;
-    --menu-toggle-divider: rgba(255,255,255,0.12);
+    --menu-toggle-divider: rgba(255, 255, 255, 0.12);
     --panel-elev: none;
     color-scheme: dark;
 }
@@ -59,7 +59,7 @@
         --btn-fg: #ffffff;
         --menu-toggle-border: #d6d6d6;
         --menu-toggle-hover-bg: #efefef;
-        --menu-toggle-divider: rgba(0,0,0,0.08);
+        --menu-toggle-divider: rgba(0, 0, 0, 0.08);
         --panel-elev: 0 12px 28px rgba(22, 30, 46, 0.08);
         --btn-outline-border: #cccccc;
         --btn-outline-hover-border: #bbbbbb;
@@ -69,7 +69,9 @@
         /* Uncomment to try: */
         /* --font-heading: 'DM Sans', 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; */
     }
-    .header { box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06); }
+    .header {
+        box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+    }
     /* Invert hero button only in light mode for contrast */
     .hero {
         background: radial-gradient(
@@ -154,7 +156,9 @@ body[data-theme='light'] {
     --btn-outline-hover-border: #bbbbbb;
     --btn-outline-hover-bg: #f5f5f5;
 }
-body[data-theme='light'] .header { box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06); }
+body[data-theme='light'] .header {
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+}
 :root[data-theme='light'] .hero,
 :root[data-theme='light'] .hero,
 body[data-theme='light'] .hero {
@@ -194,7 +198,9 @@ body[data-theme='light'] .hero::after {
 }
 body[data-theme='light'] #value .card,
 body[data-theme='light'] #solutions .card,
-body[data-theme='light'] #how .card { background: var(--panel); }
+body[data-theme='light'] #how .card {
+    background: var(--panel);
+}
 
 /* Force Dark */
 :root[data-theme='dark'],
@@ -347,10 +353,15 @@ a:hover {
     filter: saturate(1.1);
     transition: transform 0.16s ease, opacity 0.16s ease;
 }
-.tech-logos img:hover { opacity: 1; transform: translateY(-1px); }
+.tech-logos img:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+}
 
 @media (prefers-color-scheme: dark) {
-    .tech-logos img[data-invert-on-dark='true'] { filter: invert(1) brightness(1.1); }
+    .tech-logos img[data-invert-on-dark='true'] {
+        filter: invert(1) brightness(1.1);
+    }
 }
 body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     filter: invert(1) brightness(1.1);
@@ -362,6 +373,7 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     gap: calc(var(--gap) * 1.5);
     padding: 1.75rem;
     flex-wrap: wrap;
+    margin-top: 20px;
 }
 .team-card > div {
     flex: 1;
@@ -465,8 +477,7 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
         ),
         var(--panel);
     box-shadow: 0 14px 30px rgba(20, 32, 44, 0.18),
-        0 0 24px rgba(47, 165, 160, 0.08),
-        0 0 0 1px rgba(47, 165, 160, 0.06);
+        0 0 24px rgba(47, 165, 160, 0.08), 0 0 0 1px rgba(47, 165, 160, 0.06);
     transform: translateY(0);
     transition: transform 0.28s ease, box-shadow 0.28s ease,
         border-color 0.28s ease;
@@ -490,8 +501,7 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     transform: translateY(-4px);
     border-color: rgba(47, 165, 160, 0.38);
     box-shadow: 0 18px 42px rgba(18, 30, 42, 0.24),
-        0 0 36px rgba(47, 165, 160, 0.14),
-        0 0 0 1px rgba(47, 165, 160, 0.12);
+        0 0 36px rgba(47, 165, 160, 0.14), 0 0 0 1px rgba(47, 165, 160, 0.12);
 }
 .pricing-card:hover::before,
 .pricing-card.is-open::before {
@@ -510,8 +520,7 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
         ),
         var(--panel);
     box-shadow: 0 14px 32px rgba(20, 32, 44, 0.2),
-        0 0 24px rgba(47, 165, 160, 0.08),
-        0 0 0 1px rgba(47, 165, 160, 0.06);
+        0 0 24px rgba(47, 165, 160, 0.08), 0 0 0 1px rgba(47, 165, 160, 0.06);
     overflow: hidden;
     transition: transform 0.28s ease, box-shadow 0.28s ease,
         border-color 0.28s ease;
@@ -533,8 +542,7 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     transform: translateY(-2px);
     border-color: rgba(47, 165, 160, 0.34);
     box-shadow: 0 18px 40px rgba(18, 30, 42, 0.22),
-        0 0 30px rgba(47, 165, 160, 0.12),
-        0 0 0 1px rgba(47, 165, 160, 0.12);
+        0 0 30px rgba(47, 165, 160, 0.12), 0 0 0 1px rgba(47, 165, 160, 0.12);
 }
 .cta-card:hover::before {
     opacity: 0.25;
@@ -557,8 +565,7 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     color: inherit;
     cursor: pointer;
     font-weight: 600;
-    transition: background 0.18s ease, color 0.18s ease,
-        border-color 0.18s ease;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 .collapsible-toggle:hover {
     background: rgba(47, 165, 160, 0.12);
@@ -577,8 +584,7 @@ body[data-theme='dark'] .tech-logos img[data-invert-on-dark='true'] {
     opacity: 0;
     transform: translateY(-6px);
     pointer-events: none;
-    transition: max-height 0.35s ease, opacity 0.25s ease,
-        transform 0.25s ease;
+    transition: max-height 0.35s ease, opacity 0.25s ease, transform 0.25s ease;
 }
 .collapsible-body.is-open {
     max-height: 1600px; /* enough room for content */
@@ -1534,12 +1540,24 @@ body:not(.app-ready) .page {
         filter: blur(0);
     }
 }
-.intro { opacity: 0; }
-.app-ready .intro { animation: introFadeUp 520ms ease forwards; }
-.app-ready .intro.delay-1 { animation-delay: 120ms; }
-.app-ready .intro.delay-2 { animation-delay: 240ms; }
-.app-ready .intro.delay-3 { animation-delay: 360ms; }
-.app-ready .intro.delay-4 { animation-delay: 480ms; }
+.intro {
+    opacity: 0;
+}
+.app-ready .intro {
+    animation: introFadeUp 520ms ease forwards;
+}
+.app-ready .intro.delay-1 {
+    animation-delay: 120ms;
+}
+.app-ready .intro.delay-2 {
+    animation-delay: 240ms;
+}
+.app-ready .intro.delay-3 {
+    animation-delay: 360ms;
+}
+.app-ready .intro.delay-4 {
+    animation-delay: 480ms;
+}
 
 @media (prefers-reduced-motion: reduce) {
     .app-ready .intro {
