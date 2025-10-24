@@ -29,11 +29,13 @@ export default function MeetTheTeam() {
                         <p>
                             George leads GBM’s AI transformation engagements,
                             blending 5+ years delivering mission-critical
-                            software for Government with deep, family-rooted
-                            knowledge of transport & logistics. He guides each
-                            engagement from discovery through to implementation
-                            and ongoing support, ensuring every team, from
-                            operations to finance, sees real, measurable impact.
+                            software for Government with strong, family-rooted
+                            knowledge of transport & logistics, and a deep
+                            passion for using AI to transform business. He
+                            guides each engagement from discovery through to
+                            implementation and ongoing support, ensuring every
+                            team, from operations to finance, sees real,
+                            measurable impact.
                         </p>
                         <div className="team-links">
                             <a
@@ -63,7 +65,7 @@ export default function MeetTheTeam() {
                 </div>
                 <div className="team-card card">
                     <img
-                        src="/bigTheadshot2.png"
+                        src="/bigTheadshot3.png"
                         alt="Tony, founder of GBMGroup"
                         className="team-photo"
                         loading="lazy"
