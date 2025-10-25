@@ -25,7 +25,7 @@ export default function MeetTheTeam() {
                         loading="lazy"
                     />
                     <div>
-                        <h3>George Marsh | Founder &amp; Lead AI Consultant</h3>
+                        <h3>George Marsh · Founder &amp; Lead AI Consultant</h3>
                         <p>
                             George leads GBM’s AI transformation engagements,
                             blending 5+ years delivering mission-critical
@@ -72,7 +72,7 @@ export default function MeetTheTeam() {
                     />
                     <div>
                         <h3>
-                            Tony Marsh | Co-founder &amp; Operations Consultant
+                            Tony Marsh · Co-founder &amp; Operations Consultant
                         </h3>
                         <p>
                             Tony brings 30+ years of hands-on experience across

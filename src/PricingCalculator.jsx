@@ -78,7 +78,7 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                 icon={faCalculator}
                                 aria-hidden="true"
                             />
-                            AI Transformation Investment Guide
+                            AI Transformation Pricing Guide
                         </h3>
                         <button
                             type="button"
