@@ -99,7 +99,7 @@ export default function MeetTheTeam() {
                                 <span>Connect on LinkedIn</span>
                             </a>
                             <a
-                                href="mailto:tonymarsh4888@gmail.com"
+                                href="mailto:tony@gbmgroup.io"
                                 className="team-link"
                             >
                                 <FontAwesomeIcon
