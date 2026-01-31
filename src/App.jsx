@@ -1,19 +1,11 @@
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faPuzzlePiece,
     faCircleQuestion,
-    faSeedling,
-    faLayerGroup,
-    faLifeRing,
-    faGears,
-    faDiagramProject,
-    faChartLine,
     faSun,
     faMoon,
 } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
-import PricingCalculator from './PricingCalculator.jsx';
 import HowItWorks from './HowItWorks.jsx';
 import CTA from './CTA.jsx';
 import MeetTheTeam from './MeetTheTeam.jsx';
@@ -65,16 +57,18 @@ function GBMGroupLanding({ ctaHref = '#team' }) {
             <main id="main">
                 <Hero ctaHref={ctaHref} />
                 <ValueProps />
-                <Solutions />
+                <Solutions ctaHref={ctaHref} />
+                <WhoItsFor />
+                <HowItWorksSteps />
                 <div
                     className="container text-center"
                     style={{ marginTop: 0, marginBottom: 30 }}
                 >
                     <a href={ctaHref} className="btn cta-inline">
-                        Book a Free Discovery Call
+                        Get an Operational Clarity Audit
                     </a>
                 </div>
-                <PricingCalculator ctaHref={ctaHref} />
+                <About />
                 <MeetTheTeam />
                 <CTA />
                 <FAQ />
@@ -90,7 +84,7 @@ function Header({ ctaHref = '#team' }) {
     const [theme, setTheme] = useState(() =>
         typeof document !== 'undefined'
             ? document.body.getAttribute('data-theme') || 'dark'
-            : 'dark'
+            : 'dark',
     );
     const close = () => setOpen(false);
     const path = typeof window !== 'undefined' ? window.location.pathname : '/';
@@ -184,7 +178,13 @@ function Header({ ctaHref = '#team' }) {
     };
 
     const navClass = (id) =>
-        onHowItWorks ? '' : current === id ? 'active' : typeof id === 'string' ? current === id : '';
+        onHowItWorks
+            ? ''
+            : current === id
+              ? 'active'
+              : typeof id === 'string'
+                ? current === id
+                : '';
 
     return (
         <header className="header">
@@ -215,7 +215,7 @@ function Header({ ctaHref = '#team' }) {
                         }
                         onClick={() => setCurrent('solutions')}
                     >
-                        Services
+                        Audit
                     </a>
                     <a
                         href="/how-we-work"
@@ -223,18 +223,6 @@ function Header({ ctaHref = '#team' }) {
                         aria-current={onHowItWorks ? 'page' : undefined}
                     >
                         How We Work
-                    </a>
-                    <a
-                        href={onHowItWorks ? '/#pricing' : '#pricing'}
-                        className={navClass('pricing')}
-                        aria-current={
-                            !onHowItWorks && current === 'pricing'
-                                ? 'location'
-                                : undefined
-                        }
-                        onClick={() => setCurrent('pricing')}
-                    >
-                        Pricing
                     </a>
                     <a
                         href={onHowItWorks ? '/#team' : '#team'}
@@ -261,12 +249,10 @@ function Header({ ctaHref = '#team' }) {
                         FAQ
                     </a>
                 </nav>
-                <div className="header-actions">
+                <div className="header-controls">
                     <a href={ctaHref} className="btn intro delay-2">
                         Book a Call
                     </a>
-                </div>
-                <div className="header-controls">
                     <button
                         type="button"
                         className="theme-toggle"
@@ -356,7 +342,7 @@ function Header({ ctaHref = '#team' }) {
                                     close();
                                 }}
                             >
-                                Services
+                                Audit
                             </a>
                             <a
                                 href="/how-we-work"
@@ -365,21 +351,6 @@ function Header({ ctaHref = '#team' }) {
                                 onClick={() => close()}
                             >
                                 How We Work
-                            </a>
-                            <a
-                                href={onHowItWorks ? '/#pricing' : '#pricing'}
-                                className={navClass('pricing')}
-                                aria-current={
-                                    !onHowItWorks && current === 'pricing'
-                                        ? 'location'
-                                        : undefined
-                                }
-                                onClick={() => {
-                                    setCurrent('pricing');
-                                    close();
-                                }}
-                            >
-                                Pricing
                             </a>
                             <a
                                 href={onHowItWorks ? '/#team' : '#team'}
@@ -414,7 +385,7 @@ function Header({ ctaHref = '#team' }) {
                         </nav>
                         <div className="mobile-actions">
                             <a href={ctaHref} className="btn" onClick={close}>
-                                Book your AI Discovery Call
+                                Get an Operational Clarity Audit
                             </a>
                         </div>
                     </div>
@@ -429,29 +400,24 @@ function Hero({ ctaHref = '#team' }) {
         <section className="hero" id="hero">
             <div className="container">
                 <h1 className="intro">
-                    <span>AI Transformation for SMEs</span>
-                    <br />
-                    <span className="highlight">
-                        Discover. Implement. Evolve.
-                    </span>
+                    Remove daily bottlenecks. Regain decision clarity.
                 </h1>
                 <p className="intro delay-1">
-                    We help operations-heavy businesses turn fragmented data and
-                    manual workflows into efficient, automated systems that save
-                    you money, and give you back the time to focus on what
-                    really matters.
+                    We work with founders and leadership teams to identify and
+                    eliminate the operational friction that keeps them stuck in
+                    the business, freeing their time to work on the business.
                 </p>
                 <div className="buttons intro delay-2">
                     <a href={ctaHref} className="btn">
-                        Book a Free Discovery Call
+                        Get an Operational Clarity Audit
                     </a>
-                    <a href="#solutions" className="btn btn-outline">
-                        Explore Services
+                    <a href="#how" className="btn btn-outline">
+                        See How It Works
                     </a>
                 </div>
                 <p className="small intro delay-3" style={{ marginTop: 8 }}>
-                    30‑minute call to understand your operation, data sources,
-                    and opportunities.
+                    30‑minute call to understand your operation, decision needs,
+                    and bottlenecks.
                 </p>
             </div>
         </section>
@@ -459,119 +425,79 @@ function Hero({ ctaHref = '#team' }) {
 }
 
 function ValueProps() {
-    const items = [
-        {
-            title: 'Streamline Operations',
-            desc: 'Eliminate repetitive manual work, reduce admin overhead and free up your team’s time through smart automation. Focus on the tasks that truly drive growth and service quality.',
-            icon: faGears,
-        },
-        {
-            title: 'Connect Data Sources',
-            desc: 'Bring together data from multiple systems into clear, real-time dashboards and reports, to gain visibility across your operations and make faster, more confident decisions.',
-            icon: faDiagramProject,
-        },
-        {
-            title: 'Deliver Measurable ROI',
-            desc: 'Every system is designed to show real, quantifiable impact in time saved, costs reduced, or revenue uplifted. AI isn’t about hype, it’s about building tools that pay for themselves.',
-            icon: faChartLine,
-        },
-    ];
     return (
         <section id="value" className="section">
             <div className="container">
-                <h2 className="section-title">Why Teams Partner with GBM</h2>
-                <div className="grid">
-                    {items.map((it) => (
-                        <div key={it.title} className="card">
-                            <h3>
-                                <FontAwesomeIcon
-                                    icon={it.icon}
-                                    style={{ marginRight: 8 }}
-                                />
-                                {it.title}
-                            </h3>
-                            <p>{it.desc}</p>
-                        </div>
-                    ))}
-                </div>
+                <h2 className="section-title">What We Do</h2>
+                <p>
+                    Most growing businesses don’t have a technology problem.
+                    They have a visibility and prioritisation problem.
+                </p>
+                <ul>
+                    <li>Data becomes fragmented</li>
+                    <li>Decisions become reactive</li>
+                    <li>
+                        Leaders spend more time chasing information than acting
+                        on it
+                    </li>
+                </ul>
+                <p>
+                    GBM helps you see where the business is leaking time, money,
+                    or attention, and gives you a clear path to eliminate it.
+                </p>
+                <ul>
+                    <li>
+                        Clarify what leadership actually needs to see, daily and
+                        weekly
+                    </li>
+                    <li>Identify the highest-impact operational bottlenecks</li>
+                    <li>
+                        Design simple, durable systems that reduce manual work
+                        rather than add to it
+                    </li>
+                </ul>
             </div>
         </section>
     );
 }
 
-function Solutions() {
-    const items = [
-        {
-            title: 'Discovery',
-            icon: faSeedling,
-            bullets: [
-                'Focused interviews across teams and independent stakeholders.',
-                'Data, process and systems audit with AI opportunity map and ROI summary.',
-                'Board-ready plan covering AI use cases, roadmap, and risks.',
-            ],
-        },
-        {
-            title: 'Implementation',
-            icon: faLayerGroup,
-            bullets: [
-                'Integrate high-impact automations and solutions with live data.',
-                'Integrate with current processes, from finance and HR, to customer and compliance.',
-                'Weekly updates & training so team leads can adopt fast, without friction.',
-            ],
-        },
-        {
-            title: 'Support & Evolution',
-            icon: faLifeRing,
-            bullets: [
-                'Testing, monitoring, and CI to keep solutions sharp & up-to-date.',
-                'New data sources, system enhancements, and change requests bundled.',
-                'Continued direct communications with GBM for stakeholders.',
-            ],
-        },
-    ];
-
+function Solutions({ ctaHref = '#team' }) {
     return (
         <section id="solutions" className="section">
             <div className="container">
-                <h2 className="section-title">
-                    <FontAwesomeIcon
-                        icon={faPuzzlePiece}
-                        style={{ marginRight: 8 }}
-                    />
-                    Services
-                </h2>
-                <div className="grid">
-                    {items.map((card) => (
-                        <div key={card.title} className="card">
-                            <h3
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    gap: 8,
-                                    marginTop: 4,
-                                }}
-                            >
-                                <FontAwesomeIcon
-                                    icon={card.icon}
-                                    style={{
-                                        color: 'var(--muted)',
-                                        fontSize: 14,
-                                    }}
-                                />
-                                {card.title}
-                            </h3>
-                            <ul>
-                                {card.bullets.map((b) => (
-                                    <li key={b}>{b}</li>
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
-                </div>
+                <h2 className="section-title">The Operational Clarity Audit</h2>
+                <p className="section-lede">
+                    A short, time-bound engagement designed to give you
+                    immediate clarity on where to focus.
+                </p>
+                <p>In 14 days, we will:</p>
+                <ul>
+                    <li>
+                        Identify the top 3 operational bottlenecks limiting
+                        performance or decision-making
+                    </li>
+                    <li>
+                        Map where data, reporting, or process breakdowns are
+                        creating friction
+                    </li>
+                    <li>
+                        Deliver a clear, prioritised roadmap for elimination and
+                        improvement
+                    </li>
+                </ul>
+                <p>
+                    This is not a build. It’s a diagnostic designed to help you
+                    decide what is actually worth fixing.
+                </p>
                 <div className="text-center" style={{ marginTop: 20 }}>
+                    <a href={ctaHref} className="btn cta-inline">
+                        Book an Audit Intro Call
+                    </a>
+                </div>
+                <div className="text-center" style={{ marginTop: 16 }}>
                     <p className="small" style={{ color: 'var(--muted)' }}>
                         <a className="underline" href="/how-we-work">
-                            See how a project flows end-to-end
+                            See how it works end-to-end
                         </a>
                     </p>
                 </div>
@@ -580,134 +506,188 @@ function Solutions() {
     );
 }
 
+function WhoItsFor() {
+    return (
+        <section id="who" className="section">
+            <div className="container">
+                <h2 className="section-title">Who this is for</h2>
+                <div
+                    style={{
+                        display: 'grid',
+                        gap: 'var(--gap)',
+                        gridTemplateColumns:
+                            'repeat(auto-fit, minmax(260px, 1fr))',
+                    }}
+                >
+                    <div className="card">
+                        <h3 style={{ marginTop: 0 }}>This is for you if:</h3>
+                        <ul>
+                            <li>
+                                You lead an operations-heavy business with 20 to
+                                200 staff
+                            </li>
+                            <li>
+                                You feel the business has outgrown its systems
+                            </li>
+                            <li>
+                                Decisions rely on spreadsheets, manual reports,
+                                or chasing people
+                            </li>
+                            <li>
+                                You want clarity without adding more meetings or
+                                admin
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="card">
+                        <h3 style={{ marginTop: 0 }}>
+                            This is not for you if:
+                        </h3>
+                        <ul>
+                            <li>You’re looking for a quick AI tool</li>
+                            <li>
+                                You already have clear, trusted daily
+                                operational visibility
+                            </li>
+                            <li>
+                                You want a generic dashboard without context
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function HowItWorksSteps() {
+    const steps = [
+        {
+            title: 'Diagnose',
+            desc: 'We interview key stakeholders and review how decisions are currently made.',
+        },
+        {
+            title: 'Identify',
+            desc: 'We pinpoint where friction, delay, or blind spots are costing you leverage.',
+        },
+        {
+            title: 'Eliminate',
+            desc: 'We define a practical roadmap to remove those bottlenecks with minimal disruption.',
+        },
+        {
+            title: 'Support (Optional)',
+            desc: 'For teams that want help implementing, we offer focused elimination sprints or ongoing support.',
+        },
+    ];
+    return (
+        <section id="how" className="section">
+            <div className="container">
+                <h2 className="section-title">How it works</h2>
+                <div
+                    style={{
+                        display: 'grid',
+                        gap: 'var(--gap)',
+                        gridTemplateColumns:
+                            'repeat(auto-fit, minmax(240px, 1fr))',
+                    }}
+                >
+                    {steps.map((step) => (
+                        <div key={step.title} className="card">
+                            <h3 style={{ marginTop: 0 }}>{step.title}</h3>
+                            <p>{step.desc}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function About() {
+    return (
+        <section id="about" className="section">
+            <div className="container">
+                <h2 className="section-title">About</h2>
+                <p>
+                    GBM was founded to help operators and founders escape
+                    reactive decision-making.
+                </p>
+                <p>Most leaders aren’t short on data, but short on clarity.</p>
+                <p>
+                    GBM exists to reduce unnecessary operational noise, surface
+                    what actually matters, and help leadership teams spend more
+                    time growing the business, not firefighting it.
+                </p>
+                <p>We are deliberately small, focused, and outcome-driven.</p>
+            </div>
+        </section>
+    );
+}
+
 function FAQ() {
     const items = [
         {
-            q: 'What exactly do you do?',
+            q: 'What is the Operational Clarity Audit?',
             body: (
                 <>
                     <p>
-                        We help small and medium businesses identify where AI
-                        and automation can simplify operations, reduce manual
-                        work, and improve visibility.
-                    </p>
-                    <p>
-                        That typically means running a Discovery Phase to
-                        pinpoint opportunities, then implementing tailored
-                        systems such as automated workflows, dashboards, or AI
-                        assistants.
+                        A focused, time-bound diagnostic to surface the biggest
+                        operational bottlenecks and a clear path to eliminate
+                        them.
                     </p>
                 </>
             ),
         },
         {
-            q: 'What kinds of businesses do you work with?',
+            q: 'Who is it for?',
             body: (
                 <>
                     <p>
-                        We usually partner with operations-heavy firms, like
-                        transport, logistics, property management, and other
-                        service companies, where time and data inefficiencies
-                        are obvious.
-                    </p>
-                    <p>
-                        If your teams rely on spreadsheets, repetitive admin, or
-                        fragmented tools, automation can almost certainly unlock
-                        quick wins.
+                        Operations-led businesses with 20–200 staff where
+                        decision-making is slowed by fragmented data, manual
+                        reporting, and unclear priorities.
                     </p>
                 </>
             ),
         },
         {
-            q: 'What does the Discovery Phase involve?',
+            q: 'What do we receive at the end?',
             body: (
                 <>
                     <p>
-                        It’s a structured review of your workflows, systems, and
-                        data flows. You’ll receive an AI Opportunity Report
-                        outlining:
+                        A practical, prioritised roadmap that shows what to fix
+                        first and why. You’ll see:
                     </p>
                     <ul>
-                        <li>Quick wins for automation</li>
-                        <li>Medium-term system improvements</li>
-                        <li>A roadmap and ROI summary</li>
+                        <li>The top 3 bottlenecks limiting performance</li>
+                        <li>
+                            Where data or process breakdowns create friction
+                        </li>
+                        <li>A clear elimination and improvement plan</li>
                     </ul>
-                    <p>
-                        That way you can see exactly what’s possible before
-                        committing to any implementation.
-                    </p>
                 </>
             ),
         },
         {
-            q: 'What are examples of the kinds of systems you build?',
-            body: (
-                <ul>
-                    <li>Automated KPI and finance dashboards</li>
-                    <li>Document and compliance trackers</li>
-                    <li>Internal chat assistants for data lookups</li>
-                    <li>
-                        Workflow automations linking tools like Google Sheets,
-                        email, and CRMs
-                    </li>
-                    <li>Tailored AI systems built around your processes</li>
-                </ul>
-            ),
-        },
-        {
-            q: 'Do you replace staff with AI?',
-            body: (
-                <>
-                    <p>Absolutely not.</p>
-                    <p>
-                        The aim is to augment your team; automating routine work
-                        so people can focus on decisions, clients, and
-                        higher-value tasks.
-                    </p>
-                </>
-            ),
-        },
-        {
-            q: 'How do you ensure data security and privacy?',
-            body: (
-                <>
-                    <p>
-                        Every build follows a data-minimisation approach.
-                        Sensitive information stays within your systems wherever
-                        possible.
-                    </p>
-                    <p>
-                        We rely on trusted, GDPR-compliant providers such as
-                        Google Cloud, n8n, and the OpenAI API, and you retain
-                        full control over credentials and access.
-                    </p>
-                </>
-            ),
-        },
-        {
-            q: 'How long does an implementation take?',
-            body: (
-                <>
-                    <p>
-                        It depends on complexity, but most systems go live
-                        within 2–6 weeks after the Discovery Phase.
-                    </p>
-                    <p>
-                        Quick wins, such as dashboards or targeted automations,
-                        are often prototyped in a matter of days.
-                    </p>
-                </>
-            ),
-        },
-        {
-            q: 'What ongoing support do you offer?',
+            q: 'Do you build anything during the audit?',
             body: (
                 <p>
-                    Every system comes with a Support &amp; Maintenance option.
-                    We test, enhance, and cost-manage your automations each
-                    month so they continue to deliver value as your business and
-                    technology evolve.
+                    No. The audit is a diagnostic. If you want help removing
+                    bottlenecks afterward, we can support focused elimination
+                    sprints or ongoing work.
                 </p>
+            ),
+        },
+        {
+            q: 'Do you need to replace your systems?',
+            body: (
+                <>
+                    <p>
+                        No. We start with what you already use and identify the
+                        smallest changes that create the biggest operational
+                        lift.
+                    </p>
+                </>
             ),
         },
     ];
@@ -747,7 +727,7 @@ function Footer() {
                 <nav className="footer-nav">
                     <a href="/how-we-work">What We Do</a>
                     <a href="#value">Home</a>
-                    <a href="#solutions">Services</a>
+                    <a href="#solutions">Audit</a>
                     <a href="#pricing">Pricing</a>
                     <a href="#team">Team</a>
                     <a href="#faq">FAQ</a>

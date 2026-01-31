@@ -25,17 +25,15 @@ export default function MeetTheTeam() {
                         loading="lazy"
                     />
                     <div>
-                        <h3>George Marsh · Founder &amp; Lead AI Consultant</h3>
+                        <h3>George Marsh · Founder &amp; Lead Consultant</h3>
                         <p>
-                            George leads GBM’s AI transformation engagements,
+                            George leads GBM’s operational clarity engagements,
                             blending 5+ years delivering mission-critical
-                            software for Government with strong, family-rooted
-                            knowledge of transport & logistics, and a deep
-                            passion for using AI to transform business. He
-                            guides each engagement from discovery through to
-                            implementation and ongoing support, ensuring every
-                            team, from operations to finance, sees real,
-                            measurable impact.
+                            software for Government with deep, family-rooted
+                            knowledge of transport & logistics. He guides each
+                            engagement from diagnosis through to elimination
+                            support, ensuring teams see measurable impact in
+                            time saved and decision quality.
                         </p>
                         <div className="team-links">
                             <a
@@ -80,10 +78,10 @@ export default function MeetTheTeam() {
                             managed national contracts, and overseen large-scale
                             networks, he understands the daily realities that
                             drive operational performance. He combines decades
-                            of practical leadership with a forward-thinking
-                            approach, to help teams modernise systems, improve
-                            utilisation, and strengthen compliance through
-                            smarter, data-driven processes.
+                            of practical leadership with a direct, operator-led
+                            approach to help teams improve utilisation,
+                            strengthen compliance, and regain daily decision
+                            visibility.
                         </p>
                         <div className="team-links">
                             <a

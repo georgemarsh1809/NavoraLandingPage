@@ -6,9 +6,7 @@ import {
     faListCheck,
     faUsers,
     faMagnifyingGlass,
-    faWandMagicSparkles,
     faGears,
-    faRocket,
     faArrowsRotate,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,22 +19,22 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                         <span>The GBM Approach</span>
                         <br />
                         <span className="highlight">
-                            Clarity to build trust. Honesty to build
-                            partnerships.
+                            Decision clarity before any build.
                         </span>
                     </h1>
                     <p>
-                        Discovery-to-support engagements that replace
-                        spreadsheet chaos with AI co-pilots, live dashboards,
-                        and operations-ready system builds.
+                        Outcome-driven engagements that remove operational
+                        friction and restore daily decision visibility without
+                        adding noise.
                     </p>
                     <div className="buttons">
                         <a className="btn" href={ctaHref}>
-                            Book an AI Discovery Call
+                            Book an Audit Intro Call
                         </a>
                     </div>
                     <p className="small" style={{ marginTop: 8 }}>
-                        30‑minute session to map depots, data, and quick wins.
+                        30‑minute session to confirm fit for the Operational
+                        Clarity Audit.
                     </p>
                 </div>
             </section>
@@ -75,23 +73,23 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                                 {[
                                     {
                                         title: 'Fragmented systems & data',
-                                        body: 'CRMs, spreadsheets, trackers, and finance tools rarely speak to one another, so teams waste time stitching together the story.',
+                                        body: 'CRMs, spreadsheets, trackers, and finance tools rarely align, so leaders lose the story behind the numbers.',
                                     },
                                     {
                                         title: 'Reactive planning & reporting',
-                                        body: 'Leaders chase updates and compile reports by hand, meaning insights arrive after the moment to act has passed.',
+                                        body: 'Reporting is manual and late, so decisions follow problems instead of preventing them.',
                                     },
                                     {
                                         title: 'Siloed Communication',
-                                        body: 'Information lives in emails, chat threads, and isolated systems, causing delays, duplication, and missed opportunities for collaboration.',
+                                        body: 'Information lives in emails and chat threads, creating delays, duplication, and missed accountability.',
                                     },
                                     {
                                         title: 'Compliance & customer pressure',
-                                        body: 'Boards, auditors, and clients expect rapid evidence, even when the team is already stretched thin.',
+                                        body: 'Boards, auditors, and clients still expect rapid evidence, even when the team is stretched thin.',
                                     },
                                     {
                                         title: 'Limited build capacity',
-                                        body: 'You can see the value in automation, but internal teams lack the time and specialist skills to ship and maintain it.',
+                                        body: 'Teams know what should change, but lack the time and bandwidth to fix it properly.',
                                     },
                                 ].map((item) => (
                                     <div
@@ -136,16 +134,16 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                                     icon: faListCheck,
                                     items: [
                                         {
-                                            label: 'Discovery sessions',
-                                            body: 'Structured sprints to pinpoint opportunities.',
+                                            label: 'Operational Clarity Audit',
+                                            body: 'A focused diagnostic to surface bottlenecks and priorities.',
                                         },
                                         {
-                                            label: 'Implementation cycles',
-                                            body: 'Focused delivery that ships powerful solutions.',
+                                            label: 'Elimination sprints',
+                                            body: 'Targeted work to remove the highest-impact friction points.',
                                         },
                                         {
-                                            label: 'Support & evolution',
-                                            body: 'CI, testing, and release notes so the solutions keep up.',
+                                            label: 'Support (optional)',
+                                            body: 'Ongoing help to keep decision visibility durable.',
                                         },
                                     ],
                                 },
@@ -154,16 +152,16 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                                     icon: faUsers,
                                     items: [
                                         {
-                                            label: 'Ops-led organisations',
-                                            body: 'Operations-heavy teams ready to modernise.',
+                                            label: 'Ops-led teams',
+                                            body: 'Businesses where daily decisions depend on operational clarity.',
                                         },
                                         {
                                             label: 'Multi-system environments',
-                                            body: 'Businesses juggling multiple tools, compliance requirements, and customer expectations.',
+                                            body: 'Teams juggling spreadsheets, trackers, and manual reporting.',
                                         },
                                         {
-                                            label: 'Ambitious leaders',
-                                            body: 'Leaders who want to use AI to unlock measurable gains.',
+                                            label: 'Decision-makers',
+                                            body: 'Leaders who want visibility and focus without extra admin.',
                                         },
                                     ],
                                     delay: '60ms',
@@ -237,7 +235,7 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                 style={{ marginTop: 8, marginBottom: 8 }}
             >
                 <a href={ctaHref} className="btn cta-inline">
-                    Build Your Roadmap
+                    Book an Audit Intro Call
                 </a>
             </div>
 
@@ -247,7 +245,7 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                         className="section-title"
                         style={{ textAlign: 'center' }}
                     >
-                        Our Process
+                        How it works
                     </h2>
                     <p
                         className="small"
@@ -258,7 +256,9 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                             color: 'var(--muted)',
                         }}
                     >
-                        There is never any obligation to move from one phase to the next. Each phase is scoped, delivered, and closed independently—and we only advance when it makes sense for your business.
+                        Each phase is scoped, delivered, and closed
+                        independently. We only move forward when it makes sense
+                        for your business.
                     </p>
                     <div
                         style={{
@@ -271,28 +271,23 @@ export default function HowItWorks({ ctaHref = '#team' }) {
                     >
                         {[
                             {
-                                title: '1. Discovery',
-                                desc: 'Initial sprint with stakeholder and team interviews, data audit, and AI opportunity canvas aligned to your KPIs and metrics.',
+                                title: '1. Diagnose',
+                                desc: 'We interview key stakeholders and review how decisions are currently made.',
                                 icon: faMagnifyingGlass,
                             },
                             {
-                                title: '2. Prototype & Pilot',
-                                desc: 'Rapid proof using live data to validate automations, dashboards, or workflow co-pilots before scaling.',
-                                icon: faWandMagicSparkles,
+                                title: '2. Identify',
+                                desc: 'We pinpoint where friction, delay, or blind spots are costing you leverage.',
+                                icon: faListCheck,
                             },
                             {
-                                title: '3. Implementation',
-                                desc: 'Integrate ops, finance, HR, and compliance data with weekly increments you can get to work and quickly see a ROI.',
+                                title: '3. Eliminate',
+                                desc: 'We define a practical roadmap to remove those bottlenecks with minimal disruption.',
                                 icon: faGears,
                             },
                             {
-                                title: '4. Launch & Adoption',
-                                desc: 'Training, documentation, and playbooks so leads and stakeholders adopt with confidence.',
-                                icon: faRocket,
-                            },
-                            {
-                                title: '5. Support & Evolution',
-                                desc: 'Optional retainers for CI, enhancements, and new AI initiatives as your roadmap grows.',
+                                title: '4. Support (Optional)',
+                                desc: 'For teams that want help implementing, we offer focused elimination sprints or ongoing support.',
                                 icon: faArrowsRotate,
                             },
                         ].map((s, i) => (

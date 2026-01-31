@@ -37,9 +37,9 @@ export default function TechStack() {
                     Platforms &amp; Tools We Use
                 </h2>
                 <p className="section-lede">
-                    From data pipelines to AI orchestration, we work with the
-                    tech your business already owns, or help you select the
-                    right fit for growth.
+                    From data pipelines to daily decision visibility, we work
+                    with the tools your business already owns, or help you
+                    select the right fit for growth.
                 </p>
                 <div className="tech-logos">
                     {logos.map((l) => (

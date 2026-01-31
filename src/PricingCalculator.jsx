@@ -7,50 +7,23 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const tiers = {
-    discover: {
-        key: 'discover',
-        name: 'Discover',
-        focus: 'Identify opportunities across people, process, and data.',
+    audit: {
+        key: 'audit',
+        name: 'Operational Clarity Audit',
+        focus: 'A diagnostic engagement to surface bottlenecks and priorities.',
         deliverables: [
-            'Discovery sessions with leadership and frontline teams',
-            'AI Opportunity Report outlining quick wins and risks',
-            'ROI summary and roadmap you can share internally',
+            'Top 3 operational bottlenecks limiting performance',
+            'Map of data/reporting/process breakdowns',
+            'Prioritised roadmap for elimination and improvement',
         ],
-        duration: '1–2 weeks',
-        investment:
-            'Free Initial Meeting → £300–£1,000 full consultation depending on company size.',
-        note: 'Ideal first step to validate value and build internal momentum before investing in delivery.',
-    },
-    implement: {
-        key: 'implement',
-        name: 'Implement',
-        focus: 'Design and deploy the systems that automate the work.',
-        deliverables: [
-            'Prototyping to prove value using your live data',
-            'Full builds: automations, dashboards, and AI assistants',
-            'Documentation, training, and handover playbooks',
-        ],
-        duration: '2–6 weeks',
-        investment: '£1,000–£5,000+ project build',
-        note: 'Scope flexes with integrations, environments, and the number of workflows we automate.',
-    },
-    support: {
-        key: 'support',
-        name: 'Support',
-        focus: 'Keep automation sharp and your team confident post-launch.',
-        deliverables: [
-            'Monthly testing and performance tracking',
-            'Upgrades, change requests, and backlog shaping',
-            'Cost management to keep stack spend under control',
-        ],
-        duration: 'Ongoing',
-        investment: '£200–£1,000 per month',
-        note: 'Retainers scale up or down so you get the blend of monitoring and iteration you need.',
+        duration: '14 days',
+        investment: 'Confirmed after the intro call based on scope.',
+        note: 'This is a diagnostic only. Implementation is optional.',
     },
 };
 
 export default function PricingCalculator({ ctaHref = '#team' }) {
-    const [selTier, setSelTier] = useState('discover');
+    const [selTier, setSelTier] = useState('audit');
     const [pricingOpen, setPricingOpen] = useState(false);
 
     const tier = tiers[selTier];
@@ -78,7 +51,7 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                 icon={faCalculator}
                                 aria-hidden="true"
                             />
-                            AI Transformation Pricing Guide
+                            Operational Clarity Audit Details
                         </h3>
                         <button
                             type="button"
@@ -107,16 +80,15 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                         aria-hidden={!pricingOpen}
                     >
                         <p className="small" style={{ marginTop: 16 }}>
-                            Choose the phase that matches where you are in the
-                            journey. We confirm scope and commercials during a
-                            rapid discovery call.
+                            A focused, time-bound diagnostic to confirm what to
+                            fix first and why.
                         </p>
 
                         <fieldset
                             style={{ border: 'none', padding: 0, margin: 0 }}
                         >
                             <legend id="tier-legend" className="small">
-                                Select a phase
+                                Audit scope
                             </legend>
                             <div
                                 role="radiogroup"
@@ -236,13 +208,13 @@ export default function PricingCalculator({ ctaHref = '#team' }) {
                                     <a
                                         className="button"
                                         href={ctaHref}
-                                        aria-label="Discuss this plan with GBM"
+                                        aria-label="Book an audit intro call"
                                     >
                                         <FontAwesomeIcon
                                             icon={faComments}
                                             style={{ marginRight: 8 }}
                                         />
-                                        Discuss this plan with GBM
+                                        Book an Audit Intro Call
                                     </a>
                                     <span
                                         className="small"

@@ -21,7 +21,7 @@ export default function CTA() {
                             icon={faCalendarCheck}
                             style={{ marginRight: 8 }}
                         />
-                        Book Your AI Discovery Session
+                        Book a Free Audit Intro Call
                     </h2>
                     <p
                         style={{
@@ -30,9 +30,8 @@ export default function CTA() {
                             margin: '0 auto 1.5rem auto',
                         }}
                     >
-                        Map out the AI opportunities in your operation,
-                        potential solutions, and the quickest route to
-                        measurable results.
+                        A short intro call to confirm fit, scope, and timing for
+                        the Operational Clarity Audit.
                     </p>
 
                     <a
@@ -52,7 +51,7 @@ export default function CTA() {
                             icon={faCalendarDays}
                             style={{ marginRight: 8 }}
                         />
-                        Book on Calendly
+                        Book a Free Audit Intro Call
                     </a>
                     <p
                         className="small"
