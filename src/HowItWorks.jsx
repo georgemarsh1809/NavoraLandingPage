@@ -10,22 +10,16 @@ import {
     faArrowsRotate,
 } from '@fortawesome/free-solid-svg-icons';
 
-export default function HowItWorks({ ctaHref = '#team' }) {
+export default function HowItWorks({ ctaHref = "#team" }) {
     return (
         <div id="how">
             <section className="hero">
                 <div className="container">
                     <h1>
-                        <span>The GBM Approach</span>
-                        <br />
-                        <span className="highlight">
-                            Decision clarity before any build.
-                        </span>
+                        <span>Decision clarity before any build.</span>
                     </h1>
                     <p>
-                        Outcome-driven engagements that remove operational
-                        friction and restore daily decision visibility without
-                        adding noise.
+                        We do not start building until we understand your operation. Every engagement begins with a diagnostic phase that defines exactly what needs to exist and why, before a line of code gets written.
                     </p>
                     <div className="buttons">
                         <a className="btn" href={ctaHref}>

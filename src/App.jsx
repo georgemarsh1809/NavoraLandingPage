@@ -58,6 +58,7 @@ function GBMGroupLanding({ ctaHref = '#team' }) {
                 <Hero ctaHref={ctaHref} />
                 <ValueProps />
                 <Solutions ctaHref={ctaHref} />
+                <SecondaryOffer ctaHref={ctaHref} />
                 <WhoItsFor />
                 <HowItWorksSteps />
                 <div
@@ -395,29 +396,26 @@ function Header({ ctaHref = '#team' }) {
     );
 }
 
-function Hero({ ctaHref = '#team' }) {
+function Hero({ ctaHref = "#team" }) {
     return (
         <section className="hero" id="hero">
             <div className="container">
                 <h1 className="intro">
-                    Remove daily bottlenecks. Regain decision clarity.
+                    Your team already knows the report is wrong before they send it.
                 </h1>
                 <p className="intro delay-1">
-                    We work with founders and leadership teams to identify and
-                    eliminate the operational friction that keeps them stuck in
-                    the business, freeing their time to work on the business.
+                    They send it anyway because there's nothing better. By the time the numbers reach leadership they're already out of date, manually compiled, and quietly doubted by everyone in the room. We build ops-heavy businesses a single source of truth for their operations. One live view their leadership can trust, without waiting for someone to compile it.
                 </p>
                 <div className="buttons intro delay-2">
                     <a href={ctaHref} className="btn">
-                        Get an Operational Clarity Audit
+                        Book a Free 30-Minute Call
                     </a>
                     <a href="#how" className="btn btn-outline">
                         See How It Works
                     </a>
                 </div>
                 <p className="small intro delay-3" style={{ marginTop: 8 }}>
-                    30‑minute call to understand your operation, decision needs,
-                    and bottlenecks.
+                    30 minutes to understand your operation and whether we can help. No pitch until we have earned the right.
                 </p>
             </div>
         </section>
@@ -430,72 +428,53 @@ function ValueProps() {
             <div className="container">
                 <h2 className="section-title">What We Do</h2>
                 <p>
-                    Most growing businesses don’t have a technology problem.
-                    They have a visibility and prioritisation problem.
+                    Most ops-heavy businesses don’t have a data problem. They have a trust problem. The data exists. It’s just fragmented across spreadsheets, systems, and one person’s inbox. By the time it reaches the people who need to act on it, it’s already approximate, already late, and already being quietly questioned. We fix that. Not with a six-month transformation project. With a scoped, four-week build that gives your leadership team one place to see what’s actually happening in the business, updated automatically, accurate enough to act on. What changes for your business: reporting that previously took hours each week now updates automatically, KPIs your leadership team actually trusts, decisions made in the meeting room rather than deferred until someone can go and check, and no single person owning a critical spreadsheet that falls apart when they’re away.
                 </p>
-                <ul>
-                    <li>Data becomes fragmented</li>
-                    <li>Decisions become reactive</li>
-                    <li>
-                        Leaders spend more time chasing information than acting
-                        on it
-                    </li>
-                </ul>
-                <p>
-                    GBM helps you see where the business is leaking time, money,
-                    or attention, and gives you a clear path to eliminate it.
-                </p>
-                <ul>
-                    <li>
-                        Clarify what leadership actually needs to see, daily and
-                        weekly
-                    </li>
-                    <li>Identify the highest-impact operational bottlenecks</li>
-                    <li>
-                        Design simple, durable systems that reduce manual work
-                        rather than add to it
-                    </li>
-                </ul>
             </div>
         </section>
     );
 }
 
-function Solutions({ ctaHref = '#team' }) {
+function Solutions({ ctaHref = "#team" }) {
     return (
         <section id="solutions" className="section">
             <div className="container">
-                <h2 className="section-title">The Operational Clarity Audit</h2>
+                <h2 className="section-title">The Ops Clarity System</h2>
                 <p className="section-lede">
-                    A short, time-bound engagement designed to give you
-                    immediate clarity on where to focus.
-                </p>
-                <p>In 14 days, we will:</p>
-                <ul>
-                    <li>
-                        Identify the top 3 operational bottlenecks limiting
-                        performance or decision-making
-                    </li>
-                    <li>
-                        Map where data, reporting, or process breakdowns are
-                        creating friction
-                    </li>
-                    <li>
-                        Deliver a clear, prioritised roadmap for elimination and
-                        improvement
-                    </li>
-                </ul>
-                <p>
-                    This is not a build. It’s a diagnostic designed to help you
-                    decide what is actually worth fixing.
+                    A done-for-you operational dashboard and reporting layer, built in four weeks. We unify your existing data sources into one live view, define and automate the KPIs your leadership actually needs, and eliminate the manual reporting work your team is currently doing by hand. Fixed scope. Fixed price: £3,500 to £5,000. Fully remote. Delivered in four weeks. Optional retainer available for ongoing maintenance and iteration at £500 to £1,000 per month. Guarantee: fully built and live in four weeks, or we keep working until it is. No invoice until you are satisfied.
                 </p>
                 <div className="text-center" style={{ marginTop: 20 }}>
                     <a href={ctaHref} className="btn cta-inline">
-                        Book an Audit Intro Call
+                        Book a Free 30-Minute Call
                     </a>
                 </div>
                 <div className="text-center" style={{ marginTop: 16 }}>
-                    <p className="small" style={{ color: 'var(--muted)' }}>
+                    <p className="small" style={{ color: "var(--muted)" }}>
+                        <a className="underline" href="/how-we-work">
+                            See how it works end-to-end
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+function SecondaryOffer({ ctaHref = "#team" }) {
+    return (
+        <section id="secondary-offer" className="section">
+            <div className="container">
+                <h2 className="section-title">Not ready for a full build yet?</h2>
+                <p className="section-lede">
+                    Start with an Operational Clarity Audit. A 14-day diagnostic that identifies your top three reporting and operational bottlenecks, maps where data and process breakdowns are creating friction, and delivers a clear prioritised roadmap for what is actually worth fixing. This is a diagnostic, not a build. It is designed to give you clarity on where to focus before committing to anything larger.
+                </p>
+                <div className="text-center" style={{ marginTop: 20 }}>
+                    <a href={ctaHref} className="btn cta-inline">
+                        Book a Free 30-Minute Call
+                    </a>
+                </div>
+                <div className="text-center" style={{ marginTop: 16 }}>
+                    <p className="small" style={{ color: "var(--muted)" }}>
                         <a className="underline" href="/how-we-work">
                             See how it works end-to-end
                         </a>
@@ -510,32 +489,29 @@ function WhoItsFor() {
     return (
         <section id="who" className="section">
             <div className="container">
-                <h2 className="section-title">Who this is for</h2>
+                <h2 className="section-title">Who This Is For</h2>
                 <div
                     style={{
-                        display: 'grid',
-                        gap: 'var(--gap)',
+                        display: "grid",
+                        gap: "var(--gap)",
                         gridTemplateColumns:
-                            'repeat(auto-fit, minmax(260px, 1fr))',
+                            "repeat(auto-fit, minmax(260px, 1fr))",
                     }}
                 >
                     <div className="card">
                         <h3 style={{ marginTop: 0 }}>This is for you if:</h3>
                         <ul>
                             <li>
-                                You lead an operations-heavy business with 20 to
-                                200 staff
+                                You lead an ops-heavy business with 20 to 200 staff
                             </li>
                             <li>
-                                You feel the business has outgrown its systems
+                                Your reporting is manual, slow, or quietly distrusted by the people using it
                             </li>
                             <li>
-                                Decisions rely on spreadsheets, manual reports,
-                                or chasing people
+                                Decisions in leadership meetings get deferred because numbers can’t be verified in the room
                             </li>
                             <li>
-                                You want clarity without adding more meetings or
-                                admin
+                                You’ve said we really need to sort our data out more than twice in the last year
                             </li>
                         </ul>
                     </div>
@@ -544,13 +520,12 @@ function WhoItsFor() {
                             This is not for you if:
                         </h3>
                         <ul>
-                            <li>You’re looking for a quick AI tool</li>
+                            <li>You’re looking for a generic dashboard without operational context</li>
                             <li>
-                                You already have clear, trusted daily
-                                operational visibility
+                                You already have live trusted visibility on your operations
                             </li>
                             <li>
-                                You want a generic dashboard without context
+                                You want a long consulting engagement with no tangible deliverable at the end
                             </li>
                         </ul>
                     </div>
@@ -563,32 +538,32 @@ function WhoItsFor() {
 function HowItWorksSteps() {
     const steps = [
         {
-            title: 'Diagnose',
-            desc: 'We interview key stakeholders and review how decisions are currently made.',
+            title: "Week 1 Diagnose",
+            desc: "We interview key stakeholders and map how decisions are currently made. We identify where the data lives, where trust breaks down, and what your leadership team actually needs to see.",
         },
         {
-            title: 'Identify',
-            desc: 'We pinpoint where friction, delay, or blind spots are costing you leverage.',
+            title: "Week 2 Design",
+            desc: "We define the right KPIs, agree the data sources, and design the reporting layer before any build begins. No assumptions, no scope creep.",
         },
         {
-            title: 'Eliminate',
-            desc: 'We define a practical roadmap to remove those bottlenecks with minimal disruption.',
+            title: "Weeks 3 and 4 Build and Deploy",
+            desc: "We build and deploy the system. You get a live, working dashboard your team can use from day one.",
         },
         {
-            title: 'Support (Optional)',
-            desc: 'For teams that want help implementing, we offer focused elimination sprints or ongoing support.',
+            title: "Ongoing Optional",
+            desc: "A light monthly retainer for maintenance, iteration, and support as your operation evolves.",
         },
     ];
     return (
         <section id="how" className="section">
             <div className="container">
-                <h2 className="section-title">How it works</h2>
+                <h2 className="section-title">How It Works</h2>
                 <div
                     style={{
-                        display: 'grid',
-                        gap: 'var(--gap)',
+                        display: "grid",
+                        gap: "var(--gap)",
                         gridTemplateColumns:
-                            'repeat(auto-fit, minmax(240px, 1fr))',
+                            "repeat(auto-fit, minmax(240px, 1fr))",
                     }}
                 >
                     {steps.map((step) => (
@@ -607,18 +582,10 @@ function About() {
     return (
         <section id="about" className="section">
             <div className="container">
-                <h2 className="section-title">About</h2>
+                <h2 className="section-title">Why GBM</h2>
                 <p>
-                    GBM was founded to help operators and founders escape
-                    reactive decision-making.
+                    GBM was founded by George and Tony Marsh, a software engineer with five years delivering mission-critical systems for UK government, and an operations leader with thirty years on the ground in transport and logistics. Most firms that build reporting systems understand the technology but not the operation. Most operations consultants understand the business but cannot build anything. We sit in between, which is why what we deliver actually gets used. We are deliberately small, focused, and outcome-driven. We take on a small number of projects at a time so every engagement gets our full attention.
                 </p>
-                <p>Most leaders aren’t short on data, but short on clarity.</p>
-                <p>
-                    GBM exists to reduce unnecessary operational noise, surface
-                    what actually matters, and help leadership teams spend more
-                    time growing the business, not firefighting it.
-                </p>
-                <p>We are deliberately small, focused, and outcome-driven.</p>
             </div>
         </section>
     );

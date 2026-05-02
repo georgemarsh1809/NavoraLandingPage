@@ -27,13 +27,7 @@ export default function MeetTheTeam() {
                     <div>
                         <h3>George Marsh · Founder &amp; Lead Consultant</h3>
                         <p>
-                            George leads GBM’s operational clarity engagements,
-                            blending 5+ years delivering mission-critical
-                            software for Government with deep, family-rooted
-                            knowledge of transport & logistics. He guides each
-                            engagement from diagnosis through to elimination
-                            support, ensuring teams see measurable impact in
-                            time saved and decision quality.
+                            Five years delivering mission-critical software for UK government criminal justice systems. Now applies that same rigour to operational reporting for SMEs. Leads every engagement from diagnosis through to delivery.
                         </p>
                         <div className="team-links">
                             <a
@@ -73,15 +67,7 @@ export default function MeetTheTeam() {
                             Tony Marsh · Co-founder &amp; Operations Consultant
                         </h3>
                         <p>
-                            Tony brings 30+ years of hands-on experience across
-                            transport & logistics. Having led depot teams,
-                            managed national contracts, and overseen large-scale
-                            networks, he understands the daily realities that
-                            drive operational performance. He combines decades
-                            of practical leadership with a direct, operator-led
-                            approach to help teams improve utilisation,
-                            strengthen compliance, and regain daily decision
-                            visibility.
+                            Thirty years leading depot teams, managing national contracts, and overseeing large-scale transport and logistics networks across the UK. Brings operator-level credibility to every diagnostic. Knows what good operational visibility looks like from the inside.
                         </p>
                         <div className="team-links">
                             <a
