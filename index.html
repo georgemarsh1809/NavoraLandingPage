@@ -167,37 +167,6 @@
                 z-index: 1;
             }
 
-            .hero h1::before {
-                content: '';
-                position: absolute;
-                top: -40px;
-                left: 50%;
-                width: 400px;
-                height: 2px;
-                background: linear-gradient(
-                    90deg,
-                    transparent,
-                    #3ef0c8,
-                    transparent
-                );
-                transform: translateX(-50%);
-            }
-
-            .hero h1::after {
-                content: '';
-                position: absolute;
-                bottom: -40px;
-                left: 50%;
-                width: 400px;
-                height: 2px;
-                background: linear-gradient(
-                    90deg,
-                    transparent,
-                    #3ef0c8,
-                    transparent
-                );
-                transform: translateX(-50%);
-            }
 
             .hero .tagline {
                 font-size: 22px;
@@ -514,11 +483,6 @@
                     letter-spacing: -1px;
                 }
 
-                .hero h1::before,
-                .hero h1::after {
-                    width: 300px;
-                }
-
                 .hero .tagline {
                     font-size: 18px;
                 }
@@ -584,16 +548,6 @@
                     font-size: 36px;
                     letter-spacing: -0.8px;
                     margin-bottom: 14px;
-                }
-
-                .hero h1::before,
-                .hero h1::after {
-                    width: 200px;
-                    top: -30px;
-                }
-
-                .hero h1::after {
-                    bottom: -30px;
                 }
 
                 .hero .tagline {
@@ -739,11 +693,14 @@
             <!-- Hero Section -->
             <section class="hero">
                 <div class="container">
-                    <p class="tagline">Transform Operations Into Data</p>
+                    <h1>GBM Group</h1>
+                    <p class="tagline">
+                        Data engineering & AI enablement for ops-heavy teams
+                    </p>
                     <p>
-                        Turn spreadsheets into intelligence. Build unified data
-                        platforms that unlock AI-powered insights for your
-                        operations.
+                        We combine discovery, data engineering and custom
+                        software to help ops-heavy businesses build the data
+                        foundation for sustainable AI enablement.
                     </p>
                 </div>
             </section>
